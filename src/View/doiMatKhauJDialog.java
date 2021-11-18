@@ -1,15 +1,18 @@
 package View;
 
+import Dao.userDao;
+import Helper.dialogHelper;
+import Helper.shareHelper;
 import java.awt.Color;
 
 public class doiMatKhauJDialog extends javax.swing.JDialog {
-    
+
     public doiMatKhauJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -52,9 +55,19 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
 
         btnXacNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Accept.png"))); // NOI18N
         btnXacNhan.setText("Xác nhận");
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanActionPerformed(evt);
+            }
+        });
 
         btnKetThuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         btnKetThuc.setText("Kết thúc");
+        btnKetThuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetThucActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,6 +147,14 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        this.doiMK();
+    }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnKetThucActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,6 +214,25 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     public void init() {
         this.setLocationRelativeTo(null);
-        
+        txtTenDangNhap.setText(shareHelper.user.getMaNV());
+        txtTenDangNhap.setEditable(true);
+    }
+    userDao dao = new userDao();
+
+    private void doiMK() {
+        String matKhau = new String(txtMatKhauHienTai.getPassword());
+        String matKhau1 = new String(txtMKMoi.getPassword());
+        String matKhau2 = new String(txtMKMoi2.getPassword());
+
+        if (!matKhau.equals(shareHelper.user.getMatKhau())) {
+            dialogHelper.alert(this, "Sai mật khẩu!");
+        } else if (!matKhau1.equals(matKhau2)) {
+            dialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
+        } else {
+            shareHelper.user.setMatKhau(matKhau2);
+            dao.update(shareHelper.user);
+            dialogHelper.alert(this, "Đổi mật khẩu thành công!");
+            this.dispose();
+        }
     }
 }

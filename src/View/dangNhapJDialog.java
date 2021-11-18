@@ -5,6 +5,10 @@
  */
 package View;
 
+import Dao.userDao;
+import Helper.dialogHelper;
+import Helper.shareHelper;
+import Model.User;
 import java.awt.Color;
 
 /**
@@ -21,6 +25,7 @@ public class dangNhapJDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.pink);
+        //this.setIconImage(shareHelper.AppIcon);
     }
 
     /**
@@ -60,9 +65,19 @@ public class dangNhapJDialog extends javax.swing.JDialog {
 
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Accept.png"))); // NOI18N
         btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
 
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,7 +97,6 @@ public class dangNhapJDialog extends javax.swing.JDialog {
                             .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(133, 133, 133))
                     .addGroup(layout.createSequentialGroup()
@@ -121,6 +135,14 @@ public class dangNhapJDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        dangNhap();
+    }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        ketThuc();
+    }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,4 +196,37 @@ public class dangNhapJDialog extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
+
+    userDao dao = new userDao();
+
+    void dangNhap() {
+        String tenDN = txtTenDangNhap.getText();
+        String matKhau = new String(txtMatKhau.getPassword());
+        User ur = dao.selectById(tenDN);
+        if (tenDN.length() == 0) {
+            txtMatKhau.setBackground(Color.white);
+            txtTenDangNhap.setBackground(Color.red);
+        } else if (matKhau.length() == 0) {
+            txtTenDangNhap.setBackground(Color.white);
+            txtMatKhau.setBackground(Color.red);
+            dialogHelper.alert(this, "Mật khẩu không được trống!");
+        } else if (ur == null) {
+            txtMatKhau.setBackground(Color.white);
+            txtTenDangNhap.setBackground(Color.red);
+            dialogHelper.alert(this, "Sai tên đăng nhập");
+        } else if (!matKhau.equals(ur.getMatKhau())) {
+            txtTenDangNhap.setBackground(Color.white);
+            txtMatKhau.setBackground(Color.red);
+            dialogHelper.alert(this, "Sai mật khẩu");
+        } else {
+            shareHelper.user = ur;
+            this.dispose();
+        }
+    }
+
+    void ketThuc() {
+        if (dialogHelper.confirm(this, "Bạn có muốn thoát ứng dụng ?")) {
+            System.exit(0);
+        }
+    }
 }

@@ -6,7 +6,7 @@
 package Helper;
 
 
-import Model.User;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,20 +51,5 @@ public class shareHelper {
         File path = new File("logos", fileName);
         return new ImageIcon(new ImageIcon(path.getAbsolutePath()).getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT));
     }
-    //Đối tượng này chứa thông tin người sử dụng sau khi đăng nhập
-    public static User user = null;
-
-    //Xóa thông tin của người sử dụng khi có yêu cầu đăng xuất
-    public static void logoff() {
-        shareHelper.user = null;
-    }
-
-    //Kiểm tra xem đăng nhập hay chưa
-    public static boolean isLogin() {
-        return shareHelper.user != null;
-    }
-    //Kiểm tra vai trò
-    public static boolean isManager(){
-      return shareHelper.isLogin()&& user.isVaiTro();
-    }
+    
 }

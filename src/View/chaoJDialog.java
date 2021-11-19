@@ -22,7 +22,7 @@ int i =-1;
         super(parent, modal);
         initComponents();
         init();
-        Thread t = new Thread();
+        Thread t = new Thread(this);
         t.start();
     }
 

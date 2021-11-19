@@ -206,6 +206,7 @@ public class dangNhapJDialog extends javax.swing.JDialog {
         if (tenDN.length() == 0) {
             txtMatKhau.setBackground(Color.white);
             txtTenDangNhap.setBackground(Color.red);
+            dialogHelper.alert(this, "Tên đăng nhập không được trống!");
         } else if (matKhau.length() == 0) {
             txtTenDangNhap.setBackground(Color.white);
             txtMatKhau.setBackground(Color.red);
@@ -213,13 +214,14 @@ public class dangNhapJDialog extends javax.swing.JDialog {
         } else if (ur == null) {
             txtMatKhau.setBackground(Color.white);
             txtTenDangNhap.setBackground(Color.red);
-            dialogHelper.alert(this, "Sai tên đăng nhập");
+            dialogHelper.alert(this, "Sai tên đăng nhập!");
         } else if (!matKhau.equals(ur.getMatKhau())) {
             txtTenDangNhap.setBackground(Color.white);
             txtMatKhau.setBackground(Color.red);
-            dialogHelper.alert(this, "Sai mật khẩu");
+            dialogHelper.alert(this, "Sai mật khẩu!");
         } else {
             shareHelper.user = ur;
+            dialogHelper.alert(this, "Đăng nhập thành công!");
             this.dispose();
         }
     }

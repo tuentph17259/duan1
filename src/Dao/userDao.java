@@ -20,7 +20,7 @@ public class userDao extends cuaHangDao<User, String>{
 String UPDATE_SQL="UPDATE USERS SET MatKhau = ?, HoTen = ?, VaiTro = ? WHERE MaNV = ?";
 String DELETE_SQL="DELETE FROM USERS WHERE MaNV = ?";
 String SELECT_ALL_SQL = "SELECT * FROM USERS";
-String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE MaNV = ?";
+String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE HOTEN = ?";
 
     
     @Override
@@ -44,8 +44,8 @@ String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE MaNV = ?";
     }
 
     @Override
-    public User selectById(String maNV) {
-        List<User> list = this.selectBySql(SELECT_BY_ID_SQL,maNV);
+    public User selectById(String hoTen) {
+        List<User> list = this.selectBySql(SELECT_BY_ID_SQL,hoTen);
         if(list.isEmpty()){
         return null;
         }

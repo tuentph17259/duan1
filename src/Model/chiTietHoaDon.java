@@ -15,6 +15,7 @@ public class chiTietHoaDon {
     private int soLuong;
     private double donGia;
     private String maSanPham;
+    
 
     public chiTietHoaDon() {
     }

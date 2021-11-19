@@ -1,15 +1,19 @@
 package View;
 
+import Dao.userDao;
+import Helper.auth;
+import Helper.dialogHelper;
+import Helper.shareHelper;
 import java.awt.Color;
 
 public class doiMatKhauJDialog extends javax.swing.JDialog {
-    
+
     public doiMatKhauJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -24,9 +28,9 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
         btnXacNhan = new javax.swing.JButton();
         btnKetThuc = new javax.swing.JButton();
         txtMKMoi2 = new javax.swing.JPasswordField();
-        txtTenDangNhap = new javax.swing.JTextField();
         txtMatKhauHienTai = new javax.swing.JPasswordField();
         txtMKMoi = new javax.swing.JPasswordField();
+        lblTenDangNhap = new javax.swing.JLabel();
 
         jLabel4.setText("Mật khẩu hiện tại");
 
@@ -52,9 +56,19 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
 
         btnXacNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Accept.png"))); // NOI18N
         btnXacNhan.setText("Xác nhận");
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanActionPerformed(evt);
+            }
+        });
 
         btnKetThuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         btnKetThuc.setText("Kết thúc");
+        btnKetThuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetThucActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,13 +92,13 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(89, 89, 89)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtMKMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                .addComponent(lblTenDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addGap(4, 4, 4)
                             .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                             .addComponent(txtMKMoi2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 70, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -97,11 +111,11 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(lblTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtMatKhauHienTai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -133,6 +147,14 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        this.doiMK();
+    }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnKetThucActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,13 +208,32 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblTenDangNhap;
     private javax.swing.JPasswordField txtMKMoi;
     private javax.swing.JPasswordField txtMKMoi2;
     private javax.swing.JPasswordField txtMatKhauHienTai;
-    private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
     public void init() {
         this.setLocationRelativeTo(null);
-        
+        lblTenDangNhap.setText(auth.user.getMaNV());
+        lblTenDangNhap.setEnabled(true);
+    }
+    userDao dao = new userDao();
+
+    private void doiMK() {
+        String matKhau = new String(txtMatKhauHienTai.getPassword());
+        String matKhau1 = new String(txtMKMoi.getPassword());
+        String matKhau2 = new String(txtMKMoi2.getPassword());
+
+        if (!matKhau.equals(auth.user.getMatKhau())) {
+            dialogHelper.alert(this, "Sai mật khẩu!");
+        } else if (!matKhau1.equals(matKhau2)) {
+            dialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
+        } else {
+            auth.user.setMatKhau(matKhau2);
+            dao.update(auth.user);
+            dialogHelper.alert(this, "Đổi mật khẩu thành công!");
+            this.dispose();
+        }
     }
 }

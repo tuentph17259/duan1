@@ -13,8 +13,8 @@ import javax.swing.Timer;
  *
  * @author acer
  */
-public class chaoJDialog extends javax.swing.JDialog {
-
+public class chaoJDialog extends javax.swing.JDialog implements Runnable{
+int i =-1;
     /**
      * Creates new form chaoJDialog
      */
@@ -22,6 +22,8 @@ public class chaoJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         init();
+        Thread t = new Thread();
+        t.start();
     }
 
    
@@ -31,12 +33,15 @@ public class chaoJDialog extends javax.swing.JDialog {
 
         pgbLoading = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
+        lblND = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pgbLoading.setStringPainted(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bgr.JPG"))); // NOI18N
+
+        lblND.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,11 +51,14 @@ public class chaoJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(pgbLoading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblND, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(lblND, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pgbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -101,22 +109,43 @@ public class chaoJDialog extends javax.swing.JDialog {
     }
     private void init() {
         setLocationRelativeTo(null);
-        new Timer(10, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int value = pgbLoading.getValue();
-                if (value < pgbLoading.getMaximum()) {
-                    pgbLoading.setValue(value + 1);
-                } else {
-                    chaoJDialog.this.dispose();
-                }
-            }
-        })
-                .start();
+//        new Timer(10, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                int value = pgbLoading.getValue();
+//                if (value < pgbLoading.getMaximum()) {
+//                    pgbLoading.setValue(value + 1);
+//                } else {
+//                    chaoJDialog.this.dispose();
+//                }
+//            }
+//        })
+//                .start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblND;
     private javax.swing.JProgressBar pgbLoading;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                i++;
+                        pgbLoading.setValue(i);
+                        if(i==20)lblND.setText("Đang khởi tạo...");
+                        if(i==50)lblND.setText("Loading...");
+                        if(i==90)lblND.setText("Chuẩn bị vào chương trình...");
+                        if(i==100){
+                            chaoJDialog.this.dispose();
+                        }
+                        Thread.sleep(10); // thread tạm thời dừng hoạt động trong 10s
+            } catch (Exception e) {
+            }
+            
+            
+        }
+    }
 }

@@ -19,11 +19,12 @@ public class sanPham {
     private String cauHinhChiTiet;
     private String trangThai;
     private String maNhaCungCap;
+    private String maLoaiSP;
 
     public sanPham() {
     }
 
-    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String thuongHieu, String hinhAnh, String cauHinhChiTiet, String trangThai, String maNhaCungCap) {
+    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String thuongHieu, String hinhAnh, String cauHinhChiTiet, String trangThai, String maNhaCungCap, String maLoaiSP) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.mauSac = mauSac;
@@ -33,6 +34,7 @@ public class sanPham {
         this.cauHinhChiTiet = cauHinhChiTiet;
         this.trangThai = trangThai;
         this.maNhaCungCap = maNhaCungCap;
+        this.maLoaiSP = maLoaiSP;
     }
 
     public String getMaSanPham() {
@@ -107,9 +109,17 @@ public class sanPham {
         this.maNhaCungCap = maNhaCungCap;
     }
 
+    public String getMaLoaiSP() {
+        return maLoaiSP;
+    }
+
+    public void setMaLoaiSP(String maLoaiSP) {
+        this.maLoaiSP = maLoaiSP;
+    }
+
     @Override
     public String toString() {
-        return "sanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", mauSac=" + mauSac + ", giaSanPham=" + giaSanPham + ", thuongHieu=" + thuongHieu + ", hinhAnh=" + hinhAnh + ", cauHinhChiTiet=" + cauHinhChiTiet + ", trangThai=" + trangThai + ", maNhaCungCap=" + maNhaCungCap + '}';
+        return "sanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", mauSac=" + mauSac + ", giaSanPham=" + giaSanPham + ", thuongHieu=" + thuongHieu + ", hinhAnh=" + hinhAnh + ", cauHinhChiTiet=" + cauHinhChiTiet + ", trangThai=" + trangThai + ", maNhaCungCap=" + maNhaCungCap + ", maLoaiSP=" + maLoaiSP + '}';
     }
     
     

@@ -6,6 +6,7 @@
 package View;
 
 import Dao.userDao;
+import Helper.auth;
 import Helper.dialogHelper;
 import Helper.shareHelper;
 import Model.User;
@@ -220,7 +221,7 @@ public class dangNhapJDialog extends javax.swing.JDialog {
             txtMatKhau.setBackground(Color.red);
             dialogHelper.alert(this, "Sai mật khẩu!");
         } else {
-            shareHelper.user = ur;
+            auth.user = ur;
             dialogHelper.alert(this, "Đăng nhập thành công!");
             this.dispose();
         }

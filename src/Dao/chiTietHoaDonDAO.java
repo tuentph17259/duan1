@@ -29,7 +29,7 @@ public class chiTietHoaDonDAO extends cuaHangDao<chiTietHoaDon, String>{
 
     @Override
     public void update(chiTietHoaDon entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getMaHoaDon(),entity.getSoLuong(),entity.getDonGia(),entity.getTongTien(),entity.getMaChiTietHoaDon());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getMaHoaDon(),entity.getSoLuong(),entity.getDonGia(),entity.getTongTien(), entity.getMaSanPham(), entity.getMaChiTietHoaDon());
     }
 
     @Override

@@ -10,24 +10,21 @@ package Model;
  * @author Admin
  */
 public class chiTietHoaDon {
-     private String maChiTietHoaDon;
+    private String maChiTietHoaDon;
     private String maHoaDon;
     private int soLuong;
     private double donGia;
     private String maSanPham;
-    private double tongTien;
-    
 
     public chiTietHoaDon() {
     }
 
-    public chiTietHoaDon(String maChiTietHoaDon, String maHoaDon, int soLuong, double donGia, String maSanPham, double tongTien) {
+    public chiTietHoaDon(String maChiTietHoaDon, String maHoaDon, int soLuong, double donGia, String maSanPham) {
         this.maChiTietHoaDon = maChiTietHoaDon;
         this.maHoaDon = maHoaDon;
         this.soLuong = soLuong;
         this.donGia = donGia;
         this.maSanPham = maSanPham;
-        this.tongTien = tongTien;
     }
 
     public String getMaChiTietHoaDon() {
@@ -70,17 +67,9 @@ public class chiTietHoaDon {
         this.maSanPham = maSanPham;
     }
 
-    public double getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(double tongTien) {
-        this.tongTien = tongTien;
-    }
-
     @Override
     public String toString() {
-        return "chiTietHoaDon{" + "maChiTietHoaDon=" + maChiTietHoaDon + ", maHoaDon=" + maHoaDon + ", soLuong=" + soLuong + ", donGia=" + donGia + ", maSanPham=" + maSanPham + ", tongTien=" + tongTien + '}';
+        return "chiTietHoaDon{" + "maChiTietHoaDon=" + maChiTietHoaDon + ", maHoaDon=" + maHoaDon + ", soLuong=" + soLuong + ", donGia=" + donGia + ", maSanPham=" + maSanPham + '}';
     }
     
     

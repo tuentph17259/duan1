@@ -2,14 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/Users/acer/Documents/GitHub/duan1/src/Helper/shareHelper.java</file>
-            <file>file:/C:/Users/acer/Documents/GitHub/duan1/src/Helper/jdbcHelper.java</file>
-            <file>file:/C:/Users/acer/Documents/GitHub/duan1/src/View/TrangChuJF.java</file>
+            <file>file:/C:/Users/NGUYEN%20TRI%20TUE/Desktop/duan/src/View/dangNhapJDialog.java</file>
+            <file>file:/C:/Users/NGUYEN%20TRI%20TUE/Desktop/duan/src/View/TrangChuJF.java</file>
+            <file>file:/C:/Users/NGUYEN%20TRI%20TUE/Desktop/duan/src/Model/hoaDon.java</file>
         </group>
->>>>>>> 14a6f48ed867abdd39683d14f8222398dbccbdc9
     </open-files>
 </project-private>

@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NGUYEN%20TRI%20TUE/Desktop/duan/src/View/dangNhapJDialog.java</file>
-            <file>file:/C:/Users/NGUYEN%20TRI%20TUE/Desktop/duan/src/View/TrangChuJF.java</file>
-            <file>file:/C:/Users/NGUYEN%20TRI%20TUE/Desktop/duan/src/Model/hoaDon.java</file>
+            <file>file:/C:/Users/acer/Documents/GitHub/duan1/src/Model/hoaDon.java</file>
+            <file>file:/C:/Users/acer/Documents/GitHub/duan1/src/Helper/jdbcHelper.java</file>
+            <file>file:/C:/Users/acer/Documents/GitHub/duan1/src/Model/chiTietHoaDon.java</file>
+            <file>file:/C:/Users/acer/Documents/GitHub/duan1/src/Dao/chiTietHoaDonDAO.java</file>
         </group>
     </open-files>
 </project-private>

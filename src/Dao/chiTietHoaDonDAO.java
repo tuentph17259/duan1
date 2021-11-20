@@ -16,7 +16,7 @@ import java.util.List;
  * @author acer
  */
 public class chiTietHoaDonDAO extends cuaHangDao<chiTietHoaDon, String>{
-    String INSERT_SQL = "INSERT INTO CHITIETHOADON (MACHITIET,MAHD,SOLUONG,DONGIA,TONGTIEN,MASP) VALUES (?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO CHITIETHOADON (MACHITIET,MAHD,SOLUONG,DONGIA,TONGTIEN,MASP) VALUES (?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE CHITIETHOADON SET MAHD=?,SOLUONG=?,DONGIA=?,TONGTIEN=? where MACHITIET=?";
     String DELETE_SQL = "DELETE FROM CHITIETHOADON where MACHITIET=?";
     String SELECT_ALL_SQL = "SELECT * FROM CHITIETHOADON";
@@ -24,7 +24,7 @@ public class chiTietHoaDonDAO extends cuaHangDao<chiTietHoaDon, String>{
 
     @Override
     public void insert(chiTietHoaDon entity) {
-        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaChiTietHoaDon(),entity.getMaHoaDon(),entity.getSoLuong(),entity.getDonGia(),entity.getTongTien(),entity.getSoLuong());
+        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaChiTietHoaDon(),entity.getMaHoaDon(),entity.getSoLuong(),entity.getDonGia(),entity.getTongTien(),entity.getMaSanPham());
     }
 
     @Override

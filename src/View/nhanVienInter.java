@@ -333,6 +333,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         clearFrom();
+        this.rdoNam.setSelected(true);
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
@@ -376,7 +377,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     public void init() {
         this.row = -1;
         this.updateStatus();
-        rdoNam.setSelected(true);
+        this.rdoNam.setSelected(true);
         fillTable();
     }
 
@@ -398,12 +399,8 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     void setForm(nhanVien nv) {
         txtMaNV.setText(nv.getMaNV());
         txtTenNV.setText(nv.getTenNV());
-        if (nv.isGioiTinh()) {
-            this.rdoNam.setSelected(true);
-        } else {
-            this.rdoNam.setSelected(nv.isGioiTinh());
-            this.rdoNu.setSelected(!nv.isGioiTinh());
-        }
+        this.rdoNam.setSelected(nv.isGioiTinh());
+        this.rdoNu.setSelected(!nv.isGioiTinh());
         txtQueQuan.setText(nv.getQueQuan());
         txtNgaySinh.setText(dateHelper.toString(nv.getNgaySinh()));
         txtSDT.setText(nv.getSDT());
@@ -473,7 +470,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
             dialogHelper.alert(this, "Không được để trống!");
             return;
         } else if (checkKey() == 1) {
-            dialogHelper.alert(this, "Đã tồn tại mã nhân viên:" +txtMaNV.getText());
+            dialogHelper.alert(this, "Đã tồn tại mã nhân viên:" + txtMaNV.getText());
             return;
         } else {
             try {

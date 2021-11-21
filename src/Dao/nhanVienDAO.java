@@ -32,7 +32,7 @@ public class nhanVienDAO extends cuaHangDao<nhanVien, String> {
 
     @Override
     public void update(nhanVien entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenNV(), entity.isGioiTinh(), entity.getQueQuan(), entity.getNgaySinh(), entity.getSDT());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenNV(), entity.isGioiTinh(), entity.getQueQuan(), entity.getNgaySinh(), entity.getSDT(), entity.getMaNV());
     }
 
     @Override

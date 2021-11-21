@@ -1,7 +1,11 @@
 package View;
 
 import java.awt.Color;
-
+import Dao.userDao;
+import Helper.auth;
+import Helper.dialogHelper;
+import Helper.shareHelper;
+import java.awt.Color;
 public class doiMatKhauJDialog extends javax.swing.JDialog {
     
     public doiMatKhauJDialog(java.awt.Frame parent, boolean modal) {
@@ -24,9 +28,9 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
         btnXacNhan = new javax.swing.JButton();
         btnKetThuc = new javax.swing.JButton();
         txtMKMoi2 = new javax.swing.JPasswordField();
-        txtTenDangNhap = new javax.swing.JTextField();
         txtMatKhauHienTai = new javax.swing.JPasswordField();
         txtMKMoi = new javax.swing.JPasswordField();
+        lblTenDN = new javax.swing.JLabel();
 
         jLabel4.setText("Mật khẩu hiện tại");
 
@@ -80,7 +84,7 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
                             .addGap(89, 89, 89)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addGap(4, 4, 4)
                             .addComponent(jLabel6)
@@ -97,11 +101,11 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(lblTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtMatKhauHienTai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -113,7 +117,7 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtMKMoi2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,13 +190,32 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblTenDN;
     private javax.swing.JPasswordField txtMKMoi;
     private javax.swing.JPasswordField txtMKMoi2;
     private javax.swing.JPasswordField txtMatKhauHienTai;
-    private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
     public void init() {
         this.setLocationRelativeTo(null);
-        
+        lblTenDN.setText(auth.user.getMaNV());
+        lblTenDN.setEnabled(true);
+    }
+     userDao dao = new userDao();
+
+    private void doiMK() {
+        String matKhau = new String(txtMatKhauHienTai.getPassword());
+        String matKhau1 = new String(txtMKMoi.getPassword());
+        String matKhau2 = new String(txtMKMoi2.getPassword());
+
+        if (!matKhau.equals(auth.user.getMatKhau())) {
+            dialogHelper.alert(this, "Sai mật khẩu!");
+        } else if (!matKhau1.equals(matKhau2)) {
+            dialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
+        } else {
+            auth.user.setMatKhau(matKhau2);
+            dao.update(auth.user);
+            dialogHelper.alert(this, "Đổi mật khẩu thành công!");
+            this.dispose();
+        }
     }
 }

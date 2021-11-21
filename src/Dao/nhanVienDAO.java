@@ -23,7 +23,7 @@ public class nhanVienDAO extends cuaHangDao<nhanVien, String> {
     String UPDATE_SQL = "UPDATE NHANVIEN SET TENNV = ?, GIOITINH = ?, QUEQUAN = ?, NGAYSINH = ?, SDT = ? WHERE MaNV = ?";
     String DELETE_SQL = "DELETE FROM NHANVIEN WHERE MaNV = ?";
     String SELECT_ALL_SQL = "SELECT * FROM NHANVIEN";
-    String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE MANV = ?";
+    String SELECT_BY_ID_SQL = "SELECT * FROM NHANVIEN WHERE MANV = ?";
 
     @Override
     public void insert(nhanVien entity) {
@@ -32,7 +32,7 @@ public class nhanVienDAO extends cuaHangDao<nhanVien, String> {
 
     @Override
     public void update(nhanVien entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenNV(), entity.isGioiTinh(), entity.getQueQuan(), entity.getNgaySinh(), entity.getSDT());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenNV(), entity.isGioiTinh(), entity.getQueQuan(), entity.getNgaySinh(), entity.getSDT(), entity.getMaNV());
     }
 
     @Override

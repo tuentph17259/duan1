@@ -464,7 +464,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }
 
     void insert() {
-        nhanVien nh = getFrom();
+        nhanVien nv = getFrom();
         if (txtMaNV.getText().length() == 0
                 || txtSDT.getText().length() == 0
                 || txtQueQuan.getText().length() == 0
@@ -473,11 +473,11 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
             dialogHelper.alert(this, "Không được để trống!");
             return;
         } else if (checkKey() == 1) {
-            dialogHelper.alert(this, "Mã người học đã tồn tại!");
+            dialogHelper.alert(this, "Đã tồn tại mã nhân viên:" +txtMaNV.getText());
             return;
         } else {
             try {
-                dao.insert(nh);
+                dao.insert(nv);
                 this.fillTable();
                 this.clearFrom();
                 dialogHelper.alert(this, "Thêm mới thành công!");

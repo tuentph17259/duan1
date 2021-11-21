@@ -5,7 +5,16 @@
  */
 package View;
 
-
+import DAO.nhanVienDAO;
+import Dao.userDao;
+import Helper.auth;
+import Helper.dateHelper;
+import Helper.dialogHelper;
+import Helper.shareHelper;
+import Model.nhanVien;
+import java.awt.Color;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,13 +22,15 @@ package View;
  */
 public class nhanVienInter extends javax.swing.JInternalFrame {
 
-    
+    nhanVienDAO dao = new nhanVienDAO();
+    int row = -1;
 
     /**
      * Creates new form nhanVienInter
      */
     public nhanVienInter() {
         initComponents();
+        init();
     }
 
     /**
@@ -309,23 +320,26 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+        insert();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       
+        update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        
+        delete();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        
+        clearFrom();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
-       
+        if (evt.getClickCount() == 1) {
+            this.row = tblNhanVien.getSelectedRow();
+            this.edit();
+        }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
 
@@ -359,5 +373,164 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
 
-    
+    public void init() {
+        this.row = -1;
+        this.updateStatus();
+        rdoNam.setSelected(true);
+        fillTable();
+    }
+
+    void fillTable() {
+        DefaultTableModel mol = (DefaultTableModel) tblNhanVien.getModel();
+        mol.setRowCount(0);
+        try {
+            List<nhanVien> list = dao.selectAll();
+            for (nhanVien nv : list) {
+                Object[] row = {nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getQueQuan(), dateHelper.toString(nv.getNgaySinh(), "yyyy-MM-dd"), nv.getSDT()};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
+    }
+
+    void setForm(nhanVien nv) {
+        txtMaNV.setText(nv.getMaNV());
+        txtTenNV.setText(nv.getTenNV());
+        if (nv.isGioiTinh()) {
+            this.rdoNam.setSelected(true);
+        } else {
+            this.rdoNam.setSelected(nv.isGioiTinh());
+            this.rdoNu.setSelected(!nv.isGioiTinh());
+        }
+        txtQueQuan.setText(nv.getQueQuan());
+        txtNgaySinh.setText(dateHelper.toString(nv.getNgaySinh()));
+        txtSDT.setText(nv.getSDT());
+    }
+
+    nhanVien getFrom() {
+        nhanVien nv = new nhanVien();
+        if (txtMaNV.getText().equals("")) {
+            return null;
+        }
+        if (txtTenNV.getText().equals("")) {
+            return null;
+        }
+        if (txtNgaySinh.getText().equals("")) {
+            return null;
+        } else {
+            try {
+                dateHelper.toDate(txtNgaySinh.getText());
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Định dạng là yyyy-MM-dd");
+                return null;
+            }
+        }
+        if (txtSDT.getText().equals("")) {
+            return null;
+        } else if (!txtSDT.getText().matches("0[0-9]{9}")) {
+            dialogHelper.alert(this, "Số điện thoại 10 số");
+            return null;
+        }
+
+        nv.setMaNV(txtMaNV.getText());
+        nv.setTenNV(txtTenNV.getText());
+        nv.setGioiTinh(rdoNam.isSelected());
+        nv.setQueQuan(txtQueQuan.getText());
+        nv.setNgaySinh(dateHelper.toDate(txtNgaySinh.getText()));
+        nv.setSDT(txtSDT.getText());
+        return nv;
+    }
+
+    void clearFrom() {
+        nhanVien nh = new nhanVien();
+        setForm(nh);
+        row = -1;
+        updateStatus();
+    }
+
+    int checkKey() {
+        int kt = 0;
+        List<nhanVien> list = dao.selectAll();
+        for (int i = 0; i < list.size(); i++) {
+            nhanVien nv = list.get(i);
+            if (txtMaNV.getText().trim().equalsIgnoreCase(nv.getMaNV().trim())) {
+                kt = 1;
+                break;
+            }
+        }
+        return kt;
+    }
+
+    void insert() {
+        nhanVien nh = getFrom();
+        if (txtMaNV.getText().length() == 0
+                || txtSDT.getText().length() == 0
+                || txtQueQuan.getText().length() == 0
+                || txtTenNV.getText().length() == 0
+                || txtNgaySinh.getText().length() == 0) {
+            dialogHelper.alert(this, "Không được để trống!");
+            return;
+        } else if (checkKey() == 1) {
+            dialogHelper.alert(this, "Mã người học đã tồn tại!");
+            return;
+        } else {
+            try {
+                dao.insert(nh);
+                this.fillTable();
+                this.clearFrom();
+                dialogHelper.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Thêm mới thất bại!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    void update() {
+        nhanVien nh = getFrom();
+        try {
+            dao.update(nh);
+            fillTable();
+            clearFrom();
+            dialogHelper.alert(this, "Cập nhật thành công");
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Cập nhật thất bại!");
+            e.printStackTrace();
+        }
+    }
+
+    void delete() {
+        if (dialogHelper.confirm(this, "Bạn có muốn xóa người học này ?")) {
+            try {
+                String maNguoiHoc = txtMaNV.getText();
+                dao.delete(maNguoiHoc);
+                fillTable();
+                clearFrom();
+                dialogHelper.alert(this, "Xóa thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    void edit() {
+        String manv = (String) tblNhanVien.getValueAt(this.row, 0);
+        nhanVien nv = dao.selectById(manv);
+        this.setForm(nv);
+        tabs.setSelectedIndex(0);
+        this.updateStatus();
+    }
+
+    void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblNhanVien.getRowCount() - 1);
+        //Trạng thái form
+        txtMaNV.setEditable(!edit);
+        btnThem.setEnabled(!edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
+    }
 }

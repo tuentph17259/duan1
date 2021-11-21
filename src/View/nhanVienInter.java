@@ -445,7 +445,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
 
     void clearFrom() {
         nhanVien nv = new nhanVien();
-        setForm(nh);
+        setForm(nv);
         row = -1;
         updateStatus();
     }

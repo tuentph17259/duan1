@@ -444,7 +444,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }
 
     void clearFrom() {
-        nhanVien nh = new nhanVien();
+        nhanVien nv = new nhanVien();
         setForm(nh);
         row = -1;
         updateStatus();
@@ -489,9 +489,9 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }
 
     void update() {
-        nhanVien nh = getFrom();
+        nhanVien nv = getFrom();
         try {
-            dao.update(nh);
+            dao.update(nv);
             fillTable();
             clearFrom();
             dialogHelper.alert(this, "Cập nhật thành công");
@@ -502,10 +502,10 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }
 
     void delete() {
-        if (dialogHelper.confirm(this, "Bạn có muốn xóa người học này ?")) {
+        if (dialogHelper.confirm(this, "Bạn có muốn xóa nhân viên này ?")) {
             try {
-                String maNguoiHoc = txtMaNV.getText();
-                dao.delete(maNguoiHoc);
+                String maNV = txtMaNV.getText();
+                dao.delete(maNV);
                 fillTable();
                 clearFrom();
                 dialogHelper.alert(this, "Xóa thành công!");

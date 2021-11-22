@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 package Dao;
+
 import Helper.jdbcHelper;
 import Model.nhaCungCap;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
- * @author Dell Ins
+ * @author NGUYEN TRI TUE
  */
 public class nhaCCDao extends cuaHangDao<nhaCungCap, String>{
     String INSERT_SQL = "INSERT INTO NHACUNGCAP (MANCC, TENNCC, DIACHI, SDT) VALUES (?,?,?,?)";
@@ -70,4 +72,3 @@ public class nhaCCDao extends cuaHangDao<nhaCungCap, String>{
         }
     }
 }
-

@@ -6,6 +6,7 @@
 package View;
 
 import Dao.nhaCCDao;
+import Helper.Check;
 import Helper.dateHelper;
 import Helper.dialogHelper;
 import Model.nhaCungCap;
@@ -219,12 +220,16 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if(Check.checkName(txtTenNCC)){
         insert();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        if(Check.checkName(txtTenNCC)){
         update();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

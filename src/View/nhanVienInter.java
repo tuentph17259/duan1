@@ -7,6 +7,7 @@ package View;
 
 import DAO.nhanVienDAO;
 import Dao.userDao;
+import Helper.Check;
 import Helper.auth;
 import Helper.dateHelper;
 import Helper.dialogHelper;
@@ -320,11 +321,15 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        insert();
+        if(Check.checkName(txtTenNV)){
+            insert();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        update();
+       if(Check.checkName(txtTenNV)){
+            update();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

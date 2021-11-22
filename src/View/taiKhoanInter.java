@@ -310,6 +310,7 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         delete();
+        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTaiKhoanMouseClicked
@@ -354,6 +355,7 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
         fillComBobox();
         fillTable();
         rdoNhanVien.setSelected(true);
+        txtHoten.setEditable(false);
 
     }
 
@@ -363,7 +365,7 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
             return true;
         } else {
             txt.setBackground(pink);
-            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại.");
+            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại."+cbbMaNV.getSelectedItem());
             return false;
         }
     }
@@ -445,13 +447,16 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
     }
 
     void setForm(User us) {
+        
         txtMK.setText(us.getMatKhau());
+        txtMK2.setText(us.getMatKhau());
         cbbMaNV.setSelectedItem(us.getMaNV());
         txtHoten.setText(us.getHoTen());
         rdoChu.setSelected(us.isVaiTro());
         rdoNhanVien.setSelected(!us.isVaiTro());
 
     }
+    
 
     User getForm() {
         User us = new User();
@@ -464,16 +469,16 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
 
     void edit() {
         String manv = tblTaiKhoan.getValueAt(this.row, 0).toString();
-        User nv = usDao.selectById(manv);
-        this.setForm(nv);
+        User us = usDao.selectById(manv);
+        this.setForm(us);
+        
         tabs.setSelectedIndex(0);
 
     }
 
     void clearForm() {
-        User us = new User();
-        this.setForm(us);
-        this.row = -1;
+        txtMK.setText("");
+        txtMK2.setText("");
 
     }
 

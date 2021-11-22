@@ -27,6 +27,7 @@ public class dangNhapJDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.pink);
         //this.setIconImage(shareHelper.AppIcon);
+        
     }
 
     /**

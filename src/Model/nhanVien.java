@@ -14,6 +14,10 @@ public class nhanVien {
     private String queQuan;
     private Date ngaySinh;
     private String SDT;
+    @Override
+    public String toString(){
+        return this.maNV;
+    }
 
     public nhanVien() {
     }

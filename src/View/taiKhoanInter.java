@@ -17,6 +17,7 @@ import static java.awt.Color.white;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -310,13 +311,14 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         delete();
-        
+
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTaiKhoanMouseClicked
         if (evt.getClickCount() == 1) {
             this.row = tblTaiKhoan.getSelectedRow();
             this.edit();
+
         }
     }//GEN-LAST:event_tblTaiKhoanMouseClicked
 
@@ -365,7 +367,7 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
             return true;
         } else {
             txt.setBackground(pink);
-            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại."+cbbMaNV.getSelectedItem());
+            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại:" + cbbMaNV.getSelectedItem());
             return false;
         }
     }
@@ -396,7 +398,12 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
         if (!auth.isManager()) {
             dialogHelper.alert(this, "Bạn không có quyền xóa nhân viên");
         } else {
-            String manv = cbbMaNV.getSelectedItem().toString();
+            String manv = JOptionPane.showInputDialog("Mời bạn chọn mã nhân viên muốn xóa");
+            if (usDao.selectById(manv) == null) {
+
+                dialogHelper.alert(this, "mã nhân viên bạn nhập không tồn tại");
+                return;
+            }
             if (manv.equals(auth.user.getMaNV())) {
                 dialogHelper.alert(this, "bạn không được xóa chính bạn");
             } else if (dialogHelper.confirm(this, "Bạn có thực sự muốn xóa")) {
@@ -447,16 +454,15 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
     }
 
     void setForm(User us) {
-        
+
         txtMK.setText(us.getMatKhau());
         txtMK2.setText(us.getMatKhau());
-        cbbMaNV.setSelectedItem(us.getMaNV());
+//        cbbMaNV.setSelectedItem(us.getMaNV());
         txtHoten.setText(us.getHoTen());
         rdoChu.setSelected(us.isVaiTro());
         rdoNhanVien.setSelected(!us.isVaiTro());
 
     }
-    
 
     User getForm() {
         User us = new User();
@@ -471,7 +477,7 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
         String manv = tblTaiKhoan.getValueAt(this.row, 0).toString();
         User us = usDao.selectById(manv);
         this.setForm(us);
-        
+
         tabs.setSelectedIndex(0);
 
     }
@@ -486,5 +492,14 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
         nhanVien nv = (nhanVien) cbbMaNV.getSelectedItem();
         txtHoten.setText(nv.getTenNV());
     }
+//    void hienMaCBB(){
+//        int viTri = tblTaiKhoan.getSelectedRow();
+//        if (viTri==-1) {
+//            return;
+//        }
+//        List<nhanVien> list = nvDao.selectAll();
+//        nhanVien nv = list.get(viTri);
+//        cbbMaNV.setSelectedItem(tblTaiKhoan.getValueAt(viTri, 0));
+//    }
 
 }

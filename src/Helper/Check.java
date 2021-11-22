@@ -5,6 +5,7 @@
  */
 package Helper;
 
+import java.awt.Color;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
 import javax.swing.JPasswordField;
@@ -70,6 +71,17 @@ public class Check {
         } else {
             txt.setBackground(pink);
             dialogHelper.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng");
+            return false;
+        }
+    }
+    public static boolean checkPass(JPasswordField txt) {
+        txt.setBackground(white);
+        if (txt.getPassword().length > 2 && txt.getPassword().length < 17) {
+            return true;
+        } else {
+            txt.setBackground(Color.yellow);
+            dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải có từ 3-16 kí tự.");
+               
             return false;
         }
     }

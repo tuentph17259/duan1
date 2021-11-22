@@ -11,7 +11,8 @@ public class User {
     private String matKhau;
     private String hoTen;
     private boolean vaiTro;
-
+    
+    
     public User() {
     }
 

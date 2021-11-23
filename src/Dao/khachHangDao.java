@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 package Dao;
+
 import Helper.jdbcHelper;
 import Model.khachHang;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
- * @author Dell Ins
+ * @author NGUYEN TRI TUE
  */
 public class khachHangDao extends cuaHangDao<khachHang, String>{
     String INSERT_SQL = "INSERT INTO KHACHHANG (MAKH, TENKH, DIACHI, SDT, CMND) VALUES (?,?,?,?,?)";
@@ -75,4 +77,3 @@ public class khachHangDao extends cuaHangDao<khachHang, String>{
         return this.selectBySql(sql, "%" +keyword + "%");
     }
 }
-

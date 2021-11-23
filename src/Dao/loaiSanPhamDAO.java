@@ -23,7 +23,7 @@ public class loaiSanPhamDAO extends cuaHangDao<loaiSanPham, String> {
     String UPDATE_SQL = "UPDATE LOAISANPHAM SET TENLOAISP = ? WHERE MALOAISP = ?";
     String DELETE_SQL = "DELETE FROM LOAISANPHAM WHERE MALOAISP = ?";
     String SELECT_ALL_SQL = "SELECT * FROM LOAISANPHAM";
-    String SELECT_BY_ID_SQL = "SELECT * FROM LOAISANPHAM WHERE MANV = ?";
+    String SELECT_BY_ID_SQL = "SELECT * FROM LOAISANPHAM WHERE MALOAISP = ?";
 
     @Override
     public void insert(loaiSanPham entity) {
@@ -32,7 +32,7 @@ public class loaiSanPhamDAO extends cuaHangDao<loaiSanPham, String> {
 
     @Override
     public void update(loaiSanPham entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenLoaiSP());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenLoaiSP(),entity.getMaLoaiSP());
 
     }
 

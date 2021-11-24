@@ -571,7 +571,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (Check.checkNullText(txtMaHoaDon)) {
-            
+            insert();
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -641,8 +641,10 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         cbbNhanVien.setModel(LayDuLieucbb("nhanVien", "TenNV", "MaNV"));
         txtNgayLap.setEditable(false);
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         txtNgayLap.setText(sdf.format(date));
+        txtTongTien1.setText("0");
+        txtTongTien1.setEditable(false);
     }
 
     public DefaultComboBoxModel LayDuLieucbb(String bang, String Ten, String Ma) {

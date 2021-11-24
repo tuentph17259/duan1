@@ -699,6 +699,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Xo&#xe1; tr&#x1eaf;ng"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaTrang1ActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

@@ -356,6 +356,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnXoaTrang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
         btnXoaTrang1.setText("Xoá trắng");
+        btnXoaTrang1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTrang1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -566,14 +571,18 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtMaHDActionPerformed
 
     private void tblTTHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTHoaDonMouseClicked
-        setForm();
+        setFormHD();
     }//GEN-LAST:event_tblTTHoaDonMouseClicked
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (Check.checkNullText(txtMaHoaDon)) {
-            insert();
+            insertHD();
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
+
+    private void btnXoaTrang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrang1ActionPerformed
+       xoaFormHD();
+    }//GEN-LAST:event_btnXoaTrang1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -690,7 +699,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     }
 
-    void setForm() {
+    void setFormHD() {
         int viTri = tblTTHoaDon.getSelectedRow();
         txtMaHoaDon.setText(tblTTHoaDon.getValueAt(viTri, 1).toString());
         setSelectedCombobox(tblTTHoaDon.getValueAt(viTri, 2).toString(), cbbKhachHang);
@@ -712,7 +721,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         }
     }
 
-    hoaDon getForm() {
+    hoaDon getFormHD() {
         hoaDon hd = new hoaDon();
         hd.setMaHoaDon(txtMaHoaDon.getText());
         hd.setMaKhachHang(GetCbbSelected(cbbKhachHang));
@@ -722,14 +731,15 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         return hd;
     }
 
-    void insert() {
-        hoaDon hd = getForm();
+    void insertHD() {
+        hoaDon hd = getFormHD();
         if (hd == null) {
             return;
         }
         try {
             hdDao.insert(hd);
             this.layDuLieuHoaDon();
+            xoaFormHD();
             dialogHelper.alert(this, "thêm mới thành công");
         } catch (Exception e) {
             e.printStackTrace();
@@ -740,6 +750,14 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         displayModel item = (displayModel) obj[0];
         return item.displayvalue.toString();
 
+    }
+    public void xoaFormHD(){
+        txtMaHoaDon.setText("");
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        txtNgayLap.setText(sdf.format(date));
+        txtTongTien1.setText("0");
+        
     }
 
 }

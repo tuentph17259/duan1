@@ -16,7 +16,7 @@ public class hoaDon {
    private String maHoaDon;
     private String maKhachHang;
     private String maNhanVien;
-    private Date ngayLapHoaDon= dateHelper.now();
+    private Date ngayLapHoaDon;
     private double tongTien;
 
     public hoaDon() {

@@ -6,6 +6,7 @@
 package View;
 
 import Dao.hoaDonDAO;
+import Helper.Check;
 import Helper.dateHelper;
 import Helper.dialogHelper;
 import Helper.displayModel;
@@ -569,7 +570,9 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblTTHoaDonMouseClicked
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
-       insert();
+        if (Check.checkNullText(txtMaHoaDon)) {
+            
+        }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
 
@@ -710,8 +713,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     hoaDon getForm() {
         hoaDon hd = new hoaDon();
         hd.setMaHoaDon(txtMaHoaDon.getText());
-        hd.setMaKhachHang(cbbKhachHang.getSelectedItem().toString());
-        hd.setMaNhanVien(cbbNhanVien.getSelectedItem().toString());
+        hd.setMaKhachHang(GetCbbSelected(cbbKhachHang));
+        hd.setMaNhanVien(GetCbbSelected(cbbNhanVien));
         hd.setNgayLapHoaDon(dateHelper.toDate(txtNgayLap.getText()));
         hd.setTongTien(Double.parseDouble(txtTongTien1.getText()));
         return hd;
@@ -729,6 +732,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public String GetCbbSelected(JComboBox cbb) {
+        Object[] obj = cbb.getSelectedObjects();
+        displayModel item = (displayModel) obj[0];
+        return item.displayvalue.toString();
+
     }
 
 }

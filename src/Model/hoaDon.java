@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Helper.dateHelper;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ public class hoaDon {
    private String maHoaDon;
     private String maKhachHang;
     private String maNhanVien;
-    private Date ngayLapHoaDon;
+    private Date ngayLapHoaDon= dateHelper.now();
     private double tongTien;
 
     public hoaDon() {

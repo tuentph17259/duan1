@@ -12,6 +12,8 @@ import Helper.dialogHelper;
 import Helper.displayModel;
 import Helper.jdbcHelper;
 import Model.hoaDon;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -19,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -616,7 +619,9 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (Check.checkNullText(txtMaHoaDon)) {
-            insertHD();
+           
+        }if (checkTrungMa(txtMaHoaDon)) {
+             insertHD();
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -727,6 +732,16 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         txtNgayLap.setText(sdf.format(date));
         txtTongTien1.setText("0");
         txtTongTien1.setEditable(false);
+    }
+     public boolean checkTrungMa(JTextField txt) {
+        txt.setBackground(white);
+        if (hdDao.selectById(txt.getText().toString()) == null) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại:" + txtMaHoaDon.getText());
+            return false;
+        }
     }
 
     public DefaultComboBoxModel LayDuLieucbb(String bang, String Ten, String Ma) {

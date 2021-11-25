@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class khachHangDao extends cuaHangDao<khachHang, String>{
     String INSERT_SQL = "INSERT INTO KHACHHANG (MAKH, TENKH, DIACHI, SDT, CMND) VALUES (?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE KHACHHANG SET TENNCC = ?, DIACHI = ?, SDT = ?, CMND = ? where MAKH = ?";
+    String UPDATE_SQL = "UPDATE KHACHHANG SET TENKH = ?, DIACHI = ?, SDT = ?, CMND = ? where MAKH = ?";
     String DELETE_SQL = "DELETE FROM KHACHHANG WHERE MAKH = ?";
     String SELECT_ALL_SQL = "SELECT * FROM KHACHHANG";
     String SELECT_BY_ID_SQL = "SELECT * FROM KHACHHANG WHERE MAKH = ?";

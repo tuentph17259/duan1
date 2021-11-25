@@ -599,7 +599,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
-        xoa();
+       deleteHD();
     }//GEN-LAST:event_btnXoa1ActionPerformed
 
 
@@ -783,17 +783,17 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     public void deleteHD() {
         if (!txtMaHoaDon.getText().equals("")) {
             String maHD = txtMaHoaDon.getText();
-            
+            String sql = "delete HoaDon where MAHD=";
             String sqlDem = "select count(MACHITIET) as SoChiTietPhieuMua\n"
-                    + "            from HoaDon,ChiTietHoaDon where HoaDon.MAHD=ChiTietHoaDon.MAHD and HoaDon.MAHD=" + maHD;
-            ResultSet rs = jdbcHelper.executeQuery(sqlDem);
+                    + "            from HoaDon,ChiTietHoaDon where HoaDon.MAHD=ChiTietHoaDon.MAHD and HoaDon.MAHD=?";
+            ResultSet rs = jdbcHelper.executeQuery(sqlDem, maHD);
             System.out.println(sqlDem);
             int so = 0;
             try {
                 if (rs.next()) {
-                    so =Integer.parseInt( rs.getString("SoChiTietPhieuMua"));
-                    if (Integer.parseInt( rs.getString("SoChiTietPhieuMua"))==0) {
-                        hdDao.delete(maHD);
+                    so = rs.getInt("SoChiTietPhieuMua");
+                    if (rs.getInt("SoChiTietPhieuMua")==0) {
+                        jdbcHelper.executeUpdate(sql, maHD);
                         dialogHelper.alert(this, "xóa thành công rồi ạ");
                         layDuLieuHoaDon();
                     }else{
@@ -807,15 +807,6 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
             dialogHelper.alert(this, "bạn chưa chọn hóa đơn để xóa ");
         }
     }
-    public void xoa(){
-         String maHD = txtMaHoaDon.getText();
-         try {
-            hdDao.delete(maHD);
-            layDuLieuHoaDon();
-            dialogHelper.alert(this, "xóa thành công rồi ạ");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+   
 
 }

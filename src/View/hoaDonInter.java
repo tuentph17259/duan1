@@ -134,6 +134,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btnXoa.setText("Xoá ");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
         btnXoaTrang.setText("Xoá trắng");
@@ -353,6 +358,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnXoa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btnXoa1.setText("Xoá");
+        btnXoa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoa1ActionPerformed(evt);
+            }
+        });
 
         btnXoaTrang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
         btnXoaTrang1.setText("Xoá trắng");
@@ -581,8 +591,16 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnXoaTrang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrang1ActionPerformed
-       xoaFormHD();
+        xoaFormHD();
     }//GEN-LAST:event_btnXoaTrang1ActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+       
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
+        xoa();
+    }//GEN-LAST:event_btnXoa1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -745,19 +763,59 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
+
     public String GetCbbSelected(JComboBox cbb) {
         Object[] obj = cbb.getSelectedObjects();
         displayModel item = (displayModel) obj[0];
         return item.displayvalue.toString();
 
     }
-    public void xoaFormHD(){
+
+    public void xoaFormHD() {
         txtMaHoaDon.setText("");
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         txtNgayLap.setText(sdf.format(date));
         txtTongTien1.setText("0");
-        
+
+    }
+
+    public void deleteHD() {
+        if (!txtMaHoaDon.getText().equals("")) {
+            String maHD = txtMaHoaDon.getText();
+            
+            String sqlDem = "select count(MACHITIET) as SoChiTietPhieuMua\n"
+                    + "            from HoaDon,ChiTietHoaDon where HoaDon.MAHD=ChiTietHoaDon.MAHD and HoaDon.MAHD=" + maHD;
+            ResultSet rs = jdbcHelper.executeQuery(sqlDem);
+            System.out.println(sqlDem);
+            int so = 0;
+            try {
+                if (rs.next()) {
+                    so =Integer.parseInt( rs.getString("SoChiTietPhieuMua"));
+                    if (Integer.parseInt( rs.getString("SoChiTietPhieuMua"))==0) {
+                        hdDao.delete(maHD);
+                        dialogHelper.alert(this, "xóa thành công rồi ạ");
+                        layDuLieuHoaDon();
+                    }else{
+                        dialogHelper.alert(this, "không thể xóa bởi đã có"+so+"chi tiết hóa đơn");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            dialogHelper.alert(this, "bạn chưa chọn hóa đơn để xóa ");
+        }
+    }
+    public void xoa(){
+         String maHD = txtMaHoaDon.getText();
+         try {
+            hdDao.delete(maHD);
+            layDuLieuHoaDon();
+            dialogHelper.alert(this, "xóa thành công rồi ạ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -131,6 +131,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btnXoa.setText("Xoá ");
@@ -355,6 +360,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnSua1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         btnSua1.setText("Sửa");
+        btnSua1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSua1ActionPerformed(evt);
+            }
+        });
 
         btnXoa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btnXoa1.setText("Xoá");
@@ -402,12 +412,32 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         jPanel9.setBackground(new java.awt.Color(129, 183, 210));
 
         btnFirst1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dau.png"))); // NOI18N
+        btnFirst1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirst1ActionPerformed(evt);
+            }
+        });
 
         btnPrev1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lui.png"))); // NOI18N
+        btnPrev1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrev1ActionPerformed(evt);
+            }
+        });
 
         btnNext1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tien.png"))); // NOI18N
+        btnNext1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNext1ActionPerformed(evt);
+            }
+        });
 
         btnLast1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cuoi.png"))); // NOI18N
+        btnLast1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLast1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -595,12 +625,36 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaTrang1ActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-       
+
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
-       deleteHD();
+        deleteHD();
     }//GEN-LAST:event_btnXoa1ActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
+        updateHD();
+    }//GEN-LAST:event_btnSua1ActionPerformed
+
+    private void btnFirst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst1ActionPerformed
+        
+    }//GEN-LAST:event_btnFirst1ActionPerformed
+
+    private void btnPrev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev1ActionPerformed
+        
+    }//GEN-LAST:event_btnPrev1ActionPerformed
+
+    private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
+       
+    }//GEN-LAST:event_btnNext1ActionPerformed
+
+    private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
+       
+    }//GEN-LAST:event_btnLast1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -660,10 +714,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTongTien1;
     // End of variables declaration//GEN-END:variables
     hoaDonDAO hdDao = new hoaDonDAO();
+    int row;
 
     public void initt() {
         layDuLieuHoaDon();
-
+        this.row = -1;
         cbbKhachHang.setModel(LayDuLieucbb("KhachHang", "TENKH", "maKH"));
         cbbNhanVien.setModel(LayDuLieucbb("nhanVien", "TenNV", "MaNV"));
         txtNgayLap.setEditable(false);
@@ -783,30 +838,45 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     public void deleteHD() {
         if (!txtMaHoaDon.getText().equals("")) {
             String maHD = txtMaHoaDon.getText();
-            String sql = "delete HoaDon where MAHD=";
+
             String sqlDem = "select count(MACHITIET) as SoChiTietPhieuMua\n"
                     + "            from HoaDon,ChiTietHoaDon where HoaDon.MAHD=ChiTietHoaDon.MAHD and HoaDon.MAHD=?";
             ResultSet rs = jdbcHelper.executeQuery(sqlDem, maHD);
-            System.out.println(sqlDem);
+
             int so = 0;
             try {
                 if (rs.next()) {
                     so = rs.getInt("SoChiTietPhieuMua");
-                    if (rs.getInt("SoChiTietPhieuMua")==0) {
-                        jdbcHelper.executeUpdate(sql, maHD);
+                    if (rs.getInt("SoChiTietPhieuMua") == 0) {
+                        hdDao.delete(maHD);
                         dialogHelper.alert(this, "xóa thành công rồi ạ");
                         layDuLieuHoaDon();
-                    }else{
-                        dialogHelper.alert(this, "không thể xóa bởi đã có"+so+"chi tiết hóa đơn");
+                    } else {
+                        dialogHelper.alert(this, "không thể xóa bởi " + txtMaHoaDon.getText() + " đã có " + so + " chi tiết hóa đơn");
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             dialogHelper.alert(this, "bạn chưa chọn hóa đơn để xóa ");
         }
     }
-   
 
+    void updateHD() {
+        hoaDon hd = getFormHD();
+        if (hd == null) {
+            return;
+        }
+        try {
+            hdDao.update(hd);
+            xoaFormHD();
+            dialogHelper.alert(this, "sửa thành công");
+            layDuLieuHoaDon();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 }

@@ -30,7 +30,7 @@ public class hoaDonDAO extends cuaHangDao<hoaDon, String>{
 
     @Override
     public void update(hoaDon entity) {
-        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaKhachHang(),entity.getMaNhanVien(),entity.getNgayLapHoaDon(),entity.getTongTien(),entity.getMaHoaDon());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getMaKhachHang(),entity.getMaNhanVien(),entity.getNgayLapHoaDon(),entity.getTongTien(),entity.getMaHoaDon());
     }
 
     @Override

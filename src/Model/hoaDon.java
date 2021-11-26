@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Helper.dateHelper;
 import java.util.Date;
 
 /**
@@ -16,12 +17,12 @@ public class hoaDon {
     private String maKhachHang;
     private String maNhanVien;
     private Date ngayLapHoaDon;
-    private double tongTien;
+    private String tongTien;
 
     public hoaDon() {
     }
 
-    public hoaDon(String maHoaDon, String maKhachHang, String maNhanVien, Date ngayLapHoaDon, double tongTien) {
+    public hoaDon(String maHoaDon, String maKhachHang, String maNhanVien, Date ngayLapHoaDon, String tongTien) {
         this.maHoaDon = maHoaDon;
         this.maKhachHang = maKhachHang;
         this.maNhanVien = maNhanVien;
@@ -61,11 +62,11 @@ public class hoaDon {
         this.ngayLapHoaDon = ngayLapHoaDon;
     }
 
-    public double getTongTien() {
+    public String getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(double tongTien) {
+    public void setTongTien(String tongTien) {
         this.tongTien = tongTien;
     }
 

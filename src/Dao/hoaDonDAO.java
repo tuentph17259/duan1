@@ -30,7 +30,7 @@ public class hoaDonDAO extends cuaHangDao<hoaDon, String>{
 
     @Override
     public void update(hoaDon entity) {
-        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaKhachHang(),entity.getMaNhanVien(),entity.getNgayLapHoaDon(),entity.getTongTien(),entity.getMaHoaDon());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getMaKhachHang(),entity.getMaNhanVien(),entity.getNgayLapHoaDon(),entity.getTongTien(),entity.getMaHoaDon());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class hoaDonDAO extends cuaHangDao<hoaDon, String>{
                 entity.setMaKhachHang(rs.getString("MAKH"));
                 entity.setMaNhanVien(rs.getString("MANV"));
                 entity.setNgayLapHoaDon(rs.getDate("NGAYLAPHOADON"));
-                entity.setTongTien(rs.getDouble("TONGTIEN"));
+                entity.setTongTien(rs.getString("TONGTIEN"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

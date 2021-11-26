@@ -5,12 +5,14 @@
  */
 package View;
 
+import Dao.chiTietHoaDonDAO;
 import Dao.hoaDonDAO;
 import Helper.Check;
 import Helper.dateHelper;
 import Helper.dialogHelper;
 import Helper.displayModel;
 import Helper.jdbcHelper;
+import Model.chiTietHoaDon;
 import Model.hoaDon;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
@@ -36,7 +38,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     public hoaDonInter() {
         initComponents();
         initt();
-        
+
     }
 
     /**
@@ -55,7 +57,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtMaHDCT = new javax.swing.JTextField();
+        txtSoLuong = new javax.swing.JTextField();
         txtMaHD = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -116,6 +118,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Mã sản phẩm:");
 
+        txtSoLuong.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSoLuongKeyReleased(evt);
+            }
+        });
+
         txtMaHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaHDActionPerformed(evt);
@@ -155,7 +163,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         });
 
         btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
-        btnXoaTrang.setText("Xoá trắng");
+        btnXoaTrang.setText("Làm Mới");
+        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTrangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -282,7 +295,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(108, 108, 108)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtMaHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -294,7 +307,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtMaChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(txtMaHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -630,9 +643,10 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (Check.checkNullText(txtMaHoaDon)) {
-           
-        }if (checkTrungMa(txtMaHoaDon)) {
-             insertHD();
+
+        }
+        if (checkTrungMa(txtMaHoaDon)) {
+            insertHD();
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -657,30 +671,30 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSua1ActionPerformed
 
     private void btnFirst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst1ActionPerformed
-        
+
     }//GEN-LAST:event_btnFirst1ActionPerformed
 
     private void btnPrev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev1ActionPerformed
-        
+
     }//GEN-LAST:event_btnPrev1ActionPerformed
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
-       
+
     }//GEN-LAST:event_btnNext1ActionPerformed
 
     private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
-       
+
     }//GEN-LAST:event_btnLast1ActionPerformed
 
     private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
-      
+
     }//GEN-LAST:event_txtSoLuongActionPerformed
 
     private void txtSoLuongKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoLuongKeyReleased
-         int SoLuong = 0;
+        int SoLuong = 0;
         double Tien = 0;
         try {
-            SoLuong = Integer.valueOf(txtMaChiTiet.getText());
+            SoLuong = Integer.valueOf(txtSoLuong.getText());
         } catch (Exception e) {
         }
         int Gia = GetGiaSanPham(GetCbbSelected(cbbSanPham));
@@ -689,15 +703,14 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSoLuongKeyReleased
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-       txtMaChiTiet.setText("");
-       txtMaChiTiet.setText("");
-       txtTongTien.setText("");
-       btnThem.setEnabled(true);
-       
+        xoaTrangCt();
+
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        if (Check.checkNullText(txtMaChiTiet)) {
+            insertCT();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
 
@@ -751,13 +764,14 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDonGia;
     private javax.swing.JTextField txtMaChiTiet;
     private javax.swing.JTextField txtMaHD;
-    private javax.swing.JTextField txtMaHDCT;
     private javax.swing.JTextField txtMaHoaDon;
     private javax.swing.JTextField txtNgayLap;
+    private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTongTien;
     private javax.swing.JTextField txtTongTien1;
     // End of variables declaration//GEN-END:variables
     hoaDonDAO hdDao = new hoaDonDAO();
+    chiTietHoaDonDAO ctDao = new chiTietHoaDonDAO();
     int row;
 
     public void initt() {
@@ -773,8 +787,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         txtTongTien1.setText("0");
         txtTongTien1.setEditable(false);
     }
-    
-     public boolean checkTrungMa(JTextField txt) {
+
+    public boolean checkTrungMa(JTextField txt) {
         txt.setBackground(white);
         if (hdDao.selectById(txt.getText().toString()) == null) {
             return true;
@@ -838,12 +852,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         txtNgayLap.setText(tblTTHoaDon.getValueAt(viTri, 4).toString());
         txtTongTien1.setText(tblTTHoaDon.getValueAt(viTri, 5).toString());
         LayDuLieuChiTietHoaDon(txtMaHD.getText());
-        if (tblTTHoaDonCT.getRowCount()>0) {
+        if (tblTTHoaDonCT.getRowCount() > 0) {
             cbbSanPham.setModel(LayDuLieucbb("sanPham", "tenSP", "MASP"));
             txtMaChiTiet.setText(tblTTHoaDonCT.getValueAt(0, 1).toString());
             txtMaHD.setText(tblTTHoaDonCT.getValueAt(0, 2).toString());
-            setSelectedCombobox(tblTTHoaDonCT.getValueAt(0, 3).toString(),cbbSanPham);
-            txtMaChiTiet.setText(tblTTHoaDonCT.getValueAt(0, 4).toString());
+            setSelectedCombobox(tblTTHoaDonCT.getValueAt(0, 3).toString(), cbbSanPham);
+            txtSoLuong.setText(tblTTHoaDonCT.getValueAt(0, 4).toString());
             txtTongTien.setText(tblTTHoaDonCT.getValueAt(0, 5).toString());
         }
 
@@ -945,11 +959,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-     public int GetGiaSanPham(String MaSP) {
+
+    public int GetGiaSanPham(String MaSP) {
         int Gia = 0;
         String maSP = GetCbbSelected(cbbSanPham);
         String cautruyvan = "select * from SanPham where MaSP=?";
-        ResultSet rs = jdbcHelper.executeQuery(cautruyvan,maSP);
+        ResultSet rs = jdbcHelper.executeQuery(cautruyvan, maSP);
         try {
             if (rs.next()) {
                 Gia = rs.getInt("GIASP");
@@ -959,13 +974,13 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         }
         return Gia;
     }
-    
+
     public void LayDuLieuChiTietHoaDon(String maHD) {
         String sql = "";
-        
-        sql = "select MACHITIET,MAHD,SanPham.TENSP,SoLuong,TongTien \n" +
-"                 from ChiTietHoaDon,SanPham where ChiTietHoaDon.MASP=SanPham.MASP and maHD=? ";
-        ResultSet rs = jdbcHelper.executeQuery(sql,maHD);
+
+        sql = "select MACHITIET,MAHD,SanPham.TENSP,SoLuong,TongTien \n"
+                + "                 from ChiTietHoaDon,SanPham where ChiTietHoaDon.MASP=SanPham.MASP and maHD=? ";
+        ResultSet rs = jdbcHelper.executeQuery(sql, maHD);
         Object[] obj = new Object[]{"STT", "Mã CTHD", "Mã Hóa Đơn", "Sản Phẩm", "Số Lượng", "tổng tiền"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblTTHoaDonCT.setModel(tableModel);
@@ -980,7 +995,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                 item[3] = rs.getString("TENSP");
                 item[4] = rs.getInt("SoLuong");
                 item[5] = rs.getString("TongTien");
-                
+
                 tableModel.addRow(item);
             }
         } catch (SQLException ex) {
@@ -988,5 +1003,59 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         }
     }
 
-    
+    chiTietHoaDon getForm() {
+        chiTietHoaDon ct = new chiTietHoaDon();
+        ct.setMaChiTietHoaDon(txtMaChiTiet.getText());
+        ct.setMaHoaDon(txtMaHD.getText());
+        ct.setMaSanPham(GetCbbSelected(cbbSanPham));
+        ct.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+        ct.setTongTien(txtTongTien.getText());
+        return ct;
+    }
+
+    void insertCT() {
+        chiTietHoaDon ct = getForm();
+        if (ct == null) {
+            return;
+        }
+        try {
+            ctDao.insert(ct);
+            this.xoaTrangCt();
+            this.LayDuLieuChiTietHoaDon(txtMaHD.getText());
+            SetTongTien();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void xoaTrangCt() {
+        txtMaChiTiet.setText("");
+        txtMaChiTiet.setText("");
+        txtTongTien.setText("");
+        txtSoLuong.setText("");
+        btnThem.setEnabled(true);
+    }
+     public void SetTongTien() {
+         String maHD= txtMaHD.getText();
+        String sql = "select sum(ChiTietHoaDon.TongTien) as TongTienHienTai,HoaDon.MAHD from HoaDon,ChiTietHoaDon \n" +
+"                where HoaDon.MAHD=ChiTietHoaDon.MAHD\n" +
+"                and HoaDon.MAHD= ? group by HoaDon.MAHD";
+        ResultSet rs = jdbcHelper.executeQuery(sql,maHD);
+        String ttht = "";
+
+        try {
+            if (rs.next()) {
+                ttht = rs.getString("TongTienHienTai");
+                txtTongTien1.setText(ttht);
+                String ctv = "update HoaDon set TongTien= " + ttht + "where MAHD=?";
+                System.out.println(ctv);
+               jdbcHelper.executeUpdate(ctv,maHD);
+                layDuLieuHoaDon();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+     }
+
 }

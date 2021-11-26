@@ -62,7 +62,7 @@ public class chiTietHoaDonDAO extends cuaHangDao<chiTietHoaDon, String>{
                 entity.setMaHoaDon(rs.getString("MAHD"));
                 entity.setSoLuong(rs.getInt("SOLUONG"));
                 entity.setDonGia(rs.getDouble("DONGIA"));
-                entity.setTongTien(rs.getDouble("TONGTIEN"));
+                entity.setTongTien(rs.getString("TONGTIEN"));
                 entity.setMaSanPham(rs.getString("MASP"));
                 list.add(entity);
             }

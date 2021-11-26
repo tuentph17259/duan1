@@ -131,6 +131,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         btnSua.setText("Sửa");
@@ -619,9 +624,9 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (Check.checkNullText(txtMaHoaDon)) {
-           
-        }if (checkTrungMa(txtMaHoaDon)) {
-             insertHD();
+            if (checkTrungMa(txtMaHoaDon)) {
+                insertHD();
+            }
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -646,20 +651,24 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSua1ActionPerformed
 
     private void btnFirst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst1ActionPerformed
-        
+
     }//GEN-LAST:event_btnFirst1ActionPerformed
 
     private void btnPrev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev1ActionPerformed
-        
+
     }//GEN-LAST:event_btnPrev1ActionPerformed
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
-       
+
     }//GEN-LAST:event_btnNext1ActionPerformed
 
     private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
-       
+
     }//GEN-LAST:event_btnLast1ActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -733,7 +742,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         txtTongTien1.setText("0");
         txtTongTien1.setEditable(false);
     }
-     public boolean checkTrungMa(JTextField txt) {
+
+    public boolean checkTrungMa(JTextField txt) {
         txt.setBackground(white);
         if (hdDao.selectById(txt.getText().toString()) == null) {
             return true;
@@ -893,5 +903,4 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         }
     }
 
-    
 }

@@ -71,4 +71,9 @@ public class nhaCCDao extends cuaHangDao<nhaCungCap, String>{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void delete1(String Key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

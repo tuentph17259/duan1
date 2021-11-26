@@ -71,5 +71,10 @@ String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE MaNV = ?";
            throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void delete1(String Key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

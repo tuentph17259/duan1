@@ -76,4 +76,9 @@ public class khachHangDao extends cuaHangDao<khachHang, String>{
         String sql = "SELECT * FROM KHACHHANG WHERE TENKH LIKE ?";
         return this.selectBySql(sql, "%" +keyword + "%");
     }
+
+    @Override
+    public void delete1(String Key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

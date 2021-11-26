@@ -69,6 +69,10 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhanVien = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblLuuTru = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -146,7 +150,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3))
                         .addGap(37, 37, 37)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(jLabel5))
                     .addGroup(pnlNhapTTLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -293,6 +297,51 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
 
         tabs.addTab("Danh sách", danhSach);
 
+        tblLuuTru.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã NV", "Tên NV", "Giới tính", "Quê quán", "Ngày sinh", "SĐT"
+            }
+        ));
+        tblLuuTru.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblLuuTruMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblLuuTru);
+
+        jButton1.setText("Hiển thị lại");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(19, 19, 19))
+        );
+
+        tabs.addTab("Lưu Trữ", jPanel2);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
@@ -304,7 +353,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(240, 240, 240)
                 .addComponent(jLabel1)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(tabs)
         );
         layout.setVerticalGroup(
@@ -313,7 +362,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 512, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
 
@@ -333,7 +382,8 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+        deleteTamThoi();
+        tabs.setSelectedIndex(1);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -348,6 +398,17 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        hienThiLai();
+        tabs.setSelectedIndex(1);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblLuuTruMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLuuTruMouseClicked
+        if (evt.getClickCount() == 1) {
+            this.row = tblLuuTru.getSelectedRow();
+        }
+    }//GEN-LAST:event_tblLuuTruMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
@@ -357,6 +418,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel capNhap;
     private javax.swing.JPanel danhSach;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -366,11 +428,14 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pnlNhapTT;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTabbedPane tabs;
+    private javax.swing.JTable tblLuuTru;
     private javax.swing.JTable tblNhanVien;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtNgaySinh;
@@ -384,13 +449,29 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         this.updateStatus();
         this.rdoNam.setSelected(true);
         fillTable();
+        fillTable1();
+        tabs.setSelectedIndex(1);
     }
 
     void fillTable() {
         DefaultTableModel mol = (DefaultTableModel) tblNhanVien.getModel();
         mol.setRowCount(0);
         try {
-            List<nhanVien> list = dao.selectAll();
+            List<nhanVien> list = dao.XoaTamThoi();
+            for (nhanVien nv : list) {
+                Object[] row = {nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getQueQuan(), dateHelper.toString(nv.getNgaySinh(), "yyyy-MM-dd"), nv.getSDT()};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
+    }
+    void fillTable1() {
+        DefaultTableModel mol = (DefaultTableModel) tblLuuTru.getModel();
+        mol.setRowCount(0);
+        try {
+            List<nhanVien> list = dao.HienThiLai();
             for (nhanVien nv : list) {
                 Object[] row = {nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getQueQuan(), dateHelper.toString(nv.getNgaySinh(), "yyyy-MM-dd"), nv.getSDT()};
                 mol.addRow(row);
@@ -503,16 +584,30 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         }
     }
 
-    void delete() {
+    void deleteTamThoi() {
         if (dialogHelper.confirm(this, "Bạn có muốn xóa nhân viên này ?")) {
             try {
                 String maNV = txtMaNV.getText();
                 dao.delete(maNV);
                 fillTable();
+                fillTable1();
                 clearFrom();
                 dialogHelper.alert(this, "Xóa thành công!");
             } catch (Exception e) {
                 dialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+    void hienThiLai() {
+        if (dialogHelper.confirm(this, "Bạn có muốn thêm lại nhân viên này ?")) {
+            try {
+                String maNV = tblLuuTru.getValueAt(row, 0).toString();
+                dao.delete1(maNV);
+                fillTable1();
+                fillTable();
+                dialogHelper.alert(this, "Thêm lại thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Thêm lại thất bại!");
             }
         }
     }

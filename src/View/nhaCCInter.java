@@ -20,7 +20,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
 
     nhaCCDao dao = new nhaCCDao();
     int row = -1;
-    
+
     /**
      * Creates new form nhaCCInter
      */
@@ -38,6 +38,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -55,6 +56,10 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
         btnXoaTrang = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhaCC = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblluuTru = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -136,7 +141,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
                     .addComponent(txtMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaTrang, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -176,9 +181,9 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
                         .addComponent(btnXoa)
                         .addGap(18, 18, 18)
                         .addComponent(btnXoaTrang)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -202,17 +207,50 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jTabbedPane1.addTab("Thông tin", jPanel1);
+
+        tblluuTru.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã nhà cung cấp", "Tên nhà cung cấp"
+            }
+        ));
+        jScrollPane2.setViewportView(tblluuTru);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
+        jButton1.setText("Khôi phục");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Lưu trữ", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -228,6 +266,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         delete();
+        fillTableRecycle();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -245,6 +284,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXoaTrang;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -252,8 +292,12 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblNhaCC;
+    private javax.swing.JTable tblluuTru;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMaNCC;
     private javax.swing.JTextField txtSDT;
@@ -278,6 +322,23 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
             e.printStackTrace();
+        }
+    }
+
+    void fillTableRecycle() {
+        DefaultTableModel dtm = (DefaultTableModel) tblluuTru.getModel();
+        dtm.setRowCount(0);
+        try {
+            dao.getNhaCungCapRecycle().removeAll(dao.getNhaCungCapRecycle());
+            for (nhaCungCap ncc : dao.getNhaCungCapRecycle()) {
+                dtm.addRow(new Object[]{
+                    ncc.getMaNCC(),
+                    ncc.getTenNCC()
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            dialogHelper.alert(null, "Lỗi truy vấn dữ liệu");
         }
     }
 
@@ -375,6 +436,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
         if (dialogHelper.confirm(this, "Bạn có muốn xóa nhà cung cấp này không?")) {
             try {
                 String maNCC = txtMaNCC.getText();
+                
                 dao.delete(maNCC);
                 fillTable();
                 clearFrom();

@@ -10,15 +10,17 @@ public class nhaCungCap {
     private String tenNCC;
     private String diaChi;
     private String SDT;
+    private boolean trangThai;
 
     public nhaCungCap() {
     }
 
-    public nhaCungCap(String maNCC, String tenNCC, String diaChi, String SDT) {
+    public nhaCungCap(String maNCC, String tenNCC, String diaChi, String SDT, boolean trangThai) {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
         this.diaChi = diaChi;
         this.SDT = SDT;
+        this.trangThai = trangThai;
     }
 
     public String getMaNCC() {
@@ -37,6 +39,10 @@ public class nhaCungCap {
         return SDT;
     }
 
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
     public void setMaNCC(String maNCC) {
         this.maNCC = maNCC;
     }
@@ -53,4 +59,9 @@ public class nhaCungCap {
         this.SDT = SDT;
     }
 
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    
 }

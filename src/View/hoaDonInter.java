@@ -5,6 +5,25 @@
  */
 package View;
 
+import Dao.hoaDonDAO;
+import Helper.Check;
+import Helper.dateHelper;
+import Helper.dialogHelper;
+import Helper.displayModel;
+import Helper.jdbcHelper;
+import Model.hoaDon;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author NGUYEN TRI TUE
@@ -16,6 +35,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
      */
     public hoaDonInter() {
         initComponents();
+        initt();
     }
 
     /**
@@ -62,8 +82,6 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtMaHoaDon = new javax.swing.JTextField();
-        txtMaKH = new javax.swing.JTextField();
-        txtMaNhanVien = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtNgayLap = new javax.swing.JTextField();
@@ -80,6 +98,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         btnLast1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTTHoaDon = new javax.swing.JTable();
+        cbbKhachHang = new javax.swing.JComboBox<>();
+        cbbNhanVien = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -114,9 +134,19 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btnXoa.setText("Xoá ");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
         btnXoaTrang.setText("Xoá trắng");
@@ -255,11 +285,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtMaHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -270,7 +301,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -308,10 +339,10 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         jLabel9.setText("Mã hoá đơn:");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Mã khách hàng:");
+        jLabel10.setText("Khách Hàng");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Mã nhân viên: ");
+        jLabel11.setText("Nhân viên:");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Ngày lập:");
@@ -324,15 +355,35 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
         btnThem1.setText("Thêm");
+        btnThem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThem1ActionPerformed(evt);
+            }
+        });
 
         btnSua1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         btnSua1.setText("Sửa");
+        btnSua1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSua1ActionPerformed(evt);
+            }
+        });
 
         btnXoa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btnXoa1.setText("Xoá");
+        btnXoa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoa1ActionPerformed(evt);
+            }
+        });
 
         btnXoaTrang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
         btnXoaTrang1.setText("Xoá trắng");
+        btnXoaTrang1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTrang1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -364,12 +415,32 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         jPanel9.setBackground(new java.awt.Color(129, 183, 210));
 
         btnFirst1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dau.png"))); // NOI18N
+        btnFirst1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirst1ActionPerformed(evt);
+            }
+        });
 
         btnPrev1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lui.png"))); // NOI18N
+        btnPrev1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrev1ActionPerformed(evt);
+            }
+        });
 
         btnNext1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tien.png"))); // NOI18N
+        btnNext1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNext1ActionPerformed(evt);
+            }
+        });
 
         btnLast1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cuoi.png"))); // NOI18N
+        btnLast1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLast1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -390,8 +461,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFirst1)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFirst1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnPrev1)
                     .addComponent(btnNext1)
                     .addComponent(btnLast1))
@@ -406,6 +477,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                 "Mã hoá đơn", "Mã khách hàng", "Mã nhân viên", "Ngày lập", "Tổng tiền"
             }
         ));
+        tblTTHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTTHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblTTHoaDon);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -420,9 +496,9 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMaHoaDon)
-                    .addComponent(txtMaKH)
-                    .addComponent(txtMaNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
+                    .addComponent(txtMaHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                    .addComponent(cbbKhachHang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbNhanVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(91, 91, 91)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -455,7 +531,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                         .addGap(21, 21, 21)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbbKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
@@ -469,7 +545,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(txtMaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -537,6 +613,54 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaHDActionPerformed
 
+    private void tblTTHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTHoaDonMouseClicked
+        setFormHD();
+    }//GEN-LAST:event_tblTTHoaDonMouseClicked
+
+    private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
+        if (Check.checkNullText(txtMaHoaDon)) {
+           
+        }if (checkTrungMa(txtMaHoaDon)) {
+             insertHD();
+        }
+    }//GEN-LAST:event_btnThem1ActionPerformed
+
+    private void btnXoaTrang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrang1ActionPerformed
+        xoaFormHD();
+    }//GEN-LAST:event_btnXoaTrang1ActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
+        deleteHD();
+    }//GEN-LAST:event_btnXoa1ActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
+        updateHD();
+    }//GEN-LAST:event_btnSua1ActionPerformed
+
+    private void btnFirst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst1ActionPerformed
+        
+    }//GEN-LAST:event_btnFirst1ActionPerformed
+
+    private void btnPrev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev1ActionPerformed
+        
+    }//GEN-LAST:event_btnPrev1ActionPerformed
+
+    private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
+       
+    }//GEN-LAST:event_btnNext1ActionPerformed
+
+    private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
+       
+    }//GEN-LAST:event_btnLast1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
@@ -555,6 +679,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnXoa1;
     private javax.swing.JButton btnXoaTrang;
     private javax.swing.JButton btnXoaTrang1;
+    private javax.swing.JComboBox<String> cbbKhachHang;
+    private javax.swing.JComboBox<String> cbbNhanVien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -587,11 +713,185 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaHDCT;
     private javax.swing.JTextField txtMaHoaDon;
-    private javax.swing.JTextField txtMaKH;
-    private javax.swing.JTextField txtMaNhanVien;
     private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtNgayLap;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTongTien1;
     // End of variables declaration//GEN-END:variables
+    hoaDonDAO hdDao = new hoaDonDAO();
+    int row;
+
+    public void initt() {
+        layDuLieuHoaDon();
+        this.row = -1;
+        cbbKhachHang.setModel(LayDuLieucbb("KhachHang", "TENKH", "maKH"));
+        cbbNhanVien.setModel(LayDuLieucbb("nhanVien", "TenNV", "MaNV"));
+        txtNgayLap.setEditable(false);
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        txtNgayLap.setText(sdf.format(date));
+        txtTongTien1.setText("0");
+        txtTongTien1.setEditable(false);
+    }
+     public boolean checkTrungMa(JTextField txt) {
+        txt.setBackground(white);
+        if (hdDao.selectById(txt.getText().toString()) == null) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại:" + txtMaHoaDon.getText());
+            return false;
+        }
+    }
+
+    public DefaultComboBoxModel LayDuLieucbb(String bang, String Ten, String Ma) {
+        String cautruyvan = "select *from " + bang;
+        ResultSet rs = jdbcHelper.executeQuery(cautruyvan);
+        DefaultComboBoxModel cbbmodel = new DefaultComboBoxModel();
+        try {
+            while (rs.next()) {
+                displayModel valueModel = new displayModel(rs.getString(Ten), rs.getString(Ma));
+                cbbmodel.addElement(valueModel);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return cbbmodel;
+    }
+
+    public void layDuLieuHoaDon() {
+        String sql = "";
+        sql = "select MAHD,KhachHang.TENKH as TenKhachHang,NhanVien.TENNV,TongTien,NgayLapHoaDon from HoaDon,KhachHang,NhanVien where HoaDon.MAKH =KhachHang.MAKH \n"
+                + "                and HoaDon.MANV=NhanVien.MANV";
+        ResultSet rs = jdbcHelper.executeQuery(sql);
+        Object[] obj = new Object[]{"STT", "Mã hóa đơn", "Khách Hàng ", "Nhân viên", "Ngày lập hóa dơn", "tổng tiền"};
+        DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
+        tblTTHoaDon.setModel(tableModel);
+        int c = 0;
+        try {
+            while (rs.next()) {
+                Object[] item = new Object[6];
+                c++;
+                item[0] = c;
+                item[1] = rs.getString("MAHD");
+                item[2] = rs.getString("tenKhachHang");
+                item[3] = rs.getString("TENNV");
+                item[4] = rs.getString("NgayLapHoaDon");
+                item[5] = rs.getInt("TongTien");
+
+                tableModel.addRow(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
+    }
+
+    void setFormHD() {
+        int viTri = tblTTHoaDon.getSelectedRow();
+        txtMaHoaDon.setText(tblTTHoaDon.getValueAt(viTri, 1).toString());
+        setSelectedCombobox(tblTTHoaDon.getValueAt(viTri, 2).toString(), cbbKhachHang);
+        setSelectedCombobox(tblTTHoaDon.getValueAt(viTri, 3).toString(), cbbNhanVien);
+        txtNgayLap.setText(tblTTHoaDon.getValueAt(viTri, 4).toString());
+        txtTongTien1.setText(tblTTHoaDon.getValueAt(viTri, 5).toString());
+
+    }
+
+    public void setSelectedCombobox(String cbbselected, JComboBox cbb) {
+        for (int i = 0; i < cbb.getItemCount(); i++) {
+            Object obj = cbb.getItemAt(i);
+            if (obj != null) {
+                displayModel m = (displayModel) obj;
+                if (cbbselected.trim().equals(m.displayMember)) {
+                    cbb.setSelectedItem(m);
+                }
+            }
+        }
+    }
+
+    hoaDon getFormHD() {
+        hoaDon hd = new hoaDon();
+        hd.setMaHoaDon(txtMaHoaDon.getText());
+        hd.setMaKhachHang(GetCbbSelected(cbbKhachHang));
+        hd.setMaNhanVien(GetCbbSelected(cbbNhanVien));
+        hd.setNgayLapHoaDon(dateHelper.toDate(txtNgayLap.getText()));
+        hd.setTongTien(Double.parseDouble(txtTongTien1.getText()));
+        return hd;
+    }
+
+    void insertHD() {
+        hoaDon hd = getFormHD();
+        if (hd == null) {
+            return;
+        }
+        try {
+            hdDao.insert(hd);
+            this.layDuLieuHoaDon();
+            xoaFormHD();
+            dialogHelper.alert(this, "thêm mới thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String GetCbbSelected(JComboBox cbb) {
+        Object[] obj = cbb.getSelectedObjects();
+        displayModel item = (displayModel) obj[0];
+        return item.displayvalue.toString();
+
+    }
+
+    public void xoaFormHD() {
+        txtMaHoaDon.setText("");
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        txtNgayLap.setText(sdf.format(date));
+        txtTongTien1.setText("0");
+
+    }
+
+    public void deleteHD() {
+        if (!txtMaHoaDon.getText().equals("")) {
+            String maHD = txtMaHoaDon.getText();
+
+            String sqlDem = "select count(MACHITIET) as SoChiTietPhieuMua\n"
+                    + "            from HoaDon,ChiTietHoaDon where HoaDon.MAHD=ChiTietHoaDon.MAHD and HoaDon.MAHD=?";
+            ResultSet rs = jdbcHelper.executeQuery(sqlDem, maHD);
+
+            int so = 0;
+            try {
+                if (rs.next()) {
+                    so = rs.getInt("SoChiTietPhieuMua");
+                    if (rs.getInt("SoChiTietPhieuMua") == 0) {
+                        hdDao.delete(maHD);
+                        dialogHelper.alert(this, "xóa thành công rồi ạ");
+                        layDuLieuHoaDon();
+                    } else {
+                        dialogHelper.alert(this, "không thể xóa bởi " + txtMaHoaDon.getText() + " đã có " + so + " chi tiết hóa đơn");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            dialogHelper.alert(this, "bạn chưa chọn hóa đơn để xóa ");
+        }
+    }
+
+    void updateHD() {
+        hoaDon hd = getFormHD();
+        if (hd == null) {
+            return;
+        }
+        try {
+            hdDao.update(hd);
+            xoaFormHD();
+            dialogHelper.alert(this, "sửa thành công");
+            layDuLieuHoaDon();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 }

@@ -15,7 +15,7 @@ import java.util.Date;
  * @author NGUYEN TRI TUE
  */
 public class dateHelper {
-    static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     //Chuyển String sang data
     public static Date toDate(String date,String...pattern){
         try {

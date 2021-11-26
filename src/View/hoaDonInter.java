@@ -643,11 +643,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (Check.checkNullText(txtMaHoaDon)) {
+            if (checkTrungMa(txtMaHoaDon)) {
+                insertHD();
+            }
+        }
 
-        }
-        if (checkTrungMa(txtMaHoaDon)) {
-            insertHD();
-        }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnXoaTrang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrang1ActionPerformed
@@ -881,7 +881,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         hd.setMaKhachHang(GetCbbSelected(cbbKhachHang));
         hd.setMaNhanVien(GetCbbSelected(cbbNhanVien));
         hd.setNgayLapHoaDon(dateHelper.toDate(txtNgayLap.getText()));
-        hd.setTongTien(Double.parseDouble(txtTongTien1.getText()));
+        hd.setTongTien((txtTongTien1.getText()));
         return hd;
     }
 
@@ -1036,12 +1036,13 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         txtSoLuong.setText("");
         btnThem.setEnabled(true);
     }
-     public void SetTongTien() {
-         String maHD= txtMaHD.getText();
-        String sql = "select sum(ChiTietHoaDon.TongTien) as TongTienHienTai,HoaDon.MAHD from HoaDon,ChiTietHoaDon \n" +
-"                where HoaDon.MAHD=ChiTietHoaDon.MAHD\n" +
-"                and HoaDon.MAHD= ? group by HoaDon.MAHD";
-        ResultSet rs = jdbcHelper.executeQuery(sql,maHD);
+
+    public void SetTongTien() {
+        String maHD = txtMaHD.getText();
+        String sql = "select sum(ChiTietHoaDon.TongTien) as TongTienHienTai,HoaDon.MAHD from HoaDon,ChiTietHoaDon \n"
+                + "                where HoaDon.MAHD=ChiTietHoaDon.MAHD\n"
+                + "                and HoaDon.MAHD= ? group by HoaDon.MAHD";
+        ResultSet rs = jdbcHelper.executeQuery(sql, maHD);
         String ttht = "";
 
         try {
@@ -1050,12 +1051,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                 txtTongTien1.setText(ttht);
                 String ctv = "update HoaDon set TongTien= " + ttht + "where MAHD=?";
                 System.out.println(ctv);
-               jdbcHelper.executeUpdate(ctv,maHD);
+                jdbcHelper.executeUpdate(ctv, maHD);
                 layDuLieuHoaDon();
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-     }
+    }
 
 }

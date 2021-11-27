@@ -15,6 +15,7 @@ public abstract class cuaHangDao<E,K> {
     abstract public void insert(E entity);
     abstract public void update(E entity);
     abstract public void delete(K Key);
+    abstract public void delete1(K Key);
     abstract public List<E> selectAll();
     abstract public E selectById(K key);
     abstract protected List<E> selectBySql(String sql,Object...args);

@@ -93,8 +93,9 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         btnXoaTrang1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTTHoaDon = new javax.swing.JTable();
-        cbbKhachHang = new javax.swing.JComboBox<>();
         cbbNhanVien = new javax.swing.JComboBox<>();
+        txtTenKH = new javax.swing.JTextField();
+        txtMaKH = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -422,6 +423,12 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblTTHoaDon);
 
+        txtMaKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMaKHKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -435,8 +442,9 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtMaHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                    .addComponent(cbbKhachHang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbbNhanVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbbNhanVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTenKH)
+                    .addComponent(txtMaKH, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(91, 91, 91)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -458,31 +466,31 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(txtMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(cbbKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
+                            .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(txtNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTongTien1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jLabel14))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,10 +557,15 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void tblTTHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTHoaDonMouseClicked
         setFormHD();
+        btnThem1.setEnabled(false);
+        txtMaHoaDon.setEditable(false);
     }//GEN-LAST:event_tblTTHoaDonMouseClicked
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
-        if (Check.checkNullText(txtMaHoaDon)) {
+        if (Check.checkNullText(txtMaHoaDon)
+                && Check.checkNullText(txtMaKH)
+                && Check.checkNullText(txtTenKH)) {
+
             if (checkTrungMa(txtMaHoaDon)) {
                 insertHD();
             }
@@ -561,6 +574,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnXoaTrang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrang1ActionPerformed
         xoaFormHD();
+        btnThem1.setEnabled(true);
+        txtMaHoaDon.setEditable(true);
     }//GEN-LAST:event_btnXoaTrang1ActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -583,6 +598,13 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void txtMaKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaKHKeyReleased
+
+        String maKH = txtMaKH.getText();
+        String ten = layDuLieuKhachHang(maKH);
+        txtTenKH.setText(layDuLieuKhachHang(maKH));
+    }//GEN-LAST:event_txtMaKHKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
@@ -597,7 +619,6 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnXoa1;
     private javax.swing.JButton btnXoaTrang;
     private javax.swing.JButton btnXoaTrang1;
-    private javax.swing.JComboBox<String> cbbKhachHang;
     private javax.swing.JComboBox<String> cbbNhanVien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -630,9 +651,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaHDCT;
     private javax.swing.JTextField txtMaHoaDon;
+    private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtNgayLap;
     private javax.swing.JTextField txtSoLuong;
+    private javax.swing.JTextField txtTenKH;
     private javax.swing.JTextField txtTongTien1;
     // End of variables declaration//GEN-END:variables
     hoaDonDAO hdDao = new hoaDonDAO();
@@ -641,14 +664,15 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     public void initt() {
         layDuLieuHoaDon();
         this.row = -1;
-        cbbKhachHang.setModel(LayDuLieucbb("KhachHang", "TENKH", "maKH"));
         cbbNhanVien.setModel(LayDuLieucbb("nhanVien", "TenNV", "MaNV"));
+
         txtNgayLap.setEditable(false);
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         txtNgayLap.setText(sdf.format(date));
         txtTongTien1.setText("0");
         txtTongTien1.setEditable(false);
+        txtTenKH.setEditable(false);
     }
 
     public boolean checkTrungMa(JTextField txt) {
@@ -679,7 +703,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     public void layDuLieuHoaDon() {
         String sql = "";
-        sql = "select MAHD,KhachHang.TENKH as TenKhachHang,NhanVien.TENNV,TongTien,NgayLapHoaDon from HoaDon,KhachHang,NhanVien where HoaDon.MAKH =KhachHang.MAKH \n"
+        sql = "select MAHD,KhachHang.maKH as TenKhachHang,NhanVien.TENNV,TongTien,NgayLapHoaDon from HoaDon,KhachHang,NhanVien where HoaDon.MAKH =KhachHang.MAKH \n"
                 + "                and HoaDon.MANV=NhanVien.MANV";
         ResultSet rs = jdbcHelper.executeQuery(sql);
         Object[] obj = new Object[]{"STT", "Mã hóa đơn", "Khách Hàng ", "Nhân viên", "Ngày lập hóa dơn", "tổng tiền"};
@@ -708,7 +732,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     void setFormHD() {
         int viTri = tblTTHoaDon.getSelectedRow();
         txtMaHoaDon.setText(tblTTHoaDon.getValueAt(viTri, 1).toString());
-        setSelectedCombobox(tblTTHoaDon.getValueAt(viTri, 2).toString(), cbbKhachHang);
+
+        txtMaKH.setText(tblTTHoaDon.getValueAt(viTri, 2).toString());
         setSelectedCombobox(tblTTHoaDon.getValueAt(viTri, 3).toString(), cbbNhanVien);
         txtNgayLap.setText(tblTTHoaDon.getValueAt(viTri, 4).toString());
         txtTongTien1.setText(tblTTHoaDon.getValueAt(viTri, 5).toString());
@@ -730,7 +755,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     hoaDon getFormHD() {
         hoaDon hd = new hoaDon();
         hd.setMaHoaDon(txtMaHoaDon.getText());
-        hd.setMaKhachHang(GetCbbSelected(cbbKhachHang));
+        hd.setMaKhachHang(txtMaKH.getText());
         hd.setMaNhanVien(GetCbbSelected(cbbNhanVien));
         hd.setNgayLapHoaDon(dateHelper.toDate(txtNgayLap.getText()));
         hd.setTongTien((txtTongTien1.getText()));
@@ -765,7 +790,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         txtNgayLap.setText(sdf.format(date));
         txtTongTien1.setText("0");
-
+        txtMaKH.setText("");
+        txtTenKH.setText("");
     }
 
     public void deleteHD() {
@@ -809,6 +835,21 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String layDuLieuKhachHang(String maKH) {
+        String ten = "";
+        String sql = "select TENKH from KHACHHANG where MAKH=?";
+        ResultSet rs = jdbcHelper.executeQuery(sql, maKH);
+        try {
+            if (rs.next()) {
+                ten = rs.getString("tenKH");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ten;
     }
 
 }

@@ -573,7 +573,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (Check.checkNullText(txtMaHoaDon)
-                && Check.checkNullText(txtMaKH)) {
+                && Check.checkNullText(txtMaKH)
+                &&Check.checkNullText(txtTenKH)) {
             if (checkTrungMa(txtMaHoaDon)) {
                 insertHD();
             }

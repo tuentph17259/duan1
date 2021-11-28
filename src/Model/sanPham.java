@@ -14,27 +14,24 @@ public class sanPham {
     private String tenSanPham;
     private String mauSac;
     private double giaSanPham;
-    private String thuongHieu;
     private String hinhAnh;
     private String cauHinhChiTiet;
     private String trangThai;
-    private String maNhaCungCap;
-    private String maLoaiSP;
+    private String maThuongHieu;
+    
 
     public sanPham() {
     }
 
-    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String thuongHieu, String hinhAnh, String cauHinhChiTiet, String trangThai, String maNhaCungCap, String maLoaiSP) {
+    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String hinhAnh, String cauHinhChiTiet, String trangThai, String maNhaCungCap, String maThuongHieu) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.mauSac = mauSac;
         this.giaSanPham = giaSanPham;
-        this.thuongHieu = thuongHieu;
         this.hinhAnh = hinhAnh;
         this.cauHinhChiTiet = cauHinhChiTiet;
         this.trangThai = trangThai;
-        this.maNhaCungCap = maNhaCungCap;
-        this.maLoaiSP = maLoaiSP;
+        this.maThuongHieu = maThuongHieu;
     }
 
     public String getMaSanPham() {
@@ -69,14 +66,6 @@ public class sanPham {
         this.giaSanPham = giaSanPham;
     }
 
-    public String getThuongHieu() {
-        return thuongHieu;
-    }
-
-    public void setThuongHieu(String thuongHieu) {
-        this.thuongHieu = thuongHieu;
-    }
-
     public String getHinhAnh() {
         return hinhAnh;
     }
@@ -101,25 +90,17 @@ public class sanPham {
         this.trangThai = trangThai;
     }
 
-    public String getMaNhaCungCap() {
-        return maNhaCungCap;
+    public String getMaThuongHieu() {
+        return maThuongHieu;
     }
 
-    public void setMaNhaCungCap(String maNhaCungCap) {
-        this.maNhaCungCap = maNhaCungCap;
-    }
-
-    public String getMaLoaiSP() {
-        return maLoaiSP;
-    }
-
-    public void setMaLoaiSP(String maLoaiSP) {
-        this.maLoaiSP = maLoaiSP;
+    public void setMaThuongHieu(String maThuongHieu) {
+        this.maThuongHieu = maThuongHieu;
     }
 
     @Override
     public String toString() {
-        return "sanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", mauSac=" + mauSac + ", giaSanPham=" + giaSanPham + ", thuongHieu=" + thuongHieu + ", hinhAnh=" + hinhAnh + ", cauHinhChiTiet=" + cauHinhChiTiet + ", trangThai=" + trangThai + ", maNhaCungCap=" + maNhaCungCap + ", maLoaiSP=" + maLoaiSP + '}';
+        return "sanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", mauSac=" + mauSac + ", giaSanPham=" + giaSanPham + ", hinhAnh=" + hinhAnh + ", cauHinhChiTiet=" + cauHinhChiTiet + ", trangThai=" + trangThai + ", maThuongHieu=" + maThuongHieu + '}';
     }
     
     

@@ -150,6 +150,11 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
         btnXoaTrang.setText("Xoá trắng");
+        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTrangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -180,9 +185,14 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã hoá đơn chi tiết", "Mã hoá đơn", "Mã sản phẩm", "Số lượng", "Đơn giá", "Tổng tiền"
+                "stt", "ma ct", "ma hd", "ma sp", "so luong", "Tổng tiền"
             }
         ));
+        tblTTHoaDonCT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTTHoaDonCTMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTTHoaDonCT);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -537,7 +547,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaTrang1ActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-
+        deleteCT();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
@@ -587,6 +597,20 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         String ten = layDuLieuSanPham(maSP);
         txtTenSP.setText(ten);
     }//GEN-LAST:event_txtMaSPKeyReleased
+
+    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
+       xoaTrangCt();
+    }//GEN-LAST:event_btnXoaTrangActionPerformed
+
+    private void tblTTHoaDonCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTHoaDonCTMouseClicked
+        int viTri = tblTTHoaDonCT.getSelectedRow();
+        txtMaCT.setText(tblTTHoaDonCT.getValueAt(viTri, 1).toString());
+        txtMaHD.setText(tblTTHoaDonCT.getValueAt(viTri, 2).toString());
+        txtMaSP.setText(tblTTHoaDonCT.getValueAt(viTri, 3).toString());
+        txtTenSP.setText(tblTTHoaDonCT.getValueAt(viTri, 4).toString());
+        txtSoLuong.setText(tblTTHoaDonCT.getValueAt(viTri, 5).toString());
+        txtTongTien.setText(tblTTHoaDonCT.getValueAt(viTri, 6).toString());
+    }//GEN-LAST:event_tblTTHoaDonCTMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -781,6 +805,22 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         txtMaKH.setText("");
         txtTenKH.setText("");
     }
+    public void deleteCT(){
+        if (!txtMaCT.getText().equals("")) {
+            try {
+                String maCT= txtMaCT.getText();
+                ctDao.delete(maCT);
+                LayDuLieuChiTietHoaDon(txtMaHD.getText());
+                SetTongTien();
+                dialogHelper.alert(this, "xóa thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            dialogHelper.alert(this, "bạn chưa chọn hóa đơn CT để xóa ");
+        }
+    }
 
     public void deleteHD() {
         if (!txtMaHoaDon.getText().equals("")) {
@@ -873,23 +913,24 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     public void LayDuLieuChiTietHoaDon(String maHD) {
         String sql = "";
 
-        sql = "select MACHITIET,MAHD,SanPham.TENSP,SoLuong,TongTien \n"
+        sql = "select MACHITIET,MAHD,SanPham.maSP,tenSP,SoLuong,TongTien \n"
                 + "                 from ChiTietHoaDon,SanPham where ChiTietHoaDon.MASP=SanPham.MASP and maHD=? ";
         ResultSet rs = jdbcHelper.executeQuery(sql, maHD);
-        Object[] obj = new Object[]{"STT", "Mã CTHD", "Mã Hóa Đơn", "Sản Phẩm", "Số Lượng", "tổng tiền"};
+        Object[] obj = new Object[]{"STT", "Mã CTHD", "Mã Hóa Đơn", "Mã Sản Phẩm","Tên SP", "Số Lượng", "tổng tiền"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblTTHoaDonCT.setModel(tableModel);
         int c = 0;
         try {
             while (rs.next()) {
                 c++;
-                Object[] item = new Object[6];
+                Object[] item = new Object[7];
                 item[0] = c;
                 item[1] = rs.getString("MACHITIET");
                 item[2] = rs.getString("MAHD");
-                item[3] = rs.getString("TENSP");
-                item[4] = rs.getInt("SoLuong");
-                item[5] = rs.getString("TongTien");
+                item[3] = rs.getString("masp");
+                item[4] = rs.getString("Tensp");
+                item[5] = rs.getInt("SoLuong");
+                item[6] = rs.getString("TongTien");
 
                 tableModel.addRow(item);
             }

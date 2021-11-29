@@ -20,8 +20,8 @@ public class nhaCCDao extends cuaHangDao<nhaCungCap, String> {
 
     String INSERT_SQL = "INSERT INTO NHACUNGCAP (MANCC, TENNCC, DIACHI, SDT,TRANGTHAI) VALUES (?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE NHACUNGCAP SET TENNCC = ?, DIACHI = ?, SDT = ?,TRANGTHAI=? where MANCC = ?";
-    String DELETE_SQL = "UPDATE NHACUNGCAP SET TRANGTHAI = 0 WHERE MANCC=?";
-    String DELETE_SQL2 = "DELETE FROM NHACUNGCAP WHERE MANCC=?";
+    String DELETE_SQL2 = "UPDATE NHACUNGCAP SET TRANGTHAI = 0 WHERE MANCC=?";
+    String DELETE_SQL = "DELETE FROM NHACUNGCAP WHERE MANCC=?";
     String SELECT_ALL_SQL = "SELECT * FROM NHACUNGCAP";
     String SELECT_BY_ID_SQL = "SELECT * FROM NHACUNGCAP WHERE MANCC = ?";
 
@@ -34,7 +34,7 @@ public class nhaCCDao extends cuaHangDao<nhaCungCap, String> {
     public void update(nhaCungCap entity) {
         jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenNCC(), entity.getDiaChi(), entity.getSDT(), entity.getMaNCC(), entity.isTrangThai());
     }
-    
+
     @Override
     public void delete(String maCC) {
 //        jdbcHelper.executeUpdate(DELETE_SQL, maCC);
@@ -46,6 +46,10 @@ public class nhaCCDao extends cuaHangDao<nhaCungCap, String> {
 //            e.printStackTrace();
 //        }
         jdbcHelper.executeUpdate(DELETE_SQL, maCC);
+    }
+
+    public void delete2(String maCC) {
+        jdbcHelper.executeUpdate(DELETE_SQL2, maCC);
     }
 
     @Override

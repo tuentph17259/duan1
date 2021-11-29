@@ -33,6 +33,9 @@ public class thuongHieu {
         this.tenTH = tenTH;
     }
 
-
+    @Override
+    public String toString() {
+        return maTH;
+    }
 
 }

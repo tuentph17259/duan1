@@ -26,12 +26,12 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String>{
 
     @Override
     public void insert(sanPham entity) {
-          jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaSanPham(), entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(), entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.getTrangThai(), entity.getMaThuongHieu());  
+          jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaSanPham(), entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(), entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu());  
     }
 
     @Override
     public void update(sanPham entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(),  entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.getTrangThai(), entity.getMaThuongHieu(),entity.getMaSanPham());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(),  entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu(),entity.getMaSanPham());
     }
 
     @Override
@@ -66,8 +66,9 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String>{
                 entity.setGiaSanPham(rs.getDouble("GIASP"));
                 entity.setHinhAnh(rs.getString("HINHANH"));
                 entity.setCauHinhChiTiet(rs.getString("CAUHINHCHITIET"));
-                entity.setTrangThai(rs.getString("TRANGTHAI"));
+                entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
                 entity.setMaThuongHieu(rs.getString("MATHUONGHIEU"));
+                lst.add(entity);
             }
             rs.getStatement().getConnection().close();
             return lst;
@@ -76,6 +77,10 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String>{
         }
     }
 
+    public List<sanPham> selectByKeyWord(String keyword) {
+        String sql = "SELECT * FROM SANPHAM WHERE TENSP LIKE ?";
+        return this.selectBySql(sql, "%" +keyword + "%");
+    }
     @Override
     public void delete1(String Key) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

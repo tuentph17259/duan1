@@ -10,6 +10,7 @@ import Helper.dateHelper;
 import Helper.dialogHelper;
 import Model.nhaCungCap;
 import java.util.List;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +21,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
 
     nhaCCDao dao = new nhaCCDao();
     int row = -1;
-    
+
     /**
      * Creates new form nhaCCInter
      */
@@ -38,7 +39,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -57,6 +58,10 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhaCC = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblLuuTru = new javax.swing.JTable();
+        btnKhoiPhuc = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -91,7 +96,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
         });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
-        btnXoa.setText("Xoá");
+        btnXoa.setText("Vô hiệu hóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
@@ -138,12 +143,12 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
                     .addComponent(txtMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoaTrang, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXoaTrang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -178,7 +183,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
                         .addComponent(btnXoa)
                         .addGap(18, 18, 18)
                         .addComponent(btnXoaTrang)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -205,30 +210,74 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Danh sách", jPanel1);
+        tabs.addTab("Danh sách", jPanel1);
+
+        tblLuuTru.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã", "Tên", "SĐT", "Địa chỉ"
+            }
+        ));
+        tblLuuTru.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblLuuTruMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblLuuTru);
+
+        btnKhoiPhuc.setText("Khôi phục ");
+        btnKhoiPhuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhoiPhucActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel6.setText("THÔNG TIN LƯU TRỮ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnKhoiPhuc)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(jLabel6)
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnKhoiPhuc)
+                .addGap(25, 25, 25))
         );
 
-        jTabbedPane1.addTab("Lưu Trữ", jPanel3);
+        tabs.addTab("Lưu Trữ", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabs)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabs)
         );
 
         pack();
@@ -243,7 +292,8 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+        deleteTamThoi();
+        tabs.setSelectedIndex(1);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -251,12 +301,26 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void tblNhaCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhaCCMouseClicked
-        this.row = tblNhaCC.getSelectedRow();
-        this.edit();
+        if (evt.getClickCount() == 1) {
+            this.row = tblNhaCC.getSelectedRow();
+            this.edit();
+        }
     }//GEN-LAST:event_tblNhaCCMouseClicked
+
+    private void btnKhoiPhucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoiPhucActionPerformed
+        hienThiLai();
+        tabs.setSelectedIndex(0);
+    }//GEN-LAST:event_btnKhoiPhucActionPerformed
+
+    private void tblLuuTruMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLuuTruMouseClicked
+        if (evt.getClickCount() == 1) {
+            this.row = tblLuuTru.getSelectedRow();
+        }
+    }//GEN-LAST:event_tblLuuTruMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKhoiPhuc;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
@@ -266,11 +330,14 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane tabs;
+    private javax.swing.JTable tblLuuTru;
     private javax.swing.JTable tblNhaCC;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMaNCC;
@@ -282,15 +349,31 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
         this.row = -1;
         this.updateStatus();
         fillTable();
+        fillTable1();
     }
 
     void fillTable() {
         DefaultTableModel mol = (DefaultTableModel) tblNhaCC.getModel();
         mol.setRowCount(0);
         try {
-            List<nhaCungCap> list = dao.selectAll();
+            List<nhaCungCap> list = dao.XoaTamThoi();
             for (nhaCungCap cc : list) {
                 Object[] row = {cc.getMaNCC(), cc.getTenNCC(), cc.getSDT(), cc.getDiaChi()};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
+    }
+
+    void fillTable1() {
+        DefaultTableModel mol = (DefaultTableModel) tblLuuTru.getModel();
+        mol.setRowCount(0);
+        try {
+            List<nhaCungCap> list = dao.HienThiLai();
+            for (nhaCungCap nv : list) {
+                Object[] row = {nv.getMaNCC(), nv.getTenNCC(), nv.getSDT(), nv.getDiaChi()};
                 mol.addRow(row);
             }
         } catch (Exception e) {
@@ -350,6 +433,37 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
             }
         }
         return kt;
+    }
+
+    void deleteTamThoi() {
+        if (dialogHelper.confirm(this, "Bạn có muốn xóa nhà cung cấp này ?")) {
+            try {
+                String maNCC = txtMaNCC.getText();
+                dao.delete(maNCC);
+                fillTable();
+                fillTable1();
+                clearFrom();
+                dialogHelper.alert(this, "Xóa thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Xóa thất bại!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    void hienThiLai() {
+        if (dialogHelper.confirm(this, "Bạn có muốn thêm lại nhân viên này ?")) {
+            try {
+                String maNCC = tblLuuTru.getValueAt(row, 0).toString();
+                dao.delete1(maNCC);
+                fillTable1();
+                fillTable();
+                dialogHelper.alert(this, "Thêm lại thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Thêm lại thất bại!");
+                e.printStackTrace();
+            }
+        }
     }
 
     void insert() {

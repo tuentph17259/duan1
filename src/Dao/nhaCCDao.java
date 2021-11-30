@@ -15,10 +15,12 @@ import java.util.List;
  *
  * @author NGUYEN TRI TUE
  */
-public class nhaCCDao extends cuaHangDao<nhaCungCap, String>{
+public class nhaCCDao extends cuaHangDao<nhaCungCap, String> {
+
     String INSERT_SQL = "INSERT INTO NHACUNGCAP (MANCC, TENNCC, DIACHI, SDT) VALUES (?,?,?,?)";
     String UPDATE_SQL = "UPDATE NHACUNGCAP SET TENNCC = ?, DIACHI = ?, SDT = ? where MANCC = ?";
-    String DELETE_SQL = "DELETE FROM NHACUNGCAP WHERE MANCC = ?";
+    String DELETE_SQL = "UPDATE NHACUNGCAP SET TRANGTHAI =0 WHERE MaNCC = ?";
+    String DELETE_SQL1 = "UPDATE NHACUNGCAP SET TRANGTHAI =1 WHERE MaNCC = ?";
     String SELECT_ALL_SQL = "SELECT * FROM NHACUNGCAP";
     String SELECT_BY_ID_SQL = "SELECT * FROM NHACUNGCAP WHERE MANCC = ?";
 
@@ -35,7 +37,6 @@ public class nhaCCDao extends cuaHangDao<nhaCungCap, String>{
     @Override
     public void delete(String maCC) {
         jdbcHelper.executeUpdate(DELETE_SQL, maCC);
-
     }
 
     @Override
@@ -73,7 +74,47 @@ public class nhaCCDao extends cuaHangDao<nhaCungCap, String>{
     }
 
     @Override
-    public void delete1(String Key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete1(String maCC) {
+        jdbcHelper.executeUpdate(DELETE_SQL1, maCC);
+    }
+
+    public List<nhaCungCap> XoaTamThoi() {
+        List<nhaCungCap> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM NHACUNGCAP WHERE TRANGTHAI= 1";
+            ResultSet rs = jdbcHelper.executeQuery(sql);
+            while (rs.next()) {
+                nhaCungCap entity = new nhaCungCap();
+                entity.setMaNCC(rs.getString("MANCC"));
+                entity.setTenNCC(rs.getString("TENNCC"));
+                entity.setSDT(rs.getString("SDT"));
+                entity.setDiaChi(rs.getString("DIACHI"));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<nhaCungCap> HienThiLai() {
+        List<nhaCungCap> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM NHACUNGCAP WHERE TRANGTHAI= 0";
+            ResultSet rs = jdbcHelper.executeQuery(sql);
+            while (rs.next()) {
+                nhaCungCap entity = new nhaCungCap();
+                entity.setMaNCC(rs.getString("MANCC"));
+                entity.setTenNCC(rs.getString("TENNCC"));
+                entity.setSDT(rs.getString("SDT"));
+                entity.setDiaChi(rs.getString("DIACHI"));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

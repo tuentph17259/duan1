@@ -137,6 +137,7 @@ public class TrangChuJF extends javax.swing.JFrame {
         lblAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 102)));
         lblAnh.setOpaque(true);
 
+        jButton1.setBackground(new java.awt.Color(174, 214, 220));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Phiếu Nhập");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

@@ -15,23 +15,25 @@ import java.util.List;
  *
  * @author Admin
  */
-public class sanPhamDAO extends cuaHangDao<sanPham, String>{
-    String INSERT_SQL ="INSERT INTO SANPHAM(MASP,TENSP,MAUSAC,GIASP,HINHANH,CAUHINHCHITIET,TRANGTHAI,MATHUONGHIEU)\n" +
-"VALUES(?,?,?,?,?,?,?,?)";
-    String UPDATE_SQL ="UPDATE SANPHAM SET TENSP=?,MAUSAC=?,GIASP=?,HINHANH=?,CAUHINHCHITIET=?,TRANGTHAI=?,MATHUONGHIEU=?\n" +
-"WHERE MASP=?";
-    String DELETE_SQL ="DELETE FROM SANPHAM WHERE MASP=?";
-    String SELECT_ALL_SQL ="SELECT * FROM SANPHAM";
-    String SELECT_BY_ID_SQL ="SELECT * FROM SANPHAM WHERE MASP=?";
+public class sanPhamDAO extends cuaHangDao<sanPham, String> {
+
+    String INSERT_SQL = "INSERT INTO SANPHAM(MASP,TENSP,MAUSAC,GIASP,HINHANH,CAUHINHCHITIET,TRANGTHAI,MATHUONGHIEU)\n"
+            + "VALUES(?,?,?,?,?,?,?,?)";
+    String UPDATE_SQL = "UPDATE SANPHAM SET TENSP=?,MAUSAC=?,GIASP=?,HINHANH=?,CAUHINHCHITIET=?,TRANGTHAI=?,MATHUONGHIEU=?\n"
+            + "WHERE MASP=?";
+    String DELETE_SQL = "UPDATE SANPHAM SET TT =0 WHERE MaSP = ?";
+    String DELETE_SQL1 = "UPDATE SANPHAM SET TT =1 WHERE MaSP = ?";
+    String SELECT_ALL_SQL = "SELECT * FROM SANPHAM";
+    String SELECT_BY_ID_SQL = "SELECT * FROM SANPHAM WHERE MASP=?";
 
     @Override
     public void insert(sanPham entity) {
-          jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaSanPham(), entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(), entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu());  
+        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaSanPham(), entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(), entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu());
     }
 
     @Override
     public void update(sanPham entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(),  entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu(),entity.getMaSanPham());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(), entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu(), entity.getMaSanPham());
     }
 
     @Override
@@ -58,7 +60,7 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String>{
         List<sanPham> lst = new ArrayList<>();
         try {
             ResultSet rs = jdbcHelper.executeQuery(sql, args);
-            while(rs.next()){
+            while (rs.next()) {
                 sanPham entity = new sanPham();
                 entity.setMaSanPham(rs.getString("MASP"));
                 entity.setTenSanPham(rs.getString("TENSP"));
@@ -79,10 +81,59 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String>{
 
     public List<sanPham> selectByKeyWord(String keyword) {
         String sql = "SELECT * FROM SANPHAM WHERE TENSP LIKE ?";
-        return this.selectBySql(sql, "%" +keyword + "%");
+        return this.selectBySql(sql, "%" + keyword + "%");
     }
+
     @Override
-    public void delete1(String Key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete1(String maSP) {
+         jdbcHelper.executeUpdate(DELETE_SQL1, maSP);
+    }
+    
+    public List<sanPham> XoaTamThoi() {
+        List<sanPham> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM SANPHAM WHERE TT= 1";
+            ResultSet rs = jdbcHelper.executeQuery(sql);
+            while (rs.next()) {
+                sanPham entity = new sanPham();
+                entity.setMaSanPham(rs.getString("MASP"));
+                entity.setTenSanPham(rs.getString("TENSP"));
+                entity.setMauSac(rs.getString("MAUSAC"));
+                entity.setGiaSanPham(rs.getDouble("GIASP"));
+                entity.setHinhAnh(rs.getString("HINHANH"));
+                entity.setCauHinhChiTiet(rs.getString("CAUHINHCHITIET"));
+                entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
+                entity.setMaThuongHieu(rs.getString("MATHUONGHIEU"));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<sanPham> HienThiLai() {
+        List<sanPham> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM SANPHAM WHERE TT= 0";
+            ResultSet rs = jdbcHelper.executeQuery(sql);
+            while (rs.next()) {
+                sanPham entity = new sanPham();
+                entity.setMaSanPham(rs.getString("MASP"));
+                entity.setTenSanPham(rs.getString("TENSP"));
+                entity.setMauSac(rs.getString("MAUSAC"));
+                entity.setGiaSanPham(rs.getDouble("GIASP"));
+                entity.setHinhAnh(rs.getString("HINHANH"));
+                entity.setCauHinhChiTiet(rs.getString("CAUHINHCHITIET"));
+                entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
+                entity.setMaThuongHieu(rs.getString("MATHUONGHIEU"));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

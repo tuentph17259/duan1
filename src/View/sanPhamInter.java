@@ -30,12 +30,15 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     String fileNamePic = "";
     int row = -1;
     int index = 0;
+    
 
     public sanPhamInter() {
         initComponents();
         this.fillTable();
         this.fillTableSP();
+        this.fillTableSP1();
         this.fillComboBox();
+        tab1.setSelectedIndex(1);
     }
 
     private void fillTable() {
@@ -62,7 +65,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         DefaultTableModel modelSP = (DefaultTableModel) tblSanPham.getModel();
         modelSP.setRowCount(0);
         try {
-            List<sanPham> lstSP = SPdao.selectAll();
+            List<sanPham> lstSP = SPdao.XoaTamThoi();
             for (sanPham sp : lstSP) {
                 Object[] row = {
                     sp.getMaSanPham(),
@@ -79,7 +82,59 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
+    void fillTableSP1() {
+        DefaultTableModel mol = (DefaultTableModel) tblLuuTru.getModel();
+        mol.setRowCount(0);
+        try {
+            List<sanPham> list = SPdao.HienThiLai();
+            for (sanPham sp : list) {
+                Object[] row = {sp.getMaSanPham(),
+                    sp.getTenSanPham(),
+                    sp.getMauSac(),
+                    sp.isTrangThai() ? "Còn" : "Hết",
+                    sp.getGiaSanPham(),
+                    sp.getMaThuongHieu(),
+                    sp.getCauHinhChiTiet(),
+                    sp.getHinhAnh(),};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
+    }
 
+        void deleteTamThoi() {
+        if (dialogHelper.confirm(this, "Bạn có muốn xóa sản phẩm này ?")) {
+            try {
+                String maSP = txtMaSP.getText();
+                SPdao.delete(maSP);
+                fillTableSP();
+                fillTableSP1();
+                clearSP();
+                dialogHelper.alert(this, "Xóa thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Xóa thất bại!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    void hienThiLai() {
+        if (dialogHelper.confirm(this, "Bạn có muốn thêm lại sản phẩm này ?")) {
+            try {
+                String maSP = tblLuuTru.getValueAt(row, 0).toString();
+                SPdao.delete1(maSP);
+                fillTableSP1();
+                fillTableSP();
+                dialogHelper.alert(this, "Thêm lại thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Thêm lại thất bại!");
+                e.printStackTrace();
+            }
+        }
+    }
+    
     private void setForm(thuongHieu loai) {
         txtMaThuongHieu.setText(loai.getMaTH());
         txtTenThuongHieu.setText(loai.getTenTH());
@@ -403,6 +458,11 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         txtTenSPTK = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        btnHienThi = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblLuuTru = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblThuongHieu = new javax.swing.JTable();
@@ -700,11 +760,68 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         tab1.addTab("Danh sách", jPanel3);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel5.setText("THÔNG TIN LƯU TRỮ");
+
+        btnHienThi.setText("Hiển thị lại");
+        btnHienThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHienThiActionPerformed(evt);
+            }
+        });
+
+        tblLuuTru.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã SP", "Tên SP", "Màu Sắc", "Trạng Thái", "Giá", "Mã Thương Hiệu", "Cấu hình", "Hình ảnh"
+            }
+        ));
+        tblLuuTru.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblLuuTruMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tblLuuTru);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(833, 833, 833)
+                        .addComponent(btnHienThi)
+                        .addGap(0, 12, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5))
+                .addContainerGap())
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(353, 353, 353)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnHienThi)
+                .addGap(27, 27, 27))
+        );
+
+        tab1.addTab("Lưu Trữ", jPanel9);
 
         tblThuongHieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -856,7 +973,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab1)
+            .addComponent(tab1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -900,7 +1017,8 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        deleteSP();
+        deleteTamThoi();
+        tab1.setSelectedIndex(2);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -934,8 +1052,22 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
+    private void tblLuuTruMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLuuTruMouseClicked
+        if(evt.getClickCount()==1){
+         this.row = tblLuuTru.getSelectedRow();
+        }
+        
+    }//GEN-LAST:event_tblLuuTruMouseClicked
+
+    private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
+        // TODO add your handling code here:
+        hienThiLai();
+        tab1.setSelectedIndex(1);
+    }//GEN-LAST:event_btnHienThiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHienThi;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnSua1;
@@ -956,6 +1088,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -967,13 +1100,16 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblHinh;
     private javax.swing.JRadioButton rdoCon;
     private javax.swing.JRadioButton rdoHet;
     private javax.swing.JTabbedPane tab1;
+    private javax.swing.JTable tblLuuTru;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTable tblThuongHieu;
     private javax.swing.JTextArea txaCauHinh;

@@ -16,7 +16,7 @@ import java.util.List;
  * @author NGUYEN TRI TUE
  */
 public class userDao extends cuaHangDao<User, String>{
- String INSERT_SQL="INSERT INTO USERS (MaNV, MatKhau, HOTEN, VAITRO) VALUES (?,?,?,?)";
+String INSERT_SQL="INSERT INTO USERS (MaNV, MatKhau, HOTEN, VAITRO) VALUES (?,?,?,?)";
 String UPDATE_SQL="UPDATE USERS SET MatKhau = ?, HoTen = ?, VaiTro = ? WHERE MaNV = ?";
 String DELETE_SQL="DELETE FROM USERS WHERE MaNV = ?";
 String SELECT_ALL_SQL = "SELECT * FROM USERS";

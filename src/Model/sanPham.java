@@ -16,14 +16,14 @@ public class sanPham {
     private double giaSanPham;
     private String hinhAnh;
     private String cauHinhChiTiet;
-    private String trangThai;
+    private boolean trangThai;
     private String maThuongHieu;
     
 
     public sanPham() {
     }
 
-    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String hinhAnh, String cauHinhChiTiet, String trangThai, String maNhaCungCap, String maThuongHieu) {
+    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String hinhAnh, String cauHinhChiTiet, boolean trangThai, String maThuongHieu) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.mauSac = mauSac;
@@ -82,11 +82,11 @@ public class sanPham {
         this.cauHinhChiTiet = cauHinhChiTiet;
     }
 
-    public String getTrangThai() {
+    public boolean isTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
 
@@ -102,6 +102,6 @@ public class sanPham {
     public String toString() {
         return "sanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", mauSac=" + mauSac + ", giaSanPham=" + giaSanPham + ", hinhAnh=" + hinhAnh + ", cauHinhChiTiet=" + cauHinhChiTiet + ", trangThai=" + trangThai + ", maThuongHieu=" + maThuongHieu + '}';
     }
-    
-    
+
+
 }

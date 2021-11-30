@@ -16,20 +16,20 @@ import java.util.List;
  * @author acer
  */
 public class chiTietHoaDonDAO extends cuaHangDao<chiTietHoaDon, String>{
-    String INSERT_SQL = "INSERT INTO CHITIETHOADON (MACHITIET,MAHD,SOLUONG,DONGIA,TONGTIEN,MASP) VALUES (?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE CHITIETHOADON SET MAHD=?,SOLUONG=?,DONGIA=?,TONGTIEN=? , MASP=? where MACHITIET=?";
+    String INSERT_SQL = "INSERT INTO CHITIETHOADON (MACHITIET,MAHD,SOLUONG,TONGTIEN,MASP) VALUES (?,?,?,?,?)";
+    String UPDATE_SQL = "UPDATE CHITIETHOADON SET MAHD=?,SOLUONG=?,TONGTIEN=? , MASP=? where MACHITIET=?";
     String DELETE_SQL = "DELETE FROM CHITIETHOADON where MACHITIET=?";
     String SELECT_ALL_SQL = "SELECT * FROM CHITIETHOADON";
     String SELECT_BY_ID_SQL = "SELECT * FROM CHITIETHOADON WHERE MACHITIET = ?";
 
     @Override
     public void insert(chiTietHoaDon entity) {
-        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaChiTietHoaDon(),entity.getMaHoaDon(),entity.getSoLuong(),entity.getDonGia(),entity.getTongTien(),entity.getMaSanPham());
+        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaChiTietHoaDon(),entity.getMaHoaDon(),entity.getSoLuong(),entity.getTongTien(),entity.getMaSanPham());
     }
 
     @Override
     public void update(chiTietHoaDon entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getMaHoaDon(),entity.getSoLuong(),entity.getDonGia(),entity.getTongTien(), entity.getMaSanPham(), entity.getMaChiTietHoaDon());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getMaHoaDon(),entity.getSoLuong(),entity.getTongTien(), entity.getMaSanPham(), entity.getMaChiTietHoaDon());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class chiTietHoaDonDAO extends cuaHangDao<chiTietHoaDon, String>{
                 entity.setMaChiTietHoaDon(rs.getString("MACHITIET"));
                 entity.setMaHoaDon(rs.getString("MAHD"));
                 entity.setSoLuong(rs.getInt("SOLUONG"));
-                entity.setDonGia(rs.getDouble("DONGIA"));
+                
                 entity.setTongTien(rs.getString("TONGTIEN"));
                 entity.setMaSanPham(rs.getString("MASP"));
                 list.add(entity);

@@ -13,7 +13,7 @@ public class chiTietHoaDon {
     private String maChiTietHoaDon;
     private String maHoaDon;
     private int soLuong;
-    private double donGia;
+   
     private String maSanPham;
     private String tongTien;
     
@@ -21,11 +21,11 @@ public class chiTietHoaDon {
     public chiTietHoaDon() {
     }
 
-    public chiTietHoaDon(String maChiTietHoaDon, String maHoaDon, int soLuong, double donGia, String maSanPham, String tongTien) {
+    public chiTietHoaDon(String maChiTietHoaDon, String maHoaDon, int soLuong, String maSanPham, String tongTien) {
         this.maChiTietHoaDon = maChiTietHoaDon;
         this.maHoaDon = maHoaDon;
         this.soLuong = soLuong;
-        this.donGia = donGia;
+       
         this.maSanPham = maSanPham;
         this.tongTien = tongTien;
     }
@@ -54,13 +54,7 @@ public class chiTietHoaDon {
         this.soLuong = soLuong;
     }
 
-    public double getDonGia() {
-        return donGia;
-    }
-
-    public void setDonGia(double donGia) {
-        this.donGia = donGia;
-    }
+    
 
     public String getMaSanPham() {
         return maSanPham;
@@ -80,7 +74,7 @@ public class chiTietHoaDon {
 
     @Override
     public String toString() {
-        return "chiTietHoaDon{" + "maChiTietHoaDon=" + maChiTietHoaDon + ", maHoaDon=" + maHoaDon + ", soLuong=" + soLuong + ", donGia=" + donGia + ", maSanPham=" + maSanPham + ", tongTien=" + tongTien + '}';
+        return "chiTietHoaDon{" + "maChiTietHoaDon=" + maChiTietHoaDon + ", maHoaDon=" + maHoaDon + ", soLuong=" + soLuong + ", maSanPham=" + maSanPham + ", tongTien=" + tongTien + '}';
     }
     
     

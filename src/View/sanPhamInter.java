@@ -145,6 +145,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         txtTenSP.setText(model.getTenSanPham());
         txtMauSac.setText(model.getMauSac());
         rdoCon.setSelected(model.isTrangThai());
+        rdoHet.setSelected(!model.isTrangThai());
         txtGia.setText(Double.toString(model.getGiaSanPham()));
         cbbMaTH.getModel().setSelectedItem(model.getMaThuongHieu());
         txaCauHinh.setText(model.getCauHinhChiTiet());
@@ -167,7 +168,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         sanPham sp = new sanPham();
         sp.setMaSanPham(txtMaSP.getText());
         sp.setTenSanPham(txtTenSP.getText());
-        sp.setMauSac(txtTenSP.getText());
+        sp.setMauSac(txtMauSac.getText());
         sp.setTrangThai(rdoCon.isSelected());
         sp.setGiaSanPham(Double.parseDouble(txtGia.getText()));
         sp.setMaThuongHieu(cbbMaTH.getSelectedItem().toString());
@@ -620,13 +621,14 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addGap(192, 192, 192))))
+                        .addGap(192, 192, 192))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(121, 121, 121))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -973,7 +975,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
+            .addComponent(tab1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

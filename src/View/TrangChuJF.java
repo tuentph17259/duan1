@@ -332,13 +332,18 @@ public class TrangChuJF extends javax.swing.JFrame {
 
     private void btnTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoanActionPerformed
         if (auth.isLogin()) {
-            taiKhoanInter frm = new taiKhoanInter();
-            desktop.add(frm);
-            frm.setVisible(true);
+            if (!auth.isManager()) {
+                dialogHelper.alert(this, "Bạn không có quyền nha :V");
+            } else {
+                taiKhoanInter frm = new taiKhoanInter();
+                desktop.add(frm);
+                frm.setVisible(true);
+            }
         } else {
             dialogHelper.alert(this, "Vui lòng đăng nhâp!");
             this.openDangNhap();
         }
+
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
@@ -359,17 +364,22 @@ public class TrangChuJF extends javax.swing.JFrame {
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         if (auth.isLogin()) {
-            thongKeInter frm = new thongKeInter();
-            desktop.add(frm);
-            frm.setVisible(true);
+            if (!auth.isManager()) {
+                dialogHelper.alert(this, "Bạn không có quyền nha :V");
+            } else {
+                thongKeInter frm = new thongKeInter();
+                desktop.add(frm);
+                frm.setVisible(true);
+            }
         } else {
             dialogHelper.alert(this, "Vui lòng đăng nhâp!");
             this.openDangNhap();
         }
+
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         if (auth.isLogin()) {
+        if (auth.isLogin()) {
             phieuNhapInter frm = new phieuNhapInter();
             desktop.add(frm);
             frm.setVisible(true);
@@ -462,7 +472,8 @@ public class TrangChuJF extends javax.swing.JFrame {
         }
         new dangNhapJDialog(this, true).setVisible(true);
     }
-    private void openDangNhap(){
+
+    private void openDangNhap() {
         new dangNhapJDialog(this, true).setVisible(true);
     }
 }

@@ -452,7 +452,7 @@ public class nhaCCInter extends javax.swing.JInternalFrame {
     }
 
     void hienThiLai() {
-        if (dialogHelper.confirm(this, "Bạn có muốn thêm lại nhân viên này ?")) {
+        if (dialogHelper.confirm(this, "Bạn có muốn thêm lại nhà cung cấp này ?")) {
             try {
                 String maNCC = tblLuuTru.getValueAt(row, 0).toString();
                 dao.delete1(maNCC);

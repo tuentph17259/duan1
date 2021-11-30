@@ -1,0 +1,97 @@
+
+
+#wrapper {
+    width: 100%;
+}
+
+#header {
+    background: #cc0000;
+    width: 100%;
+    height: 99px;
+}
+
+#logo {
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+
+#menu {
+    width: 100%;
+    height: 40px;
+    background: black;
+}
+
+#menu ul li {
+    list-style: none;
+    float: left;
+    line-height: 30px;
+    padding: 0 20px;
+}
+
+#menu ul li a {
+    color: lightyellow;
+    text-decoration: none;
+}
+
+#menu ul li a:hover {
+    text-decoration: underline;
+}
+
+#form {
+    margin-left: 10px;
+}
+
+#menu form {
+    padding-top: 8px;
+}
+
+#chuchay {
+    width: 100%;
+    height: 17px;
+    color: white;
+    background: rgb(123, 129, 116);
+    font-weight: bold;
+}
+
+#content {
+    width: 100%;
+    height: 1000px;
+
+    margin-top: 20px;
+}
+
+#form {
+    margin-top: 20px;
+}
+#Username{
+    width: 250px;
+    height: 35px;
+    color: #000;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    
+}
+#Password{
+    width: 250px;
+    height: 35px;
+    color: #000;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    
+}
+#login {
+    width: 90px;
+    height: 50px;
+    background: #000;
+    color: #FFF;
+    border-radius: 10px;
+    margin: 10px 0 0 70px;
+    font-family: tahoma;
+    font-size: 20px ;
+}
+#form{
+    margin-top: 20px;
+}

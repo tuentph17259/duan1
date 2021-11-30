@@ -1,0 +1,115 @@
+#wrapper{
+    width: 100%;
+}
+#header{
+    background: #cc0000;
+    width: 100%;
+    height: 99px;
+}
+#logo{
+    width: 200px;
+    height: 70px;
+    display: block; margin-left: auto;margin-right: auto;
+ 
+}
+#menu{
+    width: 100%;
+    height: 40px;
+    background:black;
+}
+#menu ul li {
+    list-style: none;
+    float: left;
+    line-height: 30px;
+    padding: 0 20px;
+}
+#menu ul li a {
+    color: lightyellow;
+    text-decoration: none;
+}
+#menu ul li a:hover{
+     text-decoration: underline;
+}
+
+#form{
+    margin-left: 10px;
+}
+#menu form {
+    padding-top: 8px;
+}
+#chuchay{
+    width: 100%;
+    height: 17px;
+    color: white;
+    background: rgb(123, 129, 116);
+    font-weight: bold;
+}
+#content{
+    width: 100%;
+    height: 1000px;
+    
+    margin-top: 20px;
+}
+
+
+
+
+.product-price,
+.product-status {
+  font-size: 30px;
+}
+#product {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+}
+#product img {
+  width: 50%;
+}
+.item {
+  border: 1px solid rgb(47, 224, 115);
+  text-align: center;
+}
+.btn-add {
+  width: 50%;
+  background-color: orangered;
+  color: #fff;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 15px;
+}
+#cart {
+  padding: 50px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid rgb(20, 88, 151);
+  text-align: center;
+}
+table img {
+  width: 25%;
+}
+#btn-remove{
+  text-align: center;
+  background: red;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+#dangky{
+  width: 80px;
+  height: 16px;
+  background: red;
+}
+
+
+
+
+
+
+
+

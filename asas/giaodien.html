@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="giaodien.css">
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <img src="img/logoNhom.JPG" alt="" id="logo">
+            <div id="menu">
+                <ul>
+                    <li><a href="">ĐIỆN THOẠI</a></li>
+                    <li><a href="">LAP TOP</a></li>
+                    <li><a href="">APPLE</a></li>
+                    <li><a href="">ĐỒNG HỒ</a></li>
+                    <li><a href="">PHỤ KIỆN</a></li>
+                    <li><a href="">KHUYẾN MÃI</a></li>
+                </ul>
+                <form action="">
+                    <input type="search" id="search" required>
+                    <input type="submit" value="Tìm Kiếm">
+                </form>
+                
+            </div>
+           
+        </div>
+        <div id="content">
+            <div id="chuchay">
+                <marquee behavior="" direction="">NHÓM 5 XIN CHÀO MỌI NGƯỜI </marquee>
+            </div>
+            <div class="container">
+                <header>
+                  <!-- logo -->
+                  <!-- menu -->
+                  <!-- banner -->
+                </header>
+                <!-- end header -->
+                <main>
+                  <div id="product"></div>
+                  <div id="cart">
+                    <button id="btn-remove">Remove Cart</button>
+                    <a href="dangnhap.html" >
+                      <button>Đăng Nhập</button>
+                    </a>
+                    <a href="dangky.html">
+                      <button>Đăng Ký</button>
+                    </a>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>STT</th>
+                          <th>Product Name</th>
+                          <th>Product Img</th>
+                          <th>Product Price</th>
+                          <th>Product Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="table-data"></tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="3">Total</td>
+                          <td colspan="2" id="total"></td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </main>
+                <!-- end main -->
+                <footer></footer>
+                <!-- end footer -->
+              </div>
+            
+        </div>
+    </div>
+    <script src="ass.js"></script>
+</body>
+</html>

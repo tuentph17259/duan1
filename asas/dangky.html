@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="dangky.css">
+</head>
+<script>var hoTen = document.getElementById('hoten');
+    var dangnhap = document.getElementById('tenDangNhap');
+    var Email = document.getElementById('email');
+    var password = document.getElementById('matKhau');
+    var dangKi = document.getElementById('dk');
+    var nhaplaipw = document.getElementById('nhaplaimatkhau');
+    var reg = /^\w+@\w+\.com$/i;
+
+
+    dangKi.onclick = function () {
+        if (hoten.value.trim() == "") {
+            alert('hãy nhập họ tên');
+            return false;
+        } if (tenDangNhap.value.trim() == "") {
+            alert("Chưa nhập tên đăng nhập");
+            return false;
+        }
+        if (matKhau.value.trim() == "") {
+            alert("Chưa nhập mật khẩu");
+            return false;
+        }
+        if (nhaplaimatKhau.value.trim() == "") {
+            alert("Chưa nhập nhập lại mật khẩu");
+            return false;
+        }
+        if (email.value.trim() == "") {
+            alert("Chưa nhập email");
+            return false;
+        }
+        var radios = document.getElementsByName('chon');
+        if (!radios[0].checked && !radios[1].checked) {
+            alert('Vui lòng chọn giới tính !');
+            return false;
+        }
+        // }else if(console.log(reg.test(email)) == "false") {
+        //     alert("Mời bạn nhập lại");
+        // }
+        alert("Bạn đăng kí thành công")
+        return true;
+    }</script>
+
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <img src="img/logo.PNG" alt="" id="logo">
+            <div id="menu">
+                <ul>
+                    <li><a href="">ĐIỆN THOẠI</a></li>
+                    <li><a href="">LAP TOP</a></li>
+                    <li><a href="">APPLE</a></li>
+                    <li><a href="">ĐỒNG HỒ</a></li>
+                    <li><a href="">PHỤ KIỆN</a></li>
+                    <li><a href="">KHUYẾN MÃI</a></li>
+                </ul>
+                <form action="">
+                    <input type="search" id="search" required>
+                    <input type="submit" value="Tìm Kiếm">
+                </form>
+
+            </div>
+            <div id="content">
+                <div id="chuchay">
+                    <marquee behavior="" direction="">Hello Thầy Sơn Đẹp Trai </marquee>
+                </div>
+                <h1 id="d">ĐĂNG KÍ </h1>
+                <form action="" id="form">
+                    <p class="chu">họ và tên</p> <input type="text" name="hoten" id="hoten" placeholder=" họ tên">
+                    <p class="chu">tên đăng nhập (*)</p> <input type="text" name="hoten" placeholder=" tên đăng nhập"
+                        id="tenDangNhap">
+                    <p class="chu">mật khẩu (*)</p> <input type="password" placeholder=" mật khẩu" id="matKhau">
+                    <p class="chu">nhập lại mật khẩu (*)</p> <input type="password" placeholder=" nhập lại mật khẩu"
+                        id="nhaplaimatKhau">
+                    <p class="chu">email (*)</p> <input id="email" type="email" placeholder=" email">
+                    <p class="chu">giới tính</p><input type="radio" name="chon" onclick="true">
+                    <label for="nam" class="gt"></label>Nam</label>
+                    <input type="radio" name="chon" onclick="false">
+                    <label for="nu" class="gt"></label>Nữ</label>
+                    </select> <br>
+
+                    <input type="button" value="Đăng kí" id="dk">
+                    <input type="reset" value="Reset " id="dk1">
+                </form>
+                <a href="giaodien.html"><button>
+                    Quay Lại
+                </button></a>
+            </div>
+        </div>
+</body>
+
+</html>

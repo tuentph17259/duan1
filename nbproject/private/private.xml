@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Helper/jdbcHelper.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Model/User.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Helper/Check.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Dao/nhanVienDAO.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Dao/userDao.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Model/nhanVien.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Helper/shareHelper.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Model/sanPham.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/View/sanPhamInter.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/View/TrangChuJF.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/View/dangNhapJDialog.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Model/chiTietHoaDon.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Dao/sanPhamDAO.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/View/chaoJDialog.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/View/doiMatKhauJDialog.java</file>
-            <file>file:/C:/Users/hieup/Desktop/Code/duan1/src/Helper/XImage.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -981,20 +981,15 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         if (ct == null) {
             return;
         }
-        
-        if (!txtTongTien.getText().equals("")) {
-            try {
-                ctDao.insert(ct);
-                this.xoaTrangCt();
-                this.LayDuLieuChiTietPhieuNhap(txtMaPN_ct.getText());
-                dialogHelper.alert(this, "thêm thành công");
-                SetTongTien();
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else{
-            dialogHelper.alert(this, "bạn chưa tính tổng tiền");
+        try {
+            ctDao.insert(ct);
+            this.xoaTrangCt();
+            this.LayDuLieuChiTietPhieuNhap(txtMaPN_ct.getText());
+            dialogHelper.alert(this, "thêm thành công");
+            SetTongTien();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

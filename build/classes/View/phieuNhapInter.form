@@ -463,12 +463,13 @@
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                                                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="txtDonGia" max="32767" attributes="0"/>
-                                                      <Component id="txtTongTien" pref="219" max="32767" attributes="0"/>
+                                                  <EmptySpace min="66" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="btnTinhTien" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="txtDonGia" max="32767" attributes="0"/>
+                                                          <Component id="txtTongTien" pref="219" max="32767" attributes="0"/>
+                                                      </Group>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -480,6 +481,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -518,7 +520,9 @@
                               <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtTongTien" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="47" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnTinhTien" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="25" max="32767" attributes="0"/>
                           <Component id="jPanel4" min="-2" pref="53" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="217" max="-2" attributes="0"/>
@@ -757,6 +761,14 @@
                     <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1;:"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JButton" name="btnTinhTien">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="T&#xed;nh ti&#x1ec1;n"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTinhTienActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -767,7 +779,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="0" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="TH&#xd4;NG TIN H&#xd3;A &#x110;&#x1a0;N CHI TI&#x1ebe;T"/>
+                <Property name="text" type="java.lang.String" value="TH&#xd4;NG TIN PHI&#x1ebe;U NH&#x1eac;P CHI TI&#x1ebe;T"/>
               </Properties>
             </Component>
           </SubComponents>

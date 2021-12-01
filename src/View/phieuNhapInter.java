@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -91,6 +92,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         txtTenSP = new javax.swing.JTextField();
         txtDonGia = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        btnTinhTien = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -400,6 +402,13 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Đơn giá:");
 
+        btnTinhTien.setText("Tính tiền");
+        btnTinhTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTinhTienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -433,17 +442,18 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
                                         .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                                        .addGap(66, 66, 66)
-                                        .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtDonGia)
-                                            .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))))))
+                                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnTinhTien)
+                                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtDonGia)
+                                                .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))))))))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(429, 429, 429)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel12))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
@@ -473,7 +483,9 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
                     .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTinhTien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -482,7 +494,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel1.setText("THÔNG TIN HÓA ĐƠN CHI TIẾT");
+        jLabel1.setText("THÔNG TIN PHIẾU NHẬP CHI TIẾT");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -545,9 +557,9 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaTrang1ActionPerformed
 
     private void tblTTPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTPhieuNhapMouseClicked
-            setFormPN();
-            btnThem1.setEnabled(false);
-            txtMaPN.setEditable(false);
+        setFormPN();
+        btnThem1.setEnabled(false);
+        txtMaPN.setEditable(false);
     }//GEN-LAST:event_tblTTPhieuNhapMouseClicked
 
     private void txtMaNVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaNVKeyReleased
@@ -593,15 +605,17 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-       deleteCT();
+        deleteCT();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         xoaTrangCt();
+        btnTinhTien.setEnabled(true);
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void tblTTPNChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTPNChiTietMouseClicked
         int viTri = tblTTPNChiTiet.getSelectedRow();
+        btnTinhTien.setEnabled(false);
         txtMaCT.setText(tblTTPNChiTiet.getValueAt(viTri, 1).toString());
         txtMaPN.setText(tblTTPNChiTiet.getValueAt(viTri, 2).toString());
         txtMaSP.setText(tblTTPNChiTiet.getValueAt(viTri, 3).toString());
@@ -624,11 +638,44 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
 //        txtTongTien.setText(String.valueOf(Tien));
     }//GEN-LAST:event_txtDonGiaKeyReleased
 
+    private void btnTinhTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTinhTienActionPerformed
+        int soLuong;
+        int donGia;
+        int tongTien;
+
+        if (checkNull()) {
+            if (Check.checkSo(txtSoLuong)
+                    && Check.checkSo(txtDonGia)) {
+                try {
+                    soLuong = Integer.valueOf(txtSoLuong.getText().trim());
+                    donGia = Integer.valueOf(txtDonGia.getText());
+                    tongTien = soLuong * donGia;
+                    txtTongTien.setText((tongTien) + "");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnTinhTienActionPerformed
+    public boolean checkNull() {
+        if (txtSoLuong.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "chưa nhap đầy đủ");
+            txtSoLuong.requestFocus();
+            return false;
+        } else if (txtDonGia.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "chưa nhap đầy đủ");
+            txtDonGia.requestFocus();
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua1;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThem1;
+    private javax.swing.JButton btnTinhTien;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXoa1;
     private javax.swing.JButton btnXoaTrang;
@@ -674,7 +721,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
     phieuNhapDao pnDao = new phieuNhapDao();
     phieuNhapChiTietDao ctDao = new phieuNhapChiTietDao();
     int row;
-    
+
     public void initt() {
         layDuLieuPhieuNhap();
         this.row = -1;
@@ -688,7 +735,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         txtMaNV.setText(auth.user.getMaNV());
         txtMaNV.setEditable(false);
     }
-    
+
     public boolean checkTrungMa(JTextField txt) {
         txt.setBackground(white);
         if (pnDao.selectById(txt.getText().toString()) == null) {
@@ -710,6 +757,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             return false;
         }
     }
+
     public DefaultComboBoxModel LayDuLieucbb(String bang, String Ten, String Ma) {
         String cautruyvan = "select *from " + bang;
         ResultSet rs = jdbcHelper.executeQuery(cautruyvan);
@@ -724,10 +772,10 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         }
         return cbbmodel;
     }
-    
+
     public void layDuLieuPhieuNhap() {
-        String sql = "SELECT MAPN,NHANVIEN.MANV,NHACUNGCAP.TENNCC,NGAYNHAP,TONGTIEN FROM PHIEUNHAP,NHACUNGCAP,NHANVIEN "
-                + "WHERE PHIEUNHAP.MANCC=NHACUNGCAP.MANCC AND PHIEUNHAP.MANV=NHANVIEN.MANV ";
+        String sql = "SELECT MAPN,NHANVIEN.MANV,NHACUNGCAP.TENNCC,NGAYNHAP,Format(TONGTIEN,'#,##')as TONGTIEN FROM PHIEUNHAP,NHACUNGCAP,NHANVIEN \n"
+                + "                WHERE PHIEUNHAP.MANCC=NHACUNGCAP.MANCC AND PHIEUNHAP.MANV=NHANVIEN.MANV  ";
         ResultSet rs = jdbcHelper.executeQuery(sql);
         Object[] obj = new Object[]{"STT", "Mã phiếu nhập", "Mã nhân viên", "Tên nhà cung cấp", "Ngày nhập", "Tổng tiền"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
@@ -742,15 +790,15 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
                 item[2] = rs.getString("MANV");
                 item[3] = rs.getString("TENNCC");
                 item[4] = rs.getString("NGAYNHAP");
-                item[5] = rs.getInt("TONGTIEN");
+                item[5] = rs.getString("TONGTIEN");
                 tableModel.addRow(item);
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-        
+
     }
-    
+
     void setFormPN() {
         int viTri = tblTTPhieuNhap.getSelectedRow();
         txtMaPN.setText(tblTTPhieuNhap.getValueAt(viTri, 1).toString());
@@ -761,7 +809,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         txtTongTien1.setText(tblTTPhieuNhap.getValueAt(viTri, 5).toString());
         LayDuLieuChiTietPhieuNhap(txtMaPN1.getText());
     }
-    
+
     public void setSelectedCombobox(String cbbselected, JComboBox cbb) {
         for (int i = 0; i < cbb.getItemCount(); i++) {
             Object obj = cbb.getItemAt(i);
@@ -773,7 +821,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     phieuNhap getFormPN() {
         phieuNhap pn = new phieuNhap();
         pn.setMaPhieuNhap(txtMaPN.getText());
@@ -783,7 +831,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         pn.setTongTien((txtTongTien1.getText()));
         return pn;
     }
-    
+
     void insertPN() {
         phieuNhap pn = getFormPN();
         if (pn == null) {
@@ -799,14 +847,14 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             dialogHelper.alert(this, "Thêm thất bại!");
         }
     }
-    
+
     public String GetCbbSelected(JComboBox cbb) {
         Object[] obj = cbb.getSelectedObjects();
         displayModel item = (displayModel) obj[0];
         return item.displayvalue.toString();
-        
+
     }
-    
+
     public void xoaFormPN() {
         txtMaPN.setText("");
         Date date = new Date();
@@ -831,14 +879,15 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             dialogHelper.alert(this, "bạn chưa chọn hóa đơn CT để xóa ");
         }
     }
+
     public void deletePN() {
         if (!txtMaPN.getText().equals("")) {
             String maPN = txtMaPN.getText();
-            
+
             String sqlDem = "select count(MACTPN) as SoChiTietPhieuNhap\n"
                     + "            from PHIEUNHAP,CHITIETPHIEUNHAP where PHIEUNHAP.MAPN=CHITIETPHIEUNHAP.MAPN and PHIEUNHAP.MAPN=?";
             ResultSet rs = jdbcHelper.executeQuery(sqlDem, maPN);
-            
+
             int so = 0;
             try {
                 if (rs.next()) {
@@ -858,7 +907,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             dialogHelper.alert(this, "bạn chưa chọn hóa đơn để xóa ");
         }
     }
-    
+
     void updatePN() {
         phieuNhap pn = getFormPN();
         if (pn == null) {
@@ -873,7 +922,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-    
+
     public String layDuLieuSanPham(String maSP) {
         String ten = "";
         String sql = "select tenSP from sanPham where maSP=?";
@@ -916,11 +965,10 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
 //        }
 //        return soLuong;
 //    }
-    
+
     public void LayDuLieuChiTietPhieuNhap(String maPN) {
-        String sql = "SELECT MACTPN,CHITIETPHIEUNHAP.MAPN,SANPHAM.MASP,TENSP,SOLUONG,DONGIA,CHITIETPHIEUNHAP.TONGTIEN "
-                + "FROM CHITIETPHIEUNHAP,SANPHAM \n"
-                + "WHERE CHITIETPHIEUNHAP.MASP=SANPHAM.MASP AND MAPN = ?";
+        String sql = "SELECT MACTPN,CHITIETPHIEUNHAP.MAPN,SANPHAM.MASP,TENSP,SOLUONG,Format(DONGIA,'#,##')as donGia,Format(CHITIETPHIEUNHAP.TONGTIEN,'#,##')as tongTien FROM CHITIETPHIEUNHAP,SANPHAM,PHIEUNHAP \n"
+                + "WHERE CHITIETPHIEUNHAP.MASP=SANPHAM.MASP AND CHITIETPHIEUNHAP.MAPN=PHIEUNHAP.MAPN AND CHITIETPHIEUNHAP.MAPN = ?";
         ResultSet rs = jdbcHelper.executeQuery(sql, maPN);
         Object[] obj = new Object[]{"STT", "Mã CTPN", "Mã phiếu nhâp", "Mã Sản Phẩm", "Tên SP", "Số Lượng", "Đơn giá", "Tổng tiền"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
@@ -936,15 +984,15 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
                 item[3] = rs.getString("MASP");
                 item[4] = rs.getString("TENSP");
                 item[5] = rs.getInt("SOLUONG");
-                item[6] = rs.getDouble("DONGIA");
-                item[7] = rs.getDouble("TONGTIEN");
+                item[6] = rs.getString("DONGIA");
+                item[7] = rs.getString("TONGTIEN");
                 tableModel.addRow(item);
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
     }
-    
+
     phieuNhapChiTiet getForm() {
         phieuNhapChiTiet ct = new phieuNhapChiTiet();
         ct.setMaChiTietPhieuNhap(txtMaCT.getText());
@@ -955,7 +1003,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         ct.setTongTien(txtTongTien.getText());
         return ct;
     }
-    
+
     void insertCT() {
         phieuNhapChiTiet ct = getForm();
         if (ct == null) {
@@ -967,12 +1015,12 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             this.LayDuLieuChiTietPhieuNhap(txtMaPN1.getText());
             dialogHelper.alert(this, "thêm thành công");
             SetTongTien();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     private void xoaTrangCt() {
         txtMaCT.setText("");
         txtMaSP.setText("");
@@ -983,20 +1031,21 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         txtMaCT.setText("");
         btnThem.setEnabled(true);
     }
-    
+
     public void SetTongTien() {
         String maPN = txtMaPN1.getText();
-        String sql = "select sum(ChiTietHoaDon.TongTien) as TongTienHienTai,HoaDon.MAHD from HoaDon,ChiTietHoaDon \n"
-                + "                where HoaDon.MAHD=ChiTietHoaDon.MAHD\n"
-                + "                and HoaDon.MAHD= ? group by HoaDon.MAHD";
+        String sql = "select sum(cast (CHITIETPHIEUNHAP.TONGTIEN as float))as tongTienHienTai,PHIEUNHAP.MAPN\n"
+                + "from PHIEUNHAP,CHITIETPHIEUNHAP\n"
+                + "where PHIEUNHAP.MAPN=CHITIETPHIEUNHAP.MAPN and PHIEUNHAP.MAPN=?\n"
+                + "group by PHIEUNHAP.MAPN";
         ResultSet rs = jdbcHelper.executeQuery(sql, maPN);
         String ttht = "";
-        
+
         try {
             if (rs.next()) {
                 ttht = rs.getString("TongTienHienTai");
                 txtTongTien1.setText(ttht);
-                String ctv = "update HoaDon set TongTien= " + ttht + "where MAHD=?";
+                String ctv = "update phieuNhap set TongTien= " + ttht + "where maPN=?";
                 System.out.println(ctv);
                 jdbcHelper.executeUpdate(ctv, maPN);
                 layDuLieuPhieuNhap();
@@ -1005,5 +1054,5 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             System.out.println(ex.toString());
         }
     }
-    
+
 }

@@ -65,8 +65,8 @@ public class phieuNhapChiTietDao extends cuaHangDao<phieuNhapChiTiet, String> {
             ResultSet rs = jdbcHelper.executeQuery(sql, args);
             while (rs.next()) {
                 phieuNhapChiTiet entity = new phieuNhapChiTiet();
-                entity.setMaChiTietPhieuNhap(rs.getString("MACHITIET"));
-                entity.setMaPhieuNhap(rs.getString("MAHD"));
+                entity.setMaChiTietPhieuNhap(rs.getString("MACTPN"));
+                entity.setMaPhieuNhap(rs.getString("MAPN"));
                 entity.setSoLuong(rs.getInt("SOLUONG"));
                 entity.setDonGia(rs.getString("DONGIA"));
                 entity.setTongTien(rs.getString("TONGTIEN"));

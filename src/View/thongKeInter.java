@@ -169,7 +169,10 @@ public class thongKeInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNamActionPerformed
-        // TODO add your handling code here:
+        int viTri = cbbNam.getSelectedIndex();
+        if(viTri>=0){
+            fillTableDoanhThu();
+        }
     }//GEN-LAST:event_cbbNamActionPerformed
 
 

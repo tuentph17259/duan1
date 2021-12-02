@@ -27,7 +27,7 @@ public class thongKeDao {
                     Object[] model = {
                         rs.getString("SANPHAM"),
                         rs.getString("SOHD"),
-                        rs.getDouble("TONGDOANHTHU")
+                        rs.getString("TONGDOANHTHU")
                     };
                     list.add(model);
                 }

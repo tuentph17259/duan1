@@ -516,8 +516,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
-        if (Check.checkNullText(txtMaPN)
-                ) {
+        if (Check.checkNullText(txtMaPN)) {
             if (checkTrungMa(txtMaPN)) {
                 insertPN();
             }
@@ -562,7 +561,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtMaSPKeyReleased
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (Check.checkNullText(txtMaCT)               
+        if (Check.checkNullText(txtMaCT)
                 && Check.checkNullText(txtMaSP)
                 && Check.checkNullText(txtTenSP)
                 && Check.checkNullText(txtSoLuong)) {
@@ -576,6 +575,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         deleteCT();
         btnTinhTien.setEnabled(true);
+        xoaTongTien();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -593,7 +593,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         txtTenSP.setText(tblTTPNChiTiet.getValueAt(viTri, 4).toString());
         txtSoLuong.setText(tblTTPNChiTiet.getValueAt(viTri, 5).toString());
         txtDonGia.setText(tblTTPNChiTiet.getValueAt(viTri, 6).toString());
-        txtTongTien.setText(tblTTPNChiTiet.getValueAt(viTri, 7).toString()+" VNĐ");
+        txtTongTien.setText(tblTTPNChiTiet.getValueAt(viTri, 7).toString() + " VNĐ");
         btnThem.setEnabled(false);
     }//GEN-LAST:event_tblTTPNChiTietMouseClicked
 
@@ -697,14 +697,14 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         layDuLieuPhieuNhap();
         this.row = -1;
         cbbNhaCC.setModel(LayDuLieucbb("NHACUNGCAP", "TENNCC", "MANCC"));
-        
+
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         txtNgayNhap.setText(sdf.format(date));
         txtTongTien1.setText("0");
-      
+
         txtMaNV.setText(auth.user.getMaNV());
-        
+
     }
 
     public boolean checkTrungMa(JTextField txt) {
@@ -777,7 +777,7 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         txtMaNV.setText(tblTTPhieuNhap.getValueAt(viTri, 2).toString());
         setSelectedCombobox(tblTTPhieuNhap.getValueAt(viTri, 3).toString(), cbbNhaCC);
         txtNgayNhap.setText(tblTTPhieuNhap.getValueAt(viTri, 4).toString());
-        txtTongTien1.setText(tblTTPhieuNhap.getValueAt(viTri, 5).toString()+" VNĐ");
+        txtTongTien1.setText(tblTTPhieuNhap.getValueAt(viTri, 5).toString() + " VNĐ");
         LayDuLieuChiTietPhieuNhap(txtMaPN_ct.getText());
     }
 
@@ -1024,6 +1024,29 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
+        }
+    }
+
+    public void xoaTongTien() {
+        String maHD = txtMaPN_ct.getText();
+
+        String sqlDem = "select count(MACTPN) as SoChiTietPhieuNhap\n"
+                + "            from PHIEUNHAP,CHITIETPHIEUNHAP where PHIEUNHAP.MAPN=CHITIETPHIEUNHAP.MAPN and PHIEUNHAP.MAPN=?";
+        ResultSet rs = jdbcHelper.executeQuery(sqlDem, maHD);
+
+        int so = 0;
+        try {
+            if (rs.next()) {
+                so = rs.getInt("SoChiTietPhieuNhap");
+                if (rs.getInt("SoChiTietPhieuNhap") == 0) {
+                    String sqlXoa = "update PhieuNhap set TONGTIEN ='0'\n"
+                            + "where maPN=?";
+                    jdbcHelper.executeUpdate(sqlXoa, txtMaPN_ct.getText());
+                    layDuLieuPhieuNhap();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

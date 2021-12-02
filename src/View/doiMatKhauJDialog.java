@@ -2,6 +2,7 @@ package View;
 
 import java.awt.Color;
 import Dao.userDao;
+import Helper.Check;
 import Helper.auth;
 import Helper.dialogHelper;
 import Helper.shareHelper;
@@ -149,7 +150,12 @@ public class doiMatKhauJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        doiMK();
+        if (Check.checkNullText(txtMatKhauHienTai)
+                && Check.checkNullText(txtMKMoi)) {
+            if (Check.checkNullText(txtMKMoi2)) {
+                doiMK();
+            }
+        }
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed

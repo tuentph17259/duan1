@@ -560,6 +560,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         deleteCT();
+        xoaTongTien();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
@@ -1034,6 +1035,28 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
+        }
+    }
+    public void xoaTongTien() {
+        String maHD = txtMaHD.getText();
+
+        String sqlDem = "select count(MACHITIET) as SoChiTietPhieuMua\n"
+                + "            from HoaDon,ChiTietHoaDon where HoaDon.MAHD=ChiTietHoaDon.MAHD and HoaDon.MAHD=?";
+        ResultSet rs = jdbcHelper.executeQuery(sqlDem, maHD);
+
+        int so = 0;
+        try {
+            if (rs.next()) {
+                so = rs.getInt("SoChiTietPhieuMua");
+                if (rs.getInt("SoChiTietPhieuMua") == 0) {
+                    String sqlXoa = "update HOADON set TONGTIEN ='0'\n"
+                            + "where MAHD=?";
+                    jdbcHelper.executeUpdate(sqlXoa, txtMaHD.getText());
+                    layDuLieuHoaDon();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

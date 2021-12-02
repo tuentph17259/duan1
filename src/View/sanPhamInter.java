@@ -12,6 +12,8 @@ import Helper.XImage;
 import Helper.dialogHelper;
 import Model.thuongHieu;
 import Model.sanPham;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class sanPhamInter extends javax.swing.JInternalFrame {
@@ -33,6 +36,12 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     public sanPhamInter() {
         initComponents();
+        init();
+    }
+
+    public void init() {
+        this.row = -1;
+        this.updateStatusSP();
         this.fillTable();
         this.fillTableSP();
         this.fillComboBox();
@@ -110,9 +119,23 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private sanPham getFormSP() {
         sanPham sp = new sanPham();
+        if (txtMaSP.getText().equals("")) {
+            return null;
+        }
+        if (txtTenSP.getText().equals("")) {
+            return null;
+        }
+        if (txtMauSac.getText().equals("")) {
+            return null;
+        }
+        if (txtGia.getText().equals("")) {
+            return null;
+        } else if (txaCauHinh.getText().equals("")) {
+            return null;
+        }
         sp.setMaSanPham(txtMaSP.getText());
         sp.setTenSanPham(txtTenSP.getText());
-        sp.setMauSac(txtTenSP.getText());
+        sp.setMauSac(txtMauSac.getText());
         sp.setTrangThai(rdoCon.isSelected());
         sp.setGiaSanPham(Double.parseDouble(txtGia.getText()));
         sp.setMaThuongHieu(cbbMaTH.getSelectedItem().toString());
@@ -132,6 +155,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         sanPham sp = new sanPham();
         this.setFormSP(sp);
         this.row = -1;
+        this.updateStatusSP();
     }
 
     private void edit() {
@@ -142,18 +166,17 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     }
 
     private void editSP() {
-        try {
-            String maSP = (String) tblSanPham.getValueAt(this.index, 0);
-            sanPham model = SPdao.selectById(maSP);
-            if (model != null) {
-                this.setFormSP(model);
-            }
-        } catch (Exception e) {
-            dialogHelper.alert(this, "Lôi truy vẫn dữ liệu");
-        }
+//        try {
+        String maSP = (String) tblSanPham.getValueAt(this.row, 0);
+        sanPham model = SPdao.selectById(maSP);
+//            if (model != null) {
+        this.setFormSP(model);
+        this.updateStatusSP();
+//            }
+//        } catch (Exception e) {
+//            dialogHelper.alert(this, "Lôi truy vẫn dữ liệu");
+//        }
     }
-
-    
 
     private void updateStatus() {
         boolean edit = (this.row >= 0);
@@ -162,6 +185,15 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         btnThem1.setEnabled(!edit);
         btnSua1.setEnabled(edit);
         btnXoa1.setEnabled(edit);
+    }
+
+    private void updateStatusSP() {
+        boolean edit = (this.row >= 0);
+
+        txtMaSP.setEditable(!edit);
+        btnThem.setEnabled(!edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
     }
 
     private void insert() {
@@ -217,14 +249,34 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void insertSP() {
         sanPham model = getFormSP();
-        try {
-            SPdao.insert(model);
-            this.fillTableSP();
-            this.clearSP();
-            dialogHelper.alert(this, "Thêm thành công");
-        } catch (Exception e) {
-            e.printStackTrace();
-            dialogHelper.alert(this, "Thêm thất bại");
+        if (txtMaSP.getText().length() == 0
+                || txtTenSP.getText().length() == 0) {
+            dialogHelper.alert(this, "Không được để trống");
+            return;
+        } else if (checkKeySP() == 1) {
+            dialogHelper.alert(this, "Đã tồn tại mã sản phẩm" + txtMaSP.getText());
+            return;
+        } else {
+            try {
+                SPdao.insert(model);
+                this.fillTableSP();
+                this.clearSP();
+                dialogHelper.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Thêm mới thất bại!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean checkTrungMa(JTextField txt) {
+        txt.setBackground(white);
+        if (SPdao.selectById(txt.getText().toString()) == null) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại:" + txtMaSP.getText());
+            return false;
         }
     }
 
@@ -259,7 +311,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         if (txtTenSPTK.getText().length() == 0) {
             dialogHelper.alert(this, "Chưa nhập thông tin!");
             return;
-        } else if (checkTim() == 1) {
+        } else if (checkKeySP() == 1) {
             dialogHelper.alert(this, "Không tìm thấy sản phẩm: " + txtTenSPTK + " ?");
             return;
         } else {
@@ -294,19 +346,6 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         }
         return kt;
     }
-    
-    int checkTim() {
-        int kt = 0;
-        List<sanPham> list = SPdao.selectAll();
-        for (int i = 0; i < list.size(); i++) {
-            sanPham sp = list.get(i);
-            if (txtMaSP.getText().trim().equalsIgnoreCase(sp.getTenSanPham().trim())) {
-                kt = 1;
-                break;
-            }
-        }
-        return kt;
-    }
 
     void chonAnh() {
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -324,7 +363,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         ImageIcon icon = new ImageIcon(img.getScaledInstance(lblHinh.getWidth(), lblHinh.getHeight(), img.SCALE_SMOOTH));
         lblHinh.setIcon(icon);
     }
-    
+
     void load() {
         DefaultTableModel mol = (DefaultTableModel) tblSanPham.getModel();
         mol.setRowCount(0);
@@ -895,7 +934,9 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        insertSP();
+        if (Check.checkSo(txtGia)) {
+            insertSP();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -905,7 +946,9 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        updateSP();
+        if (Check.checkSo(txtGia)) {
+            updateSP();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -925,12 +968,17 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         // TODO add your handling code here:
+//        if (evt.getClickCount() == 1) {
+//            this.index = tblSanPham.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
+//            if (this.index >= 0) {
+//                this.editSP();
+//                tab1.setSelectedIndex(0);
+//            }
+//        }
         if (evt.getClickCount() == 1) {
-            this.index = tblSanPham.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
-            if (this.index >= 0) {
-                this.editSP();
-                tab1.setSelectedIndex(0);
-            }
+            this.row = tblSanPham.getSelectedRow();
+            this.editSP();
+            tab1.setSelectedIndex(0);
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
 

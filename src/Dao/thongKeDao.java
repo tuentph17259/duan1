@@ -40,4 +40,22 @@ public class thongKeDao {
         }
         return list;
     }
+    public List<Integer> getNam() {
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = jdbcHelper.executeQuery("select distinct year(NGAYLAPHOADON) as nam from HOADON order by year(NGAYLAPHOADON) desc");
+                while (rs.next()) {
+                    int nam = rs.getInt(1);
+                    list.add(nam);
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
 }

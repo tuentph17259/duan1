@@ -730,7 +730,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
             return true;
         } else {
             txt.setBackground(pink);
-            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại:" + txtMaHoaDon.getText());
+            dialogHelper.alert(this, txt.getName() + " đã bị tồn tại:" + txtMaCT.getText());
             return false;
         }
     }

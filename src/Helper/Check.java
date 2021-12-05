@@ -21,8 +21,10 @@ public class Check {
     //từ 3-25 kí tự
     public static boolean checkName(JTextField txt) {
         txt.setBackground(white);
-        String id = txt.getText();
+        String id = txt.getText().trim();
         String rgx = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]{3,25}$";
+//        String rgx = "\\b[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ]+\\b";
+//        String rgx = "^[AÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶEÉÈẺẼẸÊẾỀỂỄỆIÍÌỈĨỊOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢUÚÙỦŨỤƯỨỪỬỮỰYÝỲỶỸỴĐaáàảãạâấầẩẫậăắằẳẵặeéèẻẽẹêếềểễệiíìỉĩịoóòỏõọôốồổỗộơớờởỡợuúùủũụưứừửữựyýỳỷỹỵđ\".matches(\"^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ])]{3,25}$";
         if (id.matches(rgx)) {
             return true;
         } else {
@@ -36,7 +38,7 @@ public class Check {
     //từ 3-50 kí tự
     public static boolean checkTen(JTextField txt) {
         txt.setBackground(white);
-        String id = txt.getText();
+        String id = txt.getText().trim();
         String rgx = ".{3,50}";
         if (id.matches(rgx)) {
             return true;
@@ -51,7 +53,7 @@ public class Check {
     //các đầu 3 số của nhà mạng
     public static boolean checkSDT(JTextField txt) {
         txt.setBackground(white);
-        String id = txt.getText();
+        String id = txt.getText().trim();
         String rgx = "(086|096|097|098|032|033|034|035|036|037|038|039|089|090|093|070|079|077|078|076|088|091|094|083|084|085|081|082|092|056|058|099|059)[0-9]{7}";
         if (id.matches(rgx)) {
             return true;
@@ -153,6 +155,18 @@ public class Check {
         } else {
             txt.setBackground(pink);
             dialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
+            return false;
+        }
+    }
+    public static boolean checkMaNV(JTextField txt) {
+        txt.setBackground(white);
+        String id = txt.getText().trim();
+        String rgx = "[a-zA-Z0-9]{1,15}";
+        if (id.matches(rgx)) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải có 1-15 kí tự\nchữ hoa, thường không dấu hoặc số.");
             return false;
         }
     }

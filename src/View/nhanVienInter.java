@@ -14,6 +14,7 @@ import Helper.dialogHelper;
 import Helper.shareHelper;
 import Model.nhanVien;
 import java.awt.Color;
+import static java.awt.Color.pink;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -59,7 +60,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtQueQuan = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtNgaySinh = new javax.swing.JTextField();
+        dateNgay = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
@@ -127,12 +128,12 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
                         .addComponent(rdoNu, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlNhapTTLayout.createSequentialGroup()
-                        .addGroup(pnlNhapTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlNhapTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                            .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                            .addComponent(txtQueQuan, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                            .addComponent(dateNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         pnlNhapTTLayout.setVerticalGroup(
@@ -150,7 +151,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3))
                         .addGap(37, 37, 37)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addComponent(jLabel5))
                     .addGroup(pnlNhapTTLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -159,11 +160,14 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
                             .addComponent(rdoNam))
                         .addGap(28, 28, 28)
                         .addComponent(txtQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addGroup(pnlNhapTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(28, 28, 28)
+                .addGroup(pnlNhapTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlNhapTTLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel6))
+                    .addGroup(pnlNhapTTLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(dateNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
                 .addGroup(pnlNhapTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -370,13 +374,15 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(Check.checkName(txtTenNV)){
+        if(Check.checkName(txtTenNV)&&Check.checkMaNV(txtMaNV)&&Check.checkName(txtQueQuan)){
+            if(Check.checkSDT(txtSDT)){
             insert();
+            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       if(Check.checkName(txtTenNV)){
+       if(Check.checkName(txtTenNV)&&Check.checkSDT(txtSDT)&&Check.checkName(txtQueQuan)){
             update();
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -418,6 +424,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel capNhap;
     private javax.swing.JPanel danhSach;
+    private com.toedter.calendar.JDateChooser dateNgay;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -438,7 +445,6 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblLuuTru;
     private javax.swing.JTable tblNhanVien;
     private javax.swing.JTextField txtMaNV;
-    private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtQueQuan;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenNV;
@@ -488,7 +494,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         this.rdoNam.setSelected(nv.isGioiTinh());
         this.rdoNu.setSelected(!nv.isGioiTinh());
         txtQueQuan.setText(nv.getQueQuan());
-        txtNgaySinh.setText(dateHelper.toString(nv.getNgaySinh()));
+        dateNgay.setDate(nv.getNgaySinh());
         txtSDT.setText(nv.getSDT());
     }
 
@@ -500,20 +506,18 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         if (txtTenNV.getText().equals("")) {
             return null;
         }
-        if (txtNgaySinh.getText().equals("")) {
+        if (dateNgay.equals("")) {
             return null;
         } else {
             try {
-                dateHelper.toDate(txtNgaySinh.getText());
+                dateNgay.getDate().equals("");
             } catch (Exception e) {
-                dialogHelper.alert(this, "Định dạng là yyyy-MM-dd");
+                dateNgay.setBackground(pink);
+                dialogHelper.alert(this, "Không được để trống và định dạng là yyyy-MM-dd");
                 return null;
             }
         }
         if (txtSDT.getText().equals("")) {
-            return null;
-        } else if (!txtSDT.getText().matches("0[0-9]{9}")) {
-            dialogHelper.alert(this, "Số điện thoại 10 số");
             return null;
         }
 
@@ -521,7 +525,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         nv.setTenNV(txtTenNV.getText());
         nv.setGioiTinh(rdoNam.isSelected());
         nv.setQueQuan(txtQueQuan.getText());
-        nv.setNgaySinh(dateHelper.toDate(txtNgaySinh.getText()));
+        nv.setNgaySinh(dateNgay.getDate());
         nv.setSDT(txtSDT.getText());
         return nv;
     }
@@ -551,8 +555,7 @@ public class nhanVienInter extends javax.swing.JInternalFrame {
         if (txtMaNV.getText().length() == 0
                 || txtSDT.getText().length() == 0
                 || txtQueQuan.getText().length() == 0
-                || txtTenNV.getText().length() == 0
-                || txtNgaySinh.getText().length() == 0) {
+                || txtTenNV.getText().length() == 0) {
             dialogHelper.alert(this, "Không được để trống!");
             return;
         } else if (checkKey() == 1) {

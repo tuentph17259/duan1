@@ -121,12 +121,12 @@
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtTenNV" min="-2" pref="327" max="-2" attributes="0"/>
-                                      <Component id="txtMaNV" min="-2" pref="327" max="-2" attributes="0"/>
-                                      <Component id="txtNgaySinh" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
-                                      <Component id="txtSDT" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
-                                      <Component id="txtQueQuan" min="-2" pref="327" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtTenNV" pref="327" max="32767" attributes="0"/>
+                                      <Component id="txtMaNV" pref="327" max="32767" attributes="0"/>
+                                      <Component id="txtSDT" alignment="0" pref="327" max="32767" attributes="0"/>
+                                      <Component id="txtQueQuan" pref="327" max="32767" attributes="0"/>
+                                      <Component id="dateNgay" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -151,7 +151,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="59" max="32767" attributes="0"/>
+                                  <EmptySpace pref="63" max="32767" attributes="0"/>
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -164,12 +164,17 @@
                                   <Component id="txtQueQuan" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="txtNgaySinh" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="dateNgay" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="txtSDT" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -252,7 +257,7 @@
                     <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNgaySinh">
+                <Component class="com.toedter.calendar.JDateChooser" name="dateNgay">
                 </Component>
               </SubComponents>
             </Container>

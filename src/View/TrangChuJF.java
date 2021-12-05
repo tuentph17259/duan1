@@ -367,14 +367,17 @@ public class TrangChuJF extends javax.swing.JFrame {
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         if (auth.isLogin()) {
-            nhanVienInter frm = new nhanVienInter();
-            desktop.add(frm);
-            frm.setVisible(true);
+            if (!auth.isManager()) {
+                dialogHelper.alert(this, "Bạn không có quyền nha :V");
+            } else {
+                nhanVienInter frm = new nhanVienInter();
+                desktop.add(frm);
+                frm.setVisible(true);
+            }
         } else {
             dialogHelper.alert(this, "Vui lòng đăng nhâp!");
             this.openDangNhap();
         }
-
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed

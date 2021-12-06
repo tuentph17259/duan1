@@ -934,7 +934,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if (Check.checkSo(txtGia)) {
+        if (Check.checkMaNV(txtMaSP)&&Check.checkName(txtTenSP)&&Check.checkName(txtMauSac)&&Check.checkSo(txtGia)) {
             insertSP();
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -946,7 +946,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if (Check.checkSo(txtGia)) {
+        if (Check.checkMaNV(txtMaSP)&&Check.checkName(txtTenSP)&&Check.checkName(txtMauSac)&&Check.checkSo(txtGia)) {
             updateSP();
         }
     }//GEN-LAST:event_btnSuaActionPerformed

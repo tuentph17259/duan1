@@ -307,7 +307,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         }
     }
 
-    private void search() {
+    private void searchSP() {
         if (txtTenSPTK.getText().length() == 0) {
             dialogHelper.alert(this, "Chưa nhập thông tin!");
             return;
@@ -959,7 +959,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         if (Check.checkName(txtTenSPTK)) {
-            search();
+            searchSP();
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 

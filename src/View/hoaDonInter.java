@@ -923,7 +923,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     public String layDuLieuSanPham(String maSP) {
         String ten = "";
-        String sql = "select tenSP from sanPham where maSP=?";
+        String sql = "select tenSP from sanPham where maSP=? and TT = 1";
         ResultSet rs = jdbcHelper.executeQuery(sql, maSP);
         try {
             if (rs.next()) {

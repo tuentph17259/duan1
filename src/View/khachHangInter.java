@@ -8,7 +8,10 @@ package View;
 import Dao.khachHangDao;
 import Helper.Check;
 import Helper.dialogHelper;
+import Helper.jdbcHelper;
 import Model.khachHang;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -69,6 +72,14 @@ public class khachHangInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblLichSu = new javax.swing.JTable();
+        lblLichSu = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblChiTiet = new javax.swing.JTable();
+        lblLichSu1 = new javax.swing.JLabel();
+        lblMaHD = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -241,7 +252,7 @@ public class khachHangInter extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCMNN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -367,6 +378,75 @@ public class khachHangInter extends javax.swing.JInternalFrame {
 
         tabs.addTab("Danh sách", jPanel2);
 
+        tblLichSu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblLichSu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblLichSuMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblLichSu);
+
+        lblLichSu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblLichSu.setForeground(new java.awt.Color(255, 51, 51));
+        lblLichSu.setText("Lịch sử mua hàng");
+
+        tblChiTiet.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tblChiTiet);
+
+        lblLichSu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblLichSu1.setForeground(new java.awt.Color(255, 51, 51));
+        lblLichSu1.setText("Chi tiết :");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblLichSu1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblLichSu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMaHD)))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLichSu)
+                    .addComponent(lblMaHD))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblLichSu1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("Lịch sử mua hàng", jPanel7);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -421,12 +501,24 @@ public class khachHangInter extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1) {
             this.row = tblKhachHang.getSelectedRow();
             this.edit();
+            this.lichSu();
+            tabs.setSelectedIndex(2);
+            lblMaHD.setText("");
+            this.lichSuChiTiet();
+            
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         timKiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tblLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuMouseClicked
+       this.lichSuChiTiet();
+       int viTri1 = tblLichSu.getSelectedRow();
+       String maHD= tblLichSu.getValueAt(viTri1, 1).toString();
+       lblMaHD.setText(maHD);
+    }//GEN-LAST:event_tblLichSuMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -452,9 +544,17 @@ public class khachHangInter extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblLichSu;
+    private javax.swing.JLabel lblLichSu1;
+    private javax.swing.JLabel lblMaHD;
     private javax.swing.JTabbedPane tabs;
+    private javax.swing.JTable tblChiTiet;
     private javax.swing.JTable tblKhachHang;
+    private javax.swing.JTable tblLichSu;
     private javax.swing.JTextField txtCMNN;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMaKH;
@@ -691,5 +791,68 @@ public class khachHangInter extends javax.swing.JInternalFrame {
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
 //        btnXoa.setEnabled(edit);
+    }
+
+    void lichSu() {
+        int viTri = tblKhachHang.getSelectedRow();     
+        String maKh = tblKhachHang.getValueAt(viTri, 0).toString();
+        String tenKh = tblKhachHang.getValueAt(viTri, 1).toString();
+       
+        lblLichSu.setText("Lịch sử mua hàng của:" + tenKh + "-" + maKh);
+        String sql = " select MAHD,MAKH,MANV,NGAYLAPHOADON,format (TONGTIEN,'#,##') as Tongtien\n"
+                + "from HOADON\n"
+                + "where MAKH=?";
+        ResultSet rs = jdbcHelper.executeQuery(sql, maKh);
+        Object[] obj = new Object[]{"STT", "Mã hóa đơn", "Khách Hàng ", "Mã Nhân viên", "Ngày lập hóa dơn", "tổng tiền"};
+        DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
+        tblLichSu.setModel(tableModel);
+        int c = 0;
+        try {
+            while (rs.next()) {
+                Object[] item = new Object[6];
+                c++;
+                item[0] = c;
+                item[1] = rs.getString("MAHD");
+                item[2] = rs.getString("maKH");
+                item[3] = rs.getString("maNV");
+                item[4] = rs.getString("NgayLapHoaDon");
+                item[5] = rs.getString("TongTien");
+
+                tableModel.addRow(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    public void lichSuChiTiet() {
+        String sql = "";
+        int viTri = tblLichSu.getSelectedRow();
+        String maHD = lblMaHD.getText();
+
+        sql = "select MACHITIET,MAHD,SanPham.maSP,tenSP,SoLuong,Format(TONGTIEN,'#,##')as TONGTIEN \n"
+                + "                               from ChiTietHoaDon,SanPham where ChiTietHoaDon.MASP=SanPham.MASP and maHD=?";
+        ResultSet rs = jdbcHelper.executeQuery(sql, maHD);
+        Object[] obj = new Object[]{"STT", "Mã CTHD", "Mã Hóa Đơn", "Mã Sản Phẩm", "Tên SP", "Số Lượng", "tổng tiền"};
+        DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
+        tblChiTiet.setModel(tableModel);
+        int c = 0;
+        try {
+            while (rs.next()) {
+                c++;
+                Object[] item = new Object[7];
+                item[0] = c;
+                item[1] = rs.getString("MACHITIET");
+                item[2] = rs.getString("MAHD");
+                item[3] = rs.getString("masp");
+                item[4] = rs.getString("Tensp");
+                item[5] = rs.getInt("SoLuong");
+                item[6] = rs.getString("TongTien");
+
+                tableModel.addRow(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
     }
 }

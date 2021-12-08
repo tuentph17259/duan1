@@ -79,6 +79,7 @@ public class khachHangInter extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblChiTiet = new javax.swing.JTable();
         lblLichSu1 = new javax.swing.JLabel();
+        lblMaHD = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -418,26 +419,30 @@ public class khachHangInter extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLichSu)
-                            .addComponent(lblLichSu1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblLichSu1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblLichSu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMaHD)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLichSu)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLichSu)
+                    .addComponent(lblMaHD))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblLichSu1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         tabs.addTab("Lịch sử mua hàng", jPanel7);
@@ -498,6 +503,9 @@ public class khachHangInter extends javax.swing.JInternalFrame {
             this.edit();
             this.lichSu();
             tabs.setSelectedIndex(2);
+            lblMaHD.setText("");
+            this.lichSuChiTiet();
+            
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
@@ -507,6 +515,9 @@ public class khachHangInter extends javax.swing.JInternalFrame {
 
     private void tblLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuMouseClicked
        this.lichSuChiTiet();
+       int viTri1 = tblLichSu.getSelectedRow();
+       String maHD= tblLichSu.getValueAt(viTri1, 1).toString();
+       lblMaHD.setText(maHD);
     }//GEN-LAST:event_tblLichSuMouseClicked
 
 
@@ -539,6 +550,7 @@ public class khachHangInter extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblLichSu;
     private javax.swing.JLabel lblLichSu1;
+    private javax.swing.JLabel lblMaHD;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblChiTiet;
     private javax.swing.JTable tblKhachHang;
@@ -782,9 +794,10 @@ public class khachHangInter extends javax.swing.JInternalFrame {
     }
 
     void lichSu() {
-        int viTri = tblKhachHang.getSelectedRow();
+        int viTri = tblKhachHang.getSelectedRow();     
         String maKh = tblKhachHang.getValueAt(viTri, 0).toString();
         String tenKh = tblKhachHang.getValueAt(viTri, 1).toString();
+       
         lblLichSu.setText("Lịch sử mua hàng của:" + tenKh + "-" + maKh);
         String sql = " select MAHD,MAKH,MANV,NGAYLAPHOADON,format (TONGTIEN,'#,##') as Tongtien\n"
                 + "from HOADON\n"
@@ -815,7 +828,7 @@ public class khachHangInter extends javax.swing.JInternalFrame {
     public void lichSuChiTiet() {
         String sql = "";
         int viTri = tblLichSu.getSelectedRow();
-        String maHD = tblLichSu.getValueAt(viTri, 1).toString();
+        String maHD = lblMaHD.getText();
 
         sql = "select MACHITIET,MAHD,SanPham.maSP,tenSP,SoLuong,Format(TONGTIEN,'#,##')as TONGTIEN \n"
                 + "                               from ChiTietHoaDon,SanPham where ChiTietHoaDon.MASP=SanPham.MASP and maHD=?";

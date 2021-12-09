@@ -292,11 +292,11 @@ public class taiKhoanInter extends javax.swing.JInternalFrame {
         if (Check.checkNullPass(txtMK)
                 && Check.checkNullPass(txtMK2)) {
             if (Check.checkPass(txtMK)) {
+                if (checkTrungMa(cbbMaNV)) {
+                    insert();
+                }
+            }
 
-            }
-            if (checkTrungMa(cbbMaNV)) {
-                insert();
-            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 

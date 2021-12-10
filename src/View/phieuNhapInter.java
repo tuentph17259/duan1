@@ -516,7 +516,8 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
-        if (Check.checkNullText(txtMaPN)) {
+        if (Check.checkNullText(txtMaPN)
+                && Check.checkMaNV(txtMaPN)) {
             if (checkTrungMa(txtMaPN)) {
                 insertPN();
             }
@@ -564,7 +565,8 @@ public class phieuNhapInter extends javax.swing.JInternalFrame {
         if (Check.checkNullText(txtMaCT)
                 && Check.checkNullText(txtMaSP)
                 && Check.checkNullText(txtTenSP)
-                && Check.checkNullText(txtSoLuong)) {
+                && Check.checkNullText(txtSoLuong)
+                && Check.checkMaNV(txtMaCT)) {
             if (checkTrungMaCT(txtMaCT)) {
                 insertCT();
             }

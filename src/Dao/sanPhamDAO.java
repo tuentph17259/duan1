@@ -17,10 +17,9 @@ import java.util.List;
  */
 public class sanPhamDAO extends cuaHangDao<sanPham, String> {
 
-    String INSERT_SQL = "INSERT INTO SANPHAM(MASP,TENSP,MAUSAC,GIASP,HINHANH,CAUHINHCHITIET,TRANGTHAI,MATHUONGHIEU)\n"
-            + "VALUES(?,?,?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE SANPHAM SET TENSP=?,MAUSAC=?,GIASP=?,HINHANH=?,CAUHINHCHITIET=?,TRANGTHAI=?,MATHUONGHIEU=?\n"
-            + "WHERE MASP=?";
+    String INSERT_SQL = "INSERT INTO SANPHAM(MASP,TENSP,MAUSAC,TRANGTHAI,GIASP,MATHUONGHIEU,RAM,CAMERA,KICHTHUOC,BONHOTRONG,DOPHANGIAI,HEDIEUHANH,MOTA,HINHANH)\n"
+            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    String UPDATE_SQL = "UPDATE SANPHAM SET TENSP = ? , MAUSAC = ? , TRANGTHAI = ? , GIASP = ?, MATHUONGHIEU = ?, RAM = ?, CAMERA = ?, KICHTHUOC = ?, BONHOTRONG = ?, DOPHANGIAI = ?, HEDIEUHANH = ?, MOTA = ?, HINHANH = ? WHERE MASP=?";
     String DELETE_SQL = "UPDATE SANPHAM SET TT =0 WHERE MaSP = ?";
     String DELETE_SQL1 = "UPDATE SANPHAM SET TT =1 WHERE MaSP = ?";
     String SELECT_ALL_SQL = "SELECT * FROM SANPHAM";
@@ -28,12 +27,12 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String> {
 
     @Override
     public void insert(sanPham entity) {
-        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaSanPham(), entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(), entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu());
+        jdbcHelper.executeUpdate(INSERT_SQL, entity.getMaSanPham(), entity.getTenSanPham(), entity.getMauSac(),entity.isTrangThai(), entity.getGiaSanPham(), entity.getMaThuongHieu(),entity.getRam(),entity.getCamera(),entity.getScreenSize(),entity.getRom(),entity.getPixel(),entity.getOs(),entity.getMoTa(),entity.getHinhAnh());
     }
 
     @Override
     public void update(sanPham entity) {
-        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenSanPham(), entity.getMauSac(), entity.getGiaSanPham(), entity.getHinhAnh(), entity.getCauHinhChiTiet(), entity.isTrangThai(), entity.getMaThuongHieu(), entity.getMaSanPham());
+        jdbcHelper.executeUpdate(UPDATE_SQL, entity.getTenSanPham(), entity.getMauSac(),entity.isTrangThai(), entity.getGiaSanPham(), entity.getMaThuongHieu(),entity.getRam(),entity.getCamera(),entity.getScreenSize(),entity.getRom(),entity.getPixel(),entity.getOs(),entity.getMoTa(),entity.getHinhAnh(), entity.getMaSanPham());
     }
 
     @Override
@@ -66,13 +65,19 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String> {
                 entity.setTenSanPham(rs.getString("TENSP"));
                 entity.setMauSac(rs.getString("MAUSAC"));
                 entity.setGiaSanPham(rs.getDouble("GIASP"));
-                entity.setHinhAnh(rs.getString("HINHANH"));
-                entity.setCauHinhChiTiet(rs.getString("CAUHINHCHITIET"));
                 entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
                 entity.setMaThuongHieu(rs.getString("MATHUONGHIEU"));
+                entity.setRam(rs.getString("RAM"));
+                entity.setCamera(rs.getString("CAMERA"));
+                entity.setScreenSize(rs.getString("KICHTHUOC"));
+                entity.setRom(rs.getString("BONHOTRONG"));
+                entity.setPixel(rs.getString("DOPHANGIAI"));
+                entity.setOs(rs.getString("HEDIEUHANH"));
+                entity.setMoTa(rs.getString("MOTA"));
+                entity.setHinhAnh(rs.getString("HINHANH"));
                 lst.add(entity);
             }
-            rs.getStatement().getConnection().close();
+            rs.getStatement().getConnection().close();  
             return lst;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -80,7 +85,7 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String> {
     }
 
     public List<sanPham> selectByKeyWord(String keyword) {
-        String sql = "SELECT * FROM SANPHAM WHERE TENSP LIKE ? and TT = 1";
+        String sql = "SELECT * FROM SANPHAM WHERE TENSP LIKE ?";
         return this.selectBySql(sql, "%" + keyword + "%");
     }
 
@@ -100,10 +105,16 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String> {
                 entity.setTenSanPham(rs.getString("TENSP"));
                 entity.setMauSac(rs.getString("MAUSAC"));
                 entity.setGiaSanPham(rs.getDouble("GIASP"));
-                entity.setHinhAnh(rs.getString("HINHANH"));
-                entity.setCauHinhChiTiet(rs.getString("CAUHINHCHITIET"));
                 entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
                 entity.setMaThuongHieu(rs.getString("MATHUONGHIEU"));
+                entity.setRam(rs.getString("RAM"));
+                entity.setCamera(rs.getString("CAMERA"));
+                entity.setScreenSize(rs.getString("KICHTHUOC"));
+                entity.setRom(rs.getString("BONHOTRONG"));
+                entity.setPixel(rs.getString("DOPHANGIAI"));
+                entity.setOs(rs.getString("HEDIEUHANH"));
+                entity.setMoTa(rs.getString("MOTA"));
+                entity.setHinhAnh(rs.getString("HINHANH"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
@@ -124,10 +135,16 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String> {
                 entity.setTenSanPham(rs.getString("TENSP"));
                 entity.setMauSac(rs.getString("MAUSAC"));
                 entity.setGiaSanPham(rs.getDouble("GIASP"));
-                entity.setHinhAnh(rs.getString("HINHANH"));
-                entity.setCauHinhChiTiet(rs.getString("CAUHINHCHITIET"));
                 entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
                 entity.setMaThuongHieu(rs.getString("MATHUONGHIEU"));
+                entity.setRam(rs.getString("RAM"));
+                entity.setCamera(rs.getString("CAMERA"));
+                entity.setScreenSize(rs.getString("KICHTHUOC"));
+                entity.setRom(rs.getString("BONHOTRONG"));
+                entity.setPixel(rs.getString("DOPHANGIAI"));
+                entity.setOs(rs.getString("HEDIEUHANH"));
+                entity.setMoTa(rs.getString("MOTA"));
+                entity.setHinhAnh(rs.getString("HINHANH"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

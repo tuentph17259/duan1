@@ -15,23 +15,36 @@ public class sanPham {
     private String mauSac;
     private double giaSanPham;
     private String hinhAnh;
-    private String cauHinhChiTiet;
+    private String ram;
+    private String rom;
+    private String camera;
+    private String pixel;
+    private String screenSize;
+    private String os;
     private boolean trangThai;
     private String maThuongHieu;
+    private String moTa;
+    
     
 
     public sanPham() {
     }
 
-    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String hinhAnh, String cauHinhChiTiet, boolean trangThai, String maThuongHieu) {
+    public sanPham(String maSanPham, String tenSanPham, String mauSac, double giaSanPham, String hinhAnh, String ram, String rom, String camera, String pixel, String screenSize, String os, boolean trangThai, String maThuongHieu, String moTa) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.mauSac = mauSac;
         this.giaSanPham = giaSanPham;
         this.hinhAnh = hinhAnh;
-        this.cauHinhChiTiet = cauHinhChiTiet;
+        this.ram = ram;
+        this.rom = rom;
+        this.camera = camera;
+        this.pixel = pixel;
+        this.screenSize = screenSize;
+        this.os = os;
         this.trangThai = trangThai;
         this.maThuongHieu = maThuongHieu;
+        this.moTa = moTa;
     }
 
     public String getMaSanPham() {
@@ -74,12 +87,52 @@ public class sanPham {
         this.hinhAnh = hinhAnh;
     }
 
-    public String getCauHinhChiTiet() {
-        return cauHinhChiTiet;
+    public String getRam() {
+        return ram;
     }
 
-    public void setCauHinhChiTiet(String cauHinhChiTiet) {
-        this.cauHinhChiTiet = cauHinhChiTiet;
+    public void setRam(String ram) {
+        this.ram = ram;
+    }
+
+    public String getRom() {
+        return rom;
+    }
+
+    public void setRom(String rom) {
+        this.rom = rom;
+    }
+
+    public String getCamera() {
+        return camera;
+    }
+
+    public void setCamera(String camera) {
+        this.camera = camera;
+    }
+
+    public String getPixel() {
+        return pixel;
+    }
+
+    public void setPixel(String pixel) {
+        this.pixel = pixel;
+    }
+
+    public String getScreenSize() {
+        return screenSize;
+    }
+
+    public void setScreenSize(String screenSize) {
+        this.screenSize = screenSize;
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    public void setOs(String os) {
+        this.os = os;
     }
 
     public boolean isTrangThai() {
@@ -98,10 +151,18 @@ public class sanPham {
         this.maThuongHieu = maThuongHieu;
     }
 
-    @Override
-    public String toString() {
-        return "sanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", mauSac=" + mauSac + ", giaSanPham=" + giaSanPham + ", hinhAnh=" + hinhAnh + ", cauHinhChiTiet=" + cauHinhChiTiet + ", trangThai=" + trangThai + ", maThuongHieu=" + maThuongHieu + '}';
+    public String getMoTa() {
+        return moTa;
     }
 
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
 
+    @Override
+    public String toString() {
+        return "sanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", mauSac=" + mauSac + ", giaSanPham=" + giaSanPham + ", hinhAnh=" + hinhAnh + ", ram=" + ram + ", rom=" + rom + ", camera=" + camera + ", pixel=" + pixel + ", screenSize=" + screenSize + ", os=" + os + ", trangThai=" + trangThai + ", maThuongHieu=" + maThuongHieu + ", moTa=" + moTa + '}';
+    }
+
+    
 }

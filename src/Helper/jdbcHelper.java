@@ -18,9 +18,9 @@ import java.sql.SQLException;
 public class jdbcHelper {
 
     public static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    public static String url = "jdbc:sqlserver://localhost\\DESKTOP-PQUBK1B\\SQLEXPRESS:1433;databaseName=DUAN1";
+    public static String url = "jdbc:sqlserver://localhost\\DESKTOP-HKEFBM1\\SQLEXPRESS:1433;databaseName=DUAN1";
     public static String username = "sa";
-    public static String password = "1234";
+    public static String password = "123456";
 
     //Nạp driver
     static {

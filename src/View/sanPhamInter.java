@@ -15,12 +15,15 @@ import Model.sanPham;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class sanPhamInter extends javax.swing.JInternalFrame {
 
@@ -440,6 +443,12 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
                     sp.isTrangThai() ? "Còn" : "Hết",
                     sp.getGiaSanPham(),
                     sp.getMaThuongHieu(),
+                    sp.getRam(),
+                    sp.getRom(),
+                    sp.getCamera(),
+                    sp.getScreenSize(),
+                    sp.getPixel(),
+                    sp.getOs(),
                     sp.getHinhAnh(),};
                 mol.addRow(row);
             }
@@ -463,13 +472,15 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
             dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        btnGroupSort = new javax.swing.ButtonGroup();
         tab1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -523,6 +534,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
         btnZ_A = new javax.swing.JRadioButton();
         btnLowerPrice = new javax.swing.JRadioButton();
         btnHigherPrice = new javax.swing.JRadioButton();
+        btnReset = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnHienThi = new javax.swing.JButton();
@@ -913,13 +925,20 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
         jLabel19.setText("Sắp xếp");
 
+        btnGroupSort.add(btnA_Z);
         btnA_Z.setText("Tên từ A-Z");
         btnA_Z.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 btnA_ZItemStateChanged(evt);
             }
         });
+        btnA_Z.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnA_ZActionPerformed(evt);
+            }
+        });
 
+        btnGroupSort.add(btnZ_A);
         btnZ_A.setText("Tên từ Z-A");
         btnZ_A.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -927,6 +946,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
             }
         });
 
+        btnGroupSort.add(btnLowerPrice);
         btnLowerPrice.setText("Gía tăng dần");
         btnLowerPrice.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -934,10 +954,18 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
             }
         });
 
+        btnGroupSort.add(btnHigherPrice);
         btnHigherPrice.setText("Gía giảm dần");
         btnHigherPrice.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 btnHigherPriceItemStateChanged(evt);
+            }
+        });
+
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -953,14 +981,17 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnZ_A)
+                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel19)
-                                    .addComponent(btnA_Z)))
-                            .addComponent(btnLowerPrice)
-                            .addComponent(btnHigherPrice))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnZ_A)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel19)
+                                            .addComponent(btnA_Z)))
+                                    .addComponent(btnLowerPrice)
+                                    .addComponent(btnHigherPrice))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -971,7 +1002,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
@@ -984,6 +1015,8 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
                         .addComponent(btnLowerPrice)
                         .addGap(18, 18, 18)
                         .addComponent(btnHigherPrice)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReset)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -1237,7 +1270,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblThuongHieuMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (Check.checkMaNV(txtMaSP)&&Check.checkName(txtTenSP)&&Check.checkNullText(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
+        if (Check.checkMaNV(txtMaSP)&&Check.checkNullText(txtTenSP)&&Check.checkNullText(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
             insertSP();
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -1250,7 +1283,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if (Check.checkName(txtTenSP)&&Check.checkNullText(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
+        if (Check.checkNullText(txtTenSP)&&Check.checkNullText(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
             updateSP();
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -1294,27 +1327,136 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void btnA_ZItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnA_ZItemStateChanged
-        // TODO add your handling code here:
+        DefaultTableModel mol = (DefaultTableModel) tblSanPham.getModel();
+        mol.setRowCount(0);
+        try {
+            List<sanPham> list = SPdao.SortNameASC();
+            for (sanPham sp : list) {
+                Object[] row = {
+                    sp.getMaSanPham(),
+                    sp.getTenSanPham(),
+                    sp.getMauSac(),
+                    sp.isTrangThai() ? "Còn" : "Hết",
+                    sp.getGiaSanPham(),
+                    sp.getMaThuongHieu(),
+                    sp.getRam(),
+                    sp.getRom(),
+                    sp.getCamera(),
+                    sp.getScreenSize(),
+                    sp.getPixel(),
+                    sp.getOs(),
+                    sp.getHinhAnh(),};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnA_ZItemStateChanged
 
     private void btnZ_AItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnZ_AItemStateChanged
-        // TODO add your handling code here:
+       DefaultTableModel mol = (DefaultTableModel) tblSanPham.getModel();
+        mol.setRowCount(0);
+        try {
+            List<sanPham> list = SPdao.SortNameDESC();
+            for (sanPham sp : list) {
+                Object[] row = {
+                    sp.getMaSanPham(),
+                    sp.getTenSanPham(),
+                    sp.getMauSac(),
+                    sp.isTrangThai() ? "Còn" : "Hết",
+                    sp.getGiaSanPham(),
+                    sp.getMaThuongHieu(),
+                    sp.getRam(),
+                    sp.getRom(),
+                    sp.getCamera(),
+                    sp.getScreenSize(),
+                    sp.getPixel(),
+                    sp.getOs(),
+                    sp.getHinhAnh(),};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnZ_AItemStateChanged
 
     private void btnLowerPriceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnLowerPriceItemStateChanged
-        // TODO add your handling code here:
+        DefaultTableModel mol = (DefaultTableModel) tblSanPham.getModel();
+        mol.setRowCount(0);
+        try {
+            List<sanPham> list = SPdao.SortPriceASC();
+            for (sanPham sp : list) {
+                Object[] row = {
+                    sp.getMaSanPham(),
+                    sp.getTenSanPham(),
+                    sp.getMauSac(),
+                    sp.isTrangThai() ? "Còn" : "Hết",
+                    sp.getGiaSanPham(),
+                    sp.getMaThuongHieu(),
+                    sp.getRam(),
+                    sp.getRom(),
+                    sp.getCamera(),
+                    sp.getScreenSize(),
+                    sp.getPixel(),
+                    sp.getOs(),
+                    sp.getHinhAnh(),};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnLowerPriceItemStateChanged
 
     private void btnHigherPriceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnHigherPriceItemStateChanged
-        // TODO add your handling code here:
+        DefaultTableModel mol = (DefaultTableModel) tblSanPham.getModel();
+        mol.setRowCount(0);
+        try {
+            List<sanPham> list = SPdao.SortPriceDECS();
+            for (sanPham sp : list) {
+                Object[] row = {
+                    sp.getMaSanPham(),
+                    sp.getTenSanPham(),
+                    sp.getMauSac(),
+                    sp.isTrangThai() ? "Còn" : "Hết",
+                    sp.getGiaSanPham(),
+                    sp.getMaThuongHieu(),
+                    sp.getRam(),
+                    sp.getRom(),
+                    sp.getCamera(),
+                    sp.getScreenSize(),
+                    sp.getPixel(),
+                    sp.getOs(),
+                    sp.getHinhAnh(),};
+                mol.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnHigherPriceItemStateChanged
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here
+        fillTableSP();
+        btnGroupSort.clearSelection();
+
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnA_ZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnA_ZActionPerformed
+        
+    }//GEN-LAST:event_btnA_ZActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btnA_Z;
+    private javax.swing.ButtonGroup btnGroupSort;
     private javax.swing.JButton btnHienThi;
     private javax.swing.JRadioButton btnHigherPrice;
     private javax.swing.JRadioButton btnLowerPrice;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnSua1;
@@ -1326,7 +1468,6 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnXoatrang1;
     private javax.swing.JRadioButton btnZ_A;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbbMaTH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -26,6 +26,15 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
+import org.apache.poi.ss.usermodel.Table;
 
 /**
  *
@@ -91,6 +100,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         tblTTHoaDonCT = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         txtTenSP = new javax.swing.JTextField();
+        btnXuatPDF = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -387,6 +397,14 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
         txtTenSP.setEditable(false);
 
+        btnXuatPDF.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnXuatPDF.setText("Xuất PDF");
+        btnXuatPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatPDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -414,46 +432,56 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(66, 66, 66)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(166, 166, 166)
+                                .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(429, 429, 429)
-                        .addComponent(jLabel5)))
+                        .addGap(425, 425, 425)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(206, 206, 206))
+                .addGap(86, 86, 86)
+                .addComponent(btnXuatPDF)
+                .addGap(43, 43, 43))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMaCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtMaCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXuatPDF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -604,6 +632,10 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         txtTongTien.setText(tblTTHoaDonCT.getValueAt(viTri, 6).toString());
     }//GEN-LAST:event_tblTTHoaDonCTMouseClicked
 
+    private void btnXuatPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatPDFActionPerformed
+        xuatPDF();
+    }//GEN-LAST:event_btnXuatPDFActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
@@ -612,6 +644,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnXoa1;
     private javax.swing.JButton btnXoaTrang;
     private javax.swing.JButton btnXoaTrang1;
+    private javax.swing.JButton btnXuatPDF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -706,8 +739,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
 
     public void layDuLieuHoaDon() {
         String sql = "";
-        sql = "select MAHD,KhachHang.maKH as TenKhachHang,NhanVien.maNV,Format(TONGTIEN,'#,##')as TONGTIEN,NgayLapHoaDon from HoaDon,KhachHang,NhanVien where HoaDon.MAKH =KhachHang.MAKH \n" +
-"                                and HoaDon.MANV=NhanVien.MANV";
+        sql = "select MAHD,KhachHang.maKH as TenKhachHang,NhanVien.maNV,Format(TONGTIEN,'#,##')as TONGTIEN,NgayLapHoaDon from HoaDon,KhachHang,NhanVien where HoaDon.MAKH =KhachHang.MAKH \n"
+                + "                                and HoaDon.MANV=NhanVien.MANV";
         ResultSet rs = jdbcHelper.executeQuery(sql);
         Object[] obj = new Object[]{"STT", "Mã hóa đơn", "Khách Hàng ", "Mã Nhân viên", "Ngày lập hóa dơn", "tổng tiền"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
@@ -907,8 +940,8 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
     public void LayDuLieuChiTietHoaDon(String maHD) {
         String sql = "";
 
-        sql = "select MACHITIET,MAHD,SanPham.maSP,tenSP,SoLuong,Format(TONGTIEN,'#,##')as TONGTIEN \n" +
-"                               from ChiTietHoaDon,SanPham where ChiTietHoaDon.MASP=SanPham.MASP and maHD=?";
+        sql = "select MACHITIET,MAHD,SanPham.maSP,tenSP,SoLuong,Format(TONGTIEN,'#,##')as TONGTIEN \n"
+                + "                               from ChiTietHoaDon,SanPham where ChiTietHoaDon.MASP=SanPham.MASP and maHD=?";
         ResultSet rs = jdbcHelper.executeQuery(sql, maHD);
         Object[] obj = new Object[]{"STT", "Mã CTHD", "Mã Hóa Đơn", "Mã Sản Phẩm", "Tên SP", "Số Lượng", "tổng tiền"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
@@ -990,6 +1023,7 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
             System.out.println(ex.toString());
         }
     }
+
     public void xoaTongTien() {
         String maHD = txtMaHD.getText();
 
@@ -1013,4 +1047,49 @@ public class hoaDonInter extends javax.swing.JInternalFrame {
         }
     }
 
+    void xuatPDF() {
+        String path = "";
+        JFileChooser j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x = j.showSaveDialog(this);
+        if (x == JFileChooser.APPROVE_OPTION) {
+            path = j.getSelectedFile().getPath();
+        }
+        Document doc = new Document(PageSize.A3, 10, 10, 10, 10);
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream(path + "/pn.pdf"));
+//            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/NGUYEN TRI TUE/Desktop/NhapNhap/pn.pdf"));
+            doc.open();
+            Paragraph para = new Paragraph("Hoa Don Chi Tiet:");
+            doc.add(para);
+            doc.add(new Paragraph(" "));
+            PdfPTable tbl = new PdfPTable(6);
+            tbl.addCell("STT");
+            tbl.addCell("Mã CTHD");
+            tbl.addCell("Mã HD");
+            tbl.addCell("Mã SP");
+            tbl.addCell("So luong");
+            tbl.addCell("Tong tien");
+            for (int i = 0; i < tblTTHoaDonCT.getRowCount(); i++) {
+                String STT = tblTTHoaDonCT.getValueAt(i, 0).toString();
+                String maCT = tblTTHoaDonCT.getValueAt(i, 1).toString();
+                String maHD = tblTTHoaDonCT.getValueAt(i, 2).toString();
+                String maSP = tblTTHoaDonCT.getValueAt(i, 3).toString();
+                String soLuong = tblTTHoaDonCT.getValueAt(i, 4).toString();
+                String tongTien = tblTTHoaDonCT.getValueAt(i, 5).toString();
+                tbl.addCell(STT);
+                tbl.addCell(maCT);
+                tbl.addCell(maHD);
+                tbl.addCell(maSP);
+                tbl.addCell(soLuong);
+                tbl.addCell(tongTien);
+            }
+            doc.add(tbl);
+            dialogHelper.alert(this, "Xuất file PDF thành công");
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Xuất file PDF thất bại!");
+            e.printStackTrace();
+        }
+        doc.close();
+    }
 }

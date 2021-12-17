@@ -156,7 +156,8 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     void hienThiLai() {
         if (dialogHelper.confirm(this, "Bạn có muốn thêm lại sản phẩm này ?")) {
             try {
-                String maSP = tblLuuTru.getValueAt(row, 0).toString();
+                int viTri = tblLuuTru.getSelectedRow();
+                String maSP = tblLuuTru.getValueAt(viTri, 0).toString();
                 SPdao.delete1(maSP);
                 fillTableSP1();
                 fillTableSP();

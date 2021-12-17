@@ -20,7 +20,7 @@ public class jdbcHelper {
     public static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static String url = "jdbc:sqlserver://localhost\\NATSUMEKOKKORO\\SQLEXPRESS:1433;databaseName=DUAN1";
     public static String username = "sa";
-    public static String password = "123456";
+    public static String password = "1234";
 
     //Nạp driver
     static {

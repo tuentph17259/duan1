@@ -86,7 +86,7 @@ public class sanPhamDAO extends cuaHangDao<sanPham, String> {
     }
 
     public List<sanPham> selectByKeyWord(String keyword) {
-        String sql = "SELECT * FROM SANPHAM WHERE TENSP LIKE ?";
+        String sql = "SELECT * FROM SANPHAM WHERE TENSP LIKE ? AND TT=1";
         return this.selectBySql(sql, "%" + keyword + "%");
     }
 

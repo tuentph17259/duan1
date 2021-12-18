@@ -1284,7 +1284,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblThuongHieuMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (Check.checkMaNV(txtMaSP)&&Check.checkNullText(txtTenSP)&&Check.checkNullText(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
+        if (Check.checkMaNV(txtMaSP)&&Check.checkName(txtTenSP)&&Check.checkName(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
             insertSP();
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -1297,7 +1297,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if (Check.checkNullText(txtTenSP)&&Check.checkNullText(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
+        if (Check.checkName(txtTenSP)&&Check.checkName(txtMauSac)&&Check.checkSo1(txtGia)&&Check.checkNullText(txtRam)&&Check.checkNullText(txtRom)&Check.checkNullText(txtCamera)&&Check.checkNullText(txtDensity)&&Check.checkNullText(txtScreenSize)&&Check.checkNullText(txtOS)&&Check.checkNullText(txaMoTa)) {
             updateSP();
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -1305,6 +1305,7 @@ public class sanPhamInter extends javax.swing.JInternalFrame {
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         // TODO add your handling code here:
         clearSP();
+        fillComboBox();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
